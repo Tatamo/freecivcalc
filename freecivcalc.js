@@ -21,8 +21,10 @@ var FreecivCalc;
             }
         };
         UnitManager.prototype.get = function (name) {
-            if (this._units[name])
-                return this._units[name];
+            if (this._units[name]) {
+                // return copy of unit
+                return this.copyUnit(this._units[name]);
+            }
             else
                 return null;
         };
@@ -31,6 +33,20 @@ var FreecivCalc;
                 return this._classlist[name];
             else
                 return null;
+        };
+        UnitManager.prototype.copyUnit = function (unit) {
+            var u = {
+                id: unit.id,
+                value: unit.value,
+                pronunciation: unit.pronunciation,
+                class: unit.class,
+                flags: unit.flags,
+                hp: unit.hp,
+                attack: unit.attack,
+                defence: unit.defence,
+                firepower: unit.firepower
+            };
+            return u;
         };
         return UnitManager;
     }());
@@ -348,12 +364,125 @@ var FreecivCalc;
     }());
     FreecivCalc.Loader = Loader;
 })(FreecivCalc || (FreecivCalc = {}));
+/// <reference path="freecivcalc.ts" />
+/// <reference path="unit.ts" />
+/// <reference path="adjustment.ts" />
+var FreecivCalc;
+(function (FreecivCalc) {
+    var BattleCalc = (function () {
+        function BattleCalc() {
+            this.attacker = null;
+            this.defender = null;
+            this.adjustments = null;
+            this._initialized = false;
+            this._binomial_dp = [];
+        }
+        BattleCalc.prototype.set = function (attacker, defender, adjustments) {
+            this.attacker = attacker;
+            this.defender = defender;
+            this.adjustments = adjustments;
+            this._initialized = true;
+        };
+        BattleCalc.prototype.binomial = function (n, k) {
+            // initialize
+            if (this._binomial_dp.length <= n) {
+                for (var i = this._binomial_dp.length; i <= n; i++) {
+                    var tmp = new Array(i + 1);
+                    for (var ii = 0; ii <= i; ii++) {
+                        tmp[ii] = -1;
+                    }
+                    this._binomial_dp.push(tmp);
+                }
+            }
+            if (k == 0 || k == n) {
+                return 1;
+            }
+            else {
+                var result = this.binomial(n - 1, k - 1) * n / k;
+                this._binomial_dp[n][k] = result;
+                this._binomial_dp[n][n - k] = result;
+                return result;
+            }
+        };
+        BattleCalc.prototype.calc = function () {
+            /*var raw_attack = this.attacker.attack;
+            var raw_defence = this.defender.defence;
+            var raw_attacker_fp = this.attacker.firepower;
+            var raw_defender_fp = this.defender.firepower;*/
+            var units = this.applyAdjustments();
+            // http://freeciv.wikia.com/wiki/Math_of_Freeciv
+            var s = units.attacker.attack; // all adjustments applied attack
+            var r = units.defender.defence; // all adjustments applied defence
+            var a_hp = units.attacker.hp;
+            var d_hp = units.defender.hp;
+            var a_fp = units.attacker.firepower;
+            var d_fp = units.defender.firepower;
+            var k = Math.floor((d_hp + a_fp - 1) / a_fp);
+            var l = Math.floor((a_hp + d_fp - 1) / d_fp);
+            var p = s / (s + r);
+            var q = r / (s + r); // q = 1-p
+            // DP on pow(p,x), pow(q,x)
+            var dp_pow_p = new Array(k + 1);
+            var dp_pow_q = new Array(l + 1);
+            dp_pow_p[0] = 1;
+            dp_pow_q[0] = 1;
+            for (var i = 1; i <= k; i++) {
+                dp_pow_p[i] = dp_pow_p[i - 1] * p;
+            }
+            for (var i = 1; i <= l; i++) {
+                dp_pow_q[i] = dp_pow_q[i - 1] * q;
+            }
+            // calc probability
+            var p_a_win = 0;
+            var p_a_win_with_hp = new Array(a_hp + 1);
+            for (var i = 0; i <= a_hp; i++)
+                p_a_win_with_hp[i] = 0;
+            for (var n = k; n < k + l; n++) {
+                var probability = this.binomial(n - 1, k - 1) * dp_pow_p[k] * dp_pow_q[n - k];
+                p_a_win += probability;
+                p_a_win_with_hp[a_hp - (n - k) * d_fp] = probability;
+            }
+            var exp_a_hp = 0;
+            for (var i = 0; i <= a_hp; i++) {
+                exp_a_hp += i * p_a_win_with_hp[i];
+            }
+            var p_d_win = 0;
+            var p_d_win_with_hp = new Array(d_hp + 1);
+            for (var i = 0; i <= d_hp; i++)
+                p_d_win_with_hp[i] = 0;
+            for (var n = l; n < l + k; n++) {
+                var probability = this.binomial(n - 1, l - 1) * dp_pow_q[l] * dp_pow_p[n - l];
+                p_d_win += probability;
+                p_d_win_with_hp[d_hp - (n - l) * a_fp] = probability;
+            }
+            var exp_d_hp = 0;
+            for (var i = 0; i <= d_hp; i++) {
+                exp_d_hp += i * p_d_win_with_hp[i];
+            }
+            var result = {
+                attacker_win: p_a_win,
+                defender_win: p_d_win,
+                attacker_hp_exp: exp_a_hp,
+                defender_hp_exp: exp_a_hp,
+                attacker_hp_exp_list: p_a_win_with_hp,
+                defender_hp_exp_list: p_d_win_with_hp
+            };
+            return result;
+        };
+        BattleCalc.prototype.applyAdjustments = function () {
+            return { attacker: this.attacker, defender: this.defender };
+        };
+        return BattleCalc;
+    }());
+    FreecivCalc.BattleCalc = BattleCalc;
+})(FreecivCalc || (FreecivCalc = {}));
 /// <reference path="unit.ts" />
 /// <reference path="veteranlevel.ts" />
 /// <reference path="terrain.ts" />
 /// <reference path="flags.ts" />
 /// <reference path="adjustment.ts" />
 /// <reference path="loader.ts" />
+/// <reference path="calc.ts" />
 /// <reference path="../typings/jquery/jquery.d.ts" />
 var FreecivCalc;
 (function (FreecivCalc_1) {
@@ -369,6 +498,7 @@ var FreecivCalc;
             this.terrains = new FreecivCalc_1.TerrainManager();
             this.flags = new FreecivCalc_1.FlagManager();
             this.adjustments = new FreecivCalc_1.AdjustmentManager(this);
+            this.calc = new FreecivCalc_1.BattleCalc();
             this.loaded = false;
             this.loader = new FreecivCalc_1.Loader({ units: "units.json", veteranlevel: "veteranlevel.json", terrains: "terrains.json", flags: "flags.json", adjustments: "adjustments.json" }, function () {
                 _this.loaded = true;
@@ -488,13 +618,11 @@ var FreecivCalc;
                 console.log(this.adjustments.check());
             }
         };
-        FreecivCalc.prototype.calc = function () {
-        };
         return FreecivCalc;
     }());
     FreecivCalc_1.FreecivCalc = FreecivCalc;
     window.onload = function () {
         console.log("test");
-        var freecivcalc = new FreecivCalc();
+        FreecivCalc_1.freecivcalc = new FreecivCalc();
     };
 })(FreecivCalc || (FreecivCalc = {}));

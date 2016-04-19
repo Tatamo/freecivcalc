@@ -36,12 +36,29 @@ module FreecivCalc{
 			}
 		}
 		get(name:string): Unit{
-			if(this._units[name]) return this._units[name];
+			if(this._units[name]) {
+				// return copy of unit
+				return this.copyUnit(this._units[name]);
+			}
 			else return null;
 		}
 		getclass(name:string): UnitClass{
 			if(this._classlist[name]) return this._classlist[name];
 			else return null;
+		}
+		copyUnit(unit:Unit): Unit{
+			var u: Unit = {
+				id : unit.id,
+				value : unit.value,
+				pronunciation : unit.pronunciation,
+				class : unit.class,
+				flags : unit.flags,
+				hp : unit.hp,
+				attack : unit.attack,
+				defence : unit.defence,
+				firepower : unit.firepower,
+			}
+			return u;
 		}
 	}
 }

@@ -4,6 +4,7 @@
 /// <reference path="flags.ts" />
 /// <reference path="adjustment.ts" />
 /// <reference path="loader.ts" />
+/// <reference path="calc.ts" />
 /// <reference path="../typings/jquery/jquery.d.ts" />
 module FreecivCalc{
 	export class FreecivCalc{
@@ -16,6 +17,7 @@ module FreecivCalc{
 		terrains: TerrainManager;
 		flags: FlagManager;
 		adjustments: AdjustmentManager;
+		calc: BattleCalc;
 		loader: Loader;
 		loaded: boolean;
 		constructor(){
@@ -28,6 +30,7 @@ module FreecivCalc{
 			this.terrains = new TerrainManager();
 			this.flags = new FlagManager();
 			this.adjustments = new AdjustmentManager(this);
+			this.calc = new BattleCalc();
 			this.loaded = false;
 			this.loader = new Loader(
 				{units:"units.json", veteranlevel:"veteranlevel.json", terrains:"terrains.json", flags:"flags.json", adjustments:"adjustments.json"},
@@ -145,11 +148,10 @@ module FreecivCalc{
 				console.log(this.adjustments.check());
 			}
 		}
-		calc(){
-		}
 	}
+	export var freecivcalc;
 	window.onload =()=>{
 		console.log("test");
-		var freecivcalc = new FreecivCalc();
+		freecivcalc = new FreecivCalc();
 	}
 }
