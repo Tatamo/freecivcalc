@@ -1,0 +1,16 @@
+{
+  "name": "freecivcalc",
+  "version": "2.1.0",
+  "description": "",
+  "main": "freecivcalc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc --watch --out freecivcalc.js src/freecivcalc.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tsd": "^0.6.5",
+    "typescript": "^1.8.10"
+  }
+}

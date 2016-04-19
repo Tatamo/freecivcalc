@@ -1,0 +1,4 @@
+[{"level": 1, "id": "recruit", "label": "新兵(100%)", "value": 100, "chance_for_promotion": 50},
+{"level": 2, "id": "veteran", "label": "ベテラン(150%)", "value": 150, "chance_for_promotion": 33},
+{"level": 3, "id": "hardened", "label": "精鋭(175%)", "value": 175, "chance_for_promotion": 20}, 
+{"level": 4, "id": "elite", "label": "エリート(200%)", "value": 200, "chance_for_promotion": 0}]
