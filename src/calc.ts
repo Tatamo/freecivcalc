@@ -3,12 +3,19 @@
 /// <reference path="adjustment.ts" />
 module FreecivCalc{
 	export interface BattleResult{
+		attacker_raw: Unit;
+		defender_raw: Unit;
+		attacker_strength: number;
+		defender_strength: number;
+		attacker_fp: number;
+		defender_fp: number;
 		attacker_win: number;
 		defender_win: number;
 		attacker_hp_exp: number;
 		defender_hp_exp: number;
 		attacker_hp_exp_list: Array<number>;
 		defender_hp_exp_list: Array<number>;
+		adjustments: Array<Adjustment>;
 	}
 	export class BattleCalc{
 		attacker: Unit;
@@ -51,6 +58,9 @@ module FreecivCalc{
 			}
 		}
 		calc(){
+			if(!this._initialized || !this.attacker || !this.defender || !this.adjustments){
+				throw new Error("calculator not initialized");
+			}
 			/*var raw_attack = this.attacker.attack;
 			var raw_defence = this.defender.defence;
 			var raw_attacker_fp = this.attacker.firepower;
@@ -106,17 +116,59 @@ module FreecivCalc{
 				exp_d_hp += i*p_d_win_with_hp[i];
 			}
 			var result:BattleResult = {
+				attacker_raw: this.attacker,
+				defender_raw: this.defender,
+				attacker_strength: s,
+				defender_strength: r,
+				attacker_fp: a_fp,
+				defender_fp: d_fp,
 				attacker_win: p_a_win,
 				defender_win: p_d_win,
 				attacker_hp_exp: exp_a_hp,
-				defender_hp_exp: exp_a_hp,
+				defender_hp_exp: exp_d_hp,
 				attacker_hp_exp_list: p_a_win_with_hp,
 				defender_hp_exp_list: p_d_win_with_hp,
+				adjustments: this.adjustments
 			}
 			return result;
 		}
 		applyAdjustments(){
-			return {attacker: this.attacker, defender: this.defender};
+			var attacker = new UnitManager().copyUnit(this.attacker);
+			var defender = new UnitManager().copyUnit(this.defender);
+			var s = attacker.attack * 10;
+			var r = defender.defence * 10;
+			var a_fp = attacker.firepower;
+			var d_fp = defender.firepower;
+			for(var i=0; i<this.adjustments.length; i++){
+				var adj = this.adjustments[i];
+				for(var ii=0; ii<adj.effect.length; ii++){
+					var effect = adj.effect[ii];
+					var val = effect.value;
+					if(effect.type == "attacker-strength-multiply"){
+						s *= val / 100;
+					}
+					else if(effect.type == "defender-strength-multiply"){
+						r *= val / 100;
+					}
+					else if(effect.type == "attacker-firepower-multiply"){
+						a_fp *= val / 100;
+					}
+					else if(effect.type == "defender-firepower-multiply"){
+						d_fp *= val / 100;
+					}
+					else if(effect.type == "attacker-firepower-set"){
+						a_fp = val;
+					}
+					else if(effect.type == "defender-firepower-set"){
+						d_fp = val;
+					}
+				}
+			}
+			attacker.attack = Math.floor(s);
+			defender.defence = Math.floor(r);
+			attacker.firepower = a_fp;
+			defender.firepower = d_fp;
+			return {attacker: attacker, defender: defender};
 		}
 	}
 }

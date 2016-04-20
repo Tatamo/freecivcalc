@@ -5,7 +5,7 @@ module FreecivCalc{
 	}
 	export interface Unit{
 		id :string;
-		value :string;
+		label :string;
 		pronunciation :Array<string>;
 		class :string;
 		flags :Array<string>;
@@ -49,7 +49,7 @@ module FreecivCalc{
 		copyUnit(unit:Unit): Unit{
 			var u: Unit = {
 				id : unit.id,
-				value : unit.value,
+				label : unit.label,
 				pronunciation : unit.pronunciation,
 				class : unit.class,
 				flags : unit.flags,

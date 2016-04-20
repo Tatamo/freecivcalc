@@ -17,7 +17,7 @@ module FreecivCalc{
 		terrains: TerrainManager;
 		flags: FlagManager;
 		adjustments: AdjustmentManager;
-		calc: BattleCalc;
+		calculator: BattleCalc;
 		loader: Loader;
 		loaded: boolean;
 		constructor(){
@@ -30,7 +30,7 @@ module FreecivCalc{
 			this.terrains = new TerrainManager();
 			this.flags = new FlagManager();
 			this.adjustments = new AdjustmentManager(this);
-			this.calc = new BattleCalc();
+			this.calculator = new BattleCalc();
 			this.loaded = false;
 			this.loader = new Loader(
 				{units:"units.json", veteranlevel:"veteranlevel.json", terrains:"terrains.json", flags:"flags.json", adjustments:"adjustments.json"},
@@ -68,6 +68,11 @@ module FreecivCalc{
 					});
 					this.flags.set(flag,el.prop("checked"));
 				}
+				var in_open = $( "#in-open" );
+				in_open.change(()=>{
+					this.flags.set("in-city", false);
+				});
+				in_open.prop("checked", true).change();
 				var attacker_class = $( "#attacker-class" );
 				attacker_class.change(()=>{
 					$( "#attacker-class-display" ).text(this.units.getclass(attacker_class.val()).label);
@@ -94,6 +99,14 @@ module FreecivCalc{
 						current.val(maxhp).change();
 					}
 				});
+				var attacker_cb = $( "#combobox-attack" );
+				if(attacker_cb.children().length > 1) {
+					this.setUnit(this.units.get((<any>attacker_cb.children()[1]).value), UnitSide.attacker);
+				}
+				var defender_cb = $( "#combobox-defence" );
+				if(defender_cb.children().length > 1){
+					this.setUnit(this.units.get((<any>defender_cb.children()[1]).value), UnitSide.defender);
+				}
 			});
 		}
 		createOptions(){
@@ -123,11 +136,11 @@ module FreecivCalc{
 				(<any>terrain_select).dataselect({list:this.loader.terrains,
 				select: (e,data) =>{
 					this.terrains.current(data.item.value);
-					console.log(this.terrains.current());
 				}});
 			});
 		}
 		setUnit(unit:Unit, side:UnitSide){
+			if(!unit) return;
 			if(side == UnitSide.attacker){
 				this.attacker = unit;
 				$( "#attacker-class" ).val(unit.class).change();
@@ -144,9 +157,19 @@ module FreecivCalc{
 				$( "#defender-strength" ).val(unit.defence).change();
 				$( "#defender-firepower" ).val(unit.firepower).change();
 			}
-			if(this.attacker && this.defender){
-				console.log(this.adjustments.check());
-			}
+		}
+		calc(){
+			var attacker = this.units.copyUnit(this.attacker);
+			var defender = this.units.copyUnit(this.defender);
+			attacker.hp = +$( "#attacker-current-hp" ).val();
+			defender.hp = +$( "#defender-current-hp" ).val();
+			attacker.attack = +$( "#attacker-strength" ).val();
+			defender.defence = +$( "#defender-strength" ).val();
+			attacker.firepower = +$( "#attacker-firepower" ).val();
+			defender.firepower = +$( "#defender-firepower" ).val();
+			var adjustments = this.adjustments.check();
+			this.calculator.set(attacker, defender, adjustments);
+			return this.calculator.calc();
 		}
 	}
 	export var freecivcalc;
