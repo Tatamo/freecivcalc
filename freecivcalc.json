@@ -1,4 +1,5 @@
-[{
+{
+	"units": [{
 		"id": "warriors",
 		"label": "戦士(Warriors)",
 		"pronunciation": ["戦士", "せんし", "senshi", "sennshi", "sensi", "sennsi", "warriors"],
@@ -438,5 +439,226 @@
 		"attack": 0,
 		"defence": 2,
 		"firepower": 1
-	}
-]
+	}],
+	"unitclass": [{
+		"id": "land",
+		"label": "陸上ユニット"
+	}, {
+		"id": "sea",
+		"label": "海上ユニット"
+	}, {
+		"id": "trireme",
+		"label": "トライリーム"
+	}, {
+		"id": "air",
+		"label": "航空ユニット"
+	}, {
+		"id": "helicopter",
+		"label": "ヘリコプター"
+	}, {
+		"id": "missile",
+		"label": "ミサイル"
+	}],
+	"veteranlevel": [{
+		"level": 1,
+		"id": "recruit",
+		"label": "新兵(100%)",
+		"value": 100,
+		"chance_for_promotion": 50
+	}, {
+		"level": 2,
+		"id": "veteran",
+		"label": "ベテラン(150%)",
+		"value": 150,
+		"chance_for_promotion": 33
+	}, {
+		"level": 3,
+		"id": "hardened",
+		"label": "精鋭(175%)",
+		"value": 175,
+		"chance_for_promotion": 20
+	}, {
+		"level": 4,
+		"id": "elite",
+		"label": "エリート(200%)",
+		"value": 200,
+		"chance_for_promotion": 0
+	}],
+	"terrains": [{
+		"id": "plains-grassland",
+		"label": "平野,草原(100%)",
+		"value": 100
+	}, {
+		"id": "forest",
+		"label": "森(150%)",
+		"value": 150
+	}, {
+		"id": "hills",
+		"label": "丘(200%)",
+		"value": 200
+	}, {
+		"id": "mountains",
+		"label": "山(300%)",
+		"value": 300
+	}, {
+		"id": "ocean",
+		"label": "洋上(100%)",
+		"value": 100
+	}, {
+		"id": "glacier",
+		"label": "氷河(100%)",
+		"value": 100
+	}, {
+		"id": "tundra",
+		"label": "ツンドラ(100%)",
+		"value": 100
+	}, {
+		"id": "desert",
+		"label": "砂漠(100%)",
+		"value": 100
+	}, {
+		"id": "swamp",
+		"label": "湿地(150%)",
+		"value": 150
+	}, {
+		"id": "jungle",
+		"label": "ジャングル(150%)",
+		"value": 150
+	}],
+	"flags": ["terrain-river", "in-city", "in-fortress", "defender-fortified", "city-walls", "city-coastal-defense", "city-sam-battery", "city-sdi-defense"],
+	"adjustments": [{
+		"id": "attacker-vereran",
+		"name": "ベテランレベル(攻撃側)",
+		"condition": ["true"],
+		"effect": [{
+			"type": "attacker-strength-multiply",
+			"value": "attacker-veteran()"
+		}]
+	}, {
+		"id": "defender-vereran",
+		"name": "ベテランレベル(防御側)",
+		"condition": ["true"],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "defender-veteran()"
+		}]
+	}, {
+		"id": "terrain",
+		"name": "地形補正",
+		"condition": ["defender-class(land)"],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "terrain()"
+		}]
+	}, {
+		"id": "terrain-river",
+		"name": "地形補正(川)",
+		"condition": ["defender-class(land)", "flag(terrain-river)"],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "150"
+		}]
+	}, {
+		"id": "land-unit-in-fortress",
+		"name": "要塞",
+		"condition": ["defender-class(land)", ["NOT", "flag(in-city)"], "flag(in-fortress)"],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "200"
+		}]
+	}, {
+		"id": "land-unit-fortified-or-in-city",
+		"name": "防御体勢/都市内",
+		"condition": ["defender-class(land)", ["OR", "flag(defender-fortified)", "flag(in-city)"]],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "150"
+		}]
+	}, {
+		"id": "city-walls",
+		"name": "城壁",
+		"condition": ["flag(in-city)", "flag(city-walls)", ["OR", "attacker-class(land)", "attacker-class(helicopter)"],
+			["NOT", "attacker-flag(igwall)"]
+		],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "300"
+		}]
+	}, {
+		"id": "city-coastal-defense",
+		"name": "沿岸防衛",
+		"condition": ["flag(in-city)", "flag(city-coastal-defense)", "attacker-class(sea)"],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "200"
+		}]
+	}, {
+		"id": "city-sam-battery",
+		"name": "対空ミサイル陣地",
+		"condition": ["flag(in-city)", "flag(city-sam-battery)", "attacker-class(air)"],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "200"
+		}]
+	}, {
+		"id": "city-sdi-defense",
+		"name": "SDI防衛システム",
+		"condition": ["flag(in-city)", "flag(city-sdi-defense)", "attacker-class(missile)"],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "200"
+		}]
+	}, {
+		"id": "pikemen-attacked-by-mounted",
+		"name": "長槍兵の対騎乗ユニット補正",
+		"condition": ["defender-flag(pikeman)", "attacker-flag(mounted)"],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "200"
+		}]
+	}, {
+		"id": "aegis-cruiser-attacked-by-aircraft-missile-or-helicopter",
+		"name": "イージス巡洋艦の対航空・ミサイル・ヘリコプターユニット補正",
+		"condition": ["defender-flag(aegis-cruiser)", ["OR", "attacker-class(air)", "attacker-class(missile)", "attacker-class(helicopter)"]],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "500"
+		}]
+	}, {
+		"id": "fighter-attacks-helicopter",
+		"name": "戦闘機の対ヘリコプター補正",
+		"condition": ["attacker-flag(fighter)", "defender-class(helicopter)"],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "50"
+		}, {
+			"type": "defender-firepower-set",
+			"value": "1"
+		}]
+	}, {
+		"id": "ship-in-city-attacked",
+		"name": "都市内の船舶ユニットへの攻撃補正",
+		"condition": [
+			["OR", "defender-class(sea)", "defender-class(trireme)"], "flag(in-city)"
+		],
+		"effect": [{
+			"type": "attacker-firepower-multiply",
+			"value": "200"
+		}, {
+			"type": "defender-firepower-set",
+			"value": "1"
+		}]
+	}, {
+		"id": "ship-attacks-land-unit",
+		"name": "船舶ユニットの地上ユニットへの攻撃",
+		"condition": ["attacker-class(sea)", "defender-class(land)"],
+		"effect": [{
+			"type": "attacker-firepower-set",
+			"value": "1"
+		}, {
+			"type": "defender-firepower-set",
+			"value": "1"
+		}]
+	}]
+
+}

@@ -35,7 +35,7 @@ module FreecivCalc{
 			this.result = null;
 			this.loaded = false;
 			this.loader = new Loader(
-				{units:"units.json", veteranlevel:"veteranlevel.json", terrains:"terrains.json", flags:"flags.json", adjustments:"adjustments.json"},
+				"freecivcalc.json",
 				()=>{
 					this.loaded = true;
 					this.init();
@@ -43,16 +43,7 @@ module FreecivCalc{
 			);
 		}
 		init(){
-			console.log("FreecivCalc#init");
-			var classlist = [
-				{id:"land", label:"陸上ユニット"},
-				{id:"sea", label:"海上ユニット"},
-				{id:"trireme", label:"トライリーム"},
-				{id:"air", label:"航空ユニット"},
-				{id:"helicopter", label:"ヘリコプター"},
-				{id:"missile", label:"ミサイル"},
-			];
-			this.units.init(classlist,this.loader.units);
+			this.units.init(this.loader.unitclass,this.loader.units);
 			this.veteranlevelmanager.init(this.loader.veteranlevel);
 			this.terrains.init(this.loader.terrains);
 			this.flags.init(this.loader.flags);
@@ -202,7 +193,6 @@ module FreecivCalc{
 	}
 	export var freecivcalc;
 	window.onload =()=>{
-		console.log("test");
 		freecivcalc = new FreecivCalc();
 	}
 }

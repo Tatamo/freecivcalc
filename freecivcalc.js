@@ -334,28 +334,18 @@ var FreecivCalc;
     // load JSON files
     // TODO: define interface of JSON items
     var Loader = (function () {
-        function Loader(paths, cb) {
+        function Loader(path, cb) {
             var _this = this;
             if (cb === void 0) { cb = function () { }; }
             this.onload = cb;
-            console.log(paths);
             $(function () {
-                var loads = [$.getJSON(paths.units).done(function (data) {
-                        _this.units = data;
-                    }),
-                    $.getJSON(paths.veteranlevel).done(function (data) {
-                        _this.veteranlevel = data;
-                    }),
-                    $.getJSON(paths.terrains).done(function (data) {
-                        _this.terrains = data;
-                    }),
-                    $.getJSON(paths.flags).done(function (data) {
-                        _this.flags = data;
-                    }),
-                    $.getJSON(paths.adjustments).done(function (data) {
-                        _this.adjustments = data;
-                    })];
-                Promise.all(loads).then(function () {
+                $.getJSON(path).done(function (data) {
+                    _this.units = data.units;
+                    _this.unitclass = data.unitclass;
+                    _this.veteranlevel = data.veteranlevel;
+                    _this.terrains = data.terrains;
+                    _this.flags = data.flags;
+                    _this.adjustments = data.adjustments;
                     _this.onload();
                 });
             });
@@ -546,22 +536,13 @@ var FreecivCalc;
             this.calculator = new FreecivCalc_1.BattleCalc();
             this.result = null;
             this.loaded = false;
-            this.loader = new FreecivCalc_1.Loader({ units: "units.json", veteranlevel: "veteranlevel.json", terrains: "terrains.json", flags: "flags.json", adjustments: "adjustments.json" }, function () {
+            this.loader = new FreecivCalc_1.Loader("freecivcalc.json", function () {
                 _this.loaded = true;
                 _this.init();
             });
         }
         FreecivCalc.prototype.init = function () {
-            console.log("FreecivCalc#init");
-            var classlist = [
-                { id: "land", label: "陸上ユニット" },
-                { id: "sea", label: "海上ユニット" },
-                { id: "trireme", label: "トライリーム" },
-                { id: "air", label: "航空ユニット" },
-                { id: "helicopter", label: "ヘリコプター" },
-                { id: "missile", label: "ミサイル" },
-            ];
-            this.units.init(classlist, this.loader.units);
+            this.units.init(this.loader.unitclass, this.loader.units);
             this.veteranlevelmanager.init(this.loader.veteranlevel);
             this.terrains.init(this.loader.terrains);
             this.flags.init(this.loader.flags);
@@ -720,7 +701,6 @@ var FreecivCalc;
     }());
     FreecivCalc_1.FreecivCalc = FreecivCalc;
     window.onload = function () {
-        console.log("test");
         FreecivCalc_1.freecivcalc = new FreecivCalc();
     };
 })(FreecivCalc || (FreecivCalc = {}));
