@@ -61,9 +61,21 @@ module FreecivCalc{
 					});
 					this.flags.set(flag,el.prop("checked"));
 				}
+				var in_city = $( "#in-city" );
+				in_city.change(()=>{
+					if(in_city.prop("checked")){
+						$( "#fieldset-in-city" ).prop("disabled", false);
+						$( "#fieldset-in-open" ).prop("disabled", true);
+					}
+				});
+				in_city.change();
 				var in_open = $( "#in-open" );
 				in_open.change(()=>{
 					this.flags.set("in-city", false);
+					if(in_open.prop("checked")){
+						$( "#fieldset-in-open" ).prop("disabled", false);
+						$( "#fieldset-in-city" ).prop("disabled", true);
+					}
 				});
 				in_open.prop("checked", true).change();
 				var attacker_class = $( "#attacker-class" );
@@ -73,6 +85,18 @@ module FreecivCalc{
 				var defender_class = $( "#defender-class" );
 				defender_class.change(()=>{
 					$( "#defender-class-display" ).text(this.units.getclass(defender_class.val()).label);
+					if(defender_class.val() && defender_class.val() != "land"){
+						(<any>$( "#select-terrain" )).selectmenu("disable");
+						$( "#terrain-river" ).prop("disabled", true);
+						$( "#defender-fortified" ).prop("disabled", true);
+						$( "#in-fortress" ).prop("disabled", true);
+					}
+					else{
+						(<any>$( "#select-terrain" )).selectmenu("enable");
+						$( "#terrain-river" ).prop("disabled", false);
+						$( "#defender-fortified" ).prop("disabled", false);
+						$( "#in-fortress" ).prop("disabled", false);
+					}
 				});
 				var attacker_max_hp = $( "#attacker-max-hp" );
 				attacker_max_hp.change(()=>{

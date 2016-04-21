@@ -564,9 +564,21 @@ var FreecivCalc;
                 for (var i = 0; i < _this.loader.flags.length; i++) {
                     _loop_1();
                 }
+                var in_city = $("#in-city");
+                in_city.change(function () {
+                    if (in_city.prop("checked")) {
+                        $("#fieldset-in-city").prop("disabled", false);
+                        $("#fieldset-in-open").prop("disabled", true);
+                    }
+                });
+                in_city.change();
                 var in_open = $("#in-open");
                 in_open.change(function () {
                     _this.flags.set("in-city", false);
+                    if (in_open.prop("checked")) {
+                        $("#fieldset-in-open").prop("disabled", false);
+                        $("#fieldset-in-city").prop("disabled", true);
+                    }
                 });
                 in_open.prop("checked", true).change();
                 var attacker_class = $("#attacker-class");
@@ -576,6 +588,18 @@ var FreecivCalc;
                 var defender_class = $("#defender-class");
                 defender_class.change(function () {
                     $("#defender-class-display").text(_this.units.getclass(defender_class.val()).label);
+                    if (defender_class.val() && defender_class.val() != "land") {
+                        $("#select-terrain").selectmenu("disable");
+                        $("#terrain-river").prop("disabled", true);
+                        $("#defender-fortified").prop("disabled", true);
+                        $("#in-fortress").prop("disabled", true);
+                    }
+                    else {
+                        $("#select-terrain").selectmenu("enable");
+                        $("#terrain-river").prop("disabled", false);
+                        $("#defender-fortified").prop("disabled", false);
+                        $("#in-fortress").prop("disabled", false);
+                    }
                 });
                 var attacker_max_hp = $("#attacker-max-hp");
                 attacker_max_hp.change(function () {
