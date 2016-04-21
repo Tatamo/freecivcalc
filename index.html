@@ -7,134 +7,145 @@
 	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<style>
-	.custom-combobox {
-		position: relative;
-		display: inline-block;
-	}
-	.custom-combobox-toggle {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		margin-left: -1px;
-		padding: 0;
-	}
-	.ui-autocomplete {
-		max-height: 400px;
-		overflow-y: auto;
-		overflow-x: hidden;
-	}
+.custom-combobox {
+	position: relative;
+	display: inline-block;
+}
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+}
+.ui-autocomplete {
+	max-height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
 	</style>
 	<script src="widgets.js"></script>
 	<script src="freecivcalc.js"></script>
 	<script>
 $(function (){
-	var defender_class = $( "#defender-class" );
-	defender_class.change(function(){
-		if(defender_class.val() && defender_class.val() != "land"){
-			$( "#select-terrain" ).selectmenu("disable");
-			$( "#terrain-river" ).prop("disabled", true);
-			$( "#defender-fortified" ).prop("disabled", true);
-			$( "#in-fortress" ).prop("disabled", true);
-		}
-		else{
-			$( "#select-terrain" ).selectmenu("enable");
-			$( "#terrain-river" ).prop("disabled", false);
-			$( "#defender-fortified" ).prop("disabled", false);
-			$( "#in-fortress" ).prop("disabled", false);
-		}
-	});
-	var in_city = $( "#in-city" );
-	in_city.change(function(){
-		if(in_city.prop("checked")){
-			$( "#fieldset-in-city" ).prop("disabled", false);
-			$( "#fieldset-in-open" ).prop("disabled", true);
-		}
-	});
-	in_city.change();
-	var in_open = $( "#in-open" );
-	in_open.change(function(){
-		if(in_open.prop("checked")){
-			$( "#fieldset-in-open" ).prop("disabled", false);
-			$( "#fieldset-in-city" ).prop("disabled", true);
-		}
-	});
-	in_open.change();
+var defender_class = $( "#defender-class" );
+defender_class.change(function(){
+	if(defender_class.val() && defender_class.val() != "land"){
+		$( "#select-terrain" ).selectmenu("disable");
+		$( "#terrain-river" ).prop("disabled", true);
+		$( "#defender-fortified" ).prop("disabled", true);
+		$( "#in-fortress" ).prop("disabled", true);
+	}
+	else{
+		$( "#select-terrain" ).selectmenu("enable");
+		$( "#terrain-river" ).prop("disabled", false);
+		$( "#defender-fortified" ).prop("disabled", false);
+		$( "#in-fortress" ).prop("disabled", false);
+	}
+});
+var in_city = $( "#in-city" );
+in_city.change(function(){
+	if(in_city.prop("checked")){
+		$( "#fieldset-in-city" ).prop("disabled", false);
+		$( "#fieldset-in-open" ).prop("disabled", true);
+	}
+});
+in_city.change();
+var in_open = $( "#in-open" );
+in_open.change(function(){
+	if(in_open.prop("checked")){
+		$( "#fieldset-in-open" ).prop("disabled", false);
+		$( "#fieldset-in-city" ).prop("disabled", true);
+	}
+});
+in_open.change();
 });
 	</script>
 </head>
 <body>
- 
-<fieldset>
-	<legend>attacker unit</legend>
-	<div class="ui-widget">
-		<label>Select unit: </label>
-		<select id="combobox-attack">
+
+	<fieldset>
+		<legend>attacker unit</legend>
+		<div class="ui-widget">
+			<label>Select unit: </label>
+			<select id="combobox-attack">
+			</select>
+		</div>
+		<label>unit class:</label>
+		<input type="hidden" id="attacker-class"><span id="attacker-class-display"></span>
+		<label>veteran level:</label>
+		<select id="attacker-veteranlevel">
 		</select>
+		<table>
+			<tr>
+				<td style="text-align:right"><label>current HP: </label></td><td><input type="number" value="10" min="1" id="attacker-current-hp"></td>
+				<td style="text-align:right"><label>max HP: </label></td><td><input type="number" value="10" min="1" id="attacker-max-hp"></td>
+			</tr>
+			<tr>
+				<td style="text-align:right"><label>attack: </label></td><td><input type="number" value="1" min="1" id="attacker-strength">
+					<td style="text-align:right"><label>firepower: </label></td><td><input type="number" value="1" min="1" id="attacker-firepower"></td>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset>
+		<legend>defender unit</legend>
+		<div class="ui-widget">
+			<label>Select unit: </label>
+			<select id="combobox-defence">
+			</select>
+		</div>
+		<label>unit class:</label>
+		<input type="hidden" id="defender-class"><span id="defender-class-display"></span>
+		<label>veteran level:</label>
+		<select id="defender-veteranlevel">
+		</select>
+		<table>
+			<tr>
+				<td style="text-align:right"><label>current HP: </label></td><td><input type="number" value="10" min="1" id="defender-current-hp"></td>
+				<td style="text-align:right"><label>max HP: </label></td><td><input type="number" value="10" min="1" id="defender-max-hp"></td>
+			</tr>
+			<tr>
+				<td style="text-align:right"><label>defence: </label></td><td><input type="number" value="1" min="1" id="defender-strength">
+					<td style="text-align:right"><label>firepower: </label></td><td><input type="number" value="1" min="1" id="defender-firepower"></td>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset>
+		<legend>defender adjastment</legend>
+		<fieldset id="fieldset-terrains">
+			<legend>terrains</legend>
+			<label>terrain: </label>
+			<select id="select-terrain">
+			</select>
+			<input type="checkbox" id="terrain-river"><label for="terrain-river">川(150%)</label>
+		</fieldset>
+		<fieldset id="fieldset-in-city">
+			<legend><label for="in-city"  title="land units gain 150% defence adjustments"><input type="radio" name="in-city-or-open" value="city" id="in-city">in city</label></legend>
+			<label>defence structures: </label>
+			<ul style="list-style-type:none; margin-top:3px; padding-left:1em">
+				<li><label for="city-walls"><input type="checkbox" id="city-walls">城壁(対陸上ユニット、ヘリコプター(榴弾砲を除く))(300%)</label></li>
+				<li><label for="city-coastal-defense"><input type="checkbox" id="city-coastal-defense">沿岸防衛(対船舶ユニット)(200%)</label></li>
+				<li><label for="city-sam-battery"><input type="checkbox" id="city-sam-battery">対空ミサイル陣地(対航空ユニット)(200%)</label></li>
+				<li><label for="city-sdi-defense"><input type="checkbox" id="city-sdi-defense">SDI防衛システム(対ミサイル)(200%)</label></li>
+			</ul>
+		</fieldset>
+		<fieldset id="fieldset-in-open">
+			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open">out of city<label></legend>
+			<label for="defender-fortified" title="valid for only land units"><input type="checkbox" id="defender-fortified">防御体勢(150%)</label>
+			<label for="in-fortress" title="valid for only land units"><input type="checkbox" id="in-fortress">要塞(200%)</label>
+		</fieldset>
+	</fieldset>
+	<button type="button" id="calc">Calc</button>
+	<div id="result-wrapper" style="display:none">
+		<table id="result-table">
+			<tr>
+				<th>unit side</th>
+				<th>strength</th>
+				<th>probability of winning</th>
+				<th>expected hp letf</th>
+			</tr>
+		</table>
 	</div>
-	<label>unit class:</label>
-	<input type="hidden" id="attacker-class"><span id="attacker-class-display"></span>
-	<label>veteran level:</label>
-	<select id="attacker-veteranlevel">
-	</select>
-	<table>
-		<tr>
-		<td style="text-align:right"><label>current HP: </label></td><td><input type="number" value="10" min="1" id="attacker-current-hp"></td>
-		<td style="text-align:right"><label>max HP: </label></td><td><input type="number" value="10" min="1" id="attacker-max-hp"></td>
-		</tr>
-		<tr>
-		<td style="text-align:right"><label>attack: </label></td><td><input type="number" value="1" min="1" id="attacker-strength">
-		<td style="text-align:right"><label>firepower: </label></td><td><input type="number" value="1" min="1" id="attacker-firepower"></td>
-		</tr>
-	</table>
-</fieldset>
-<fieldset>
-	<legend>defender unit</legend>
-	<div class="ui-widget">
-		<label>Select unit: </label>
-		<select id="combobox-defence">
-		</select>
-	</div>
-	<label>unit class:</label>
-	<input type="hidden" id="defender-class"><span id="defender-class-display"></span>
-	<label>veteran level:</label>
-	<select id="defender-veteranlevel">
-	</select>
-	<table>
-		<tr>
-		<td style="text-align:right"><label>current HP: </label></td><td><input type="number" value="10" min="1" id="defender-current-hp"></td>
-		<td style="text-align:right"><label>max HP: </label></td><td><input type="number" value="10" min="1" id="defender-max-hp"></td>
-		</tr>
-		<tr>
-		<td style="text-align:right"><label>defence: </label></td><td><input type="number" value="1" min="1" id="defender-strength">
-		<td style="text-align:right"><label>firepower: </label></td><td><input type="number" value="1" min="1" id="defender-firepower"></td>
-		</tr>
-	</table>
-</fieldset>
-<fieldset>
-	<legend>defender adjastment</legend>
-	<fieldset id="fieldset-terrains">
-		<legend>terrains</legend>
-		<label>terrain: </label>
-		<select id="select-terrain">
-		</select>
-		<input type="checkbox" id="terrain-river"><label for="terrain-river">川(150%)</label>
-	</fieldset>
-	<fieldset id="fieldset-in-city">
-		<legend><label for="in-city"  title="land units gain 150% defence adjustments"><input type="radio" name="in-city-or-open" value="city" id="in-city">in city</label></legend>
-		<label>defence structures: </label>
-		<ul style="list-style-type:none; margin-top:3px; padding-left:1em">
-			<li><label for="city-walls"><input type="checkbox" id="city-walls">城壁(対陸上ユニット、ヘリコプター(榴弾砲を除く))(300%)</label></li>
-			<li><label for="city-coastal-defense"><input type="checkbox" id="city-coastal-defense">沿岸防衛(対船舶ユニット)(200%)</label></li>
-			<li><label for="city-sam-battery"><input type="checkbox" id="city-sam-battery">対空ミサイル陣地(対航空ユニット)(200%)</label></li>
-			<li><label for="city-sdi-defense"><input type="checkbox" id="city-sdi-defense">SDI防衛システム(対ミサイル)(200%)</label></li>
-		</ul>
-	</fieldset>
-	<fieldset id="fieldset-in-open">
-		<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open">out of city<label></legend>
-		<label for="defender-fortified" title="valid for only land units"><input type="checkbox" id="defender-fortified">防御体勢(150%)</label>
-		<label for="in-fortress" title="valid for only land units"><input type="checkbox" id="in-fortress">要塞(200%)</label>
-	</fieldset>
-</fieldset>
- 
+
 </body>
 </html>

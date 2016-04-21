@@ -18,6 +18,7 @@ module FreecivCalc{
 		flags: FlagManager;
 		adjustments: AdjustmentManager;
 		calculator: BattleCalc;
+		result: BattleResult;
 		loader: Loader;
 		loaded: boolean;
 		constructor(){
@@ -31,6 +32,7 @@ module FreecivCalc{
 			this.flags = new FlagManager();
 			this.adjustments = new AdjustmentManager(this);
 			this.calculator = new BattleCalc();
+			this.result = null;
 			this.loaded = false;
 			this.loader = new Loader(
 				{units:"units.json", veteranlevel:"veteranlevel.json", terrains:"terrains.json", flags:"flags.json", adjustments:"adjustments.json"},
@@ -107,6 +109,10 @@ module FreecivCalc{
 				if(defender_cb.children().length > 1){
 					this.setUnit(this.units.get((<any>defender_cb.children()[1]).value), UnitSide.defender);
 				}
+				var calc = $( "#calc" );
+				calc.click(()=>{
+					console.log(this.calc());
+				});
 			});
 		}
 		createOptions(){
@@ -158,7 +164,26 @@ module FreecivCalc{
 				$( "#defender-firepower" ).val(unit.firepower).change();
 			}
 		}
+		showResult(){
+			if(!this.result) return;
+			var wrapper = $( "#result-wrapper" );
+			wrapper.show();
+			var table = $( "#result-table" );
+			$("<tr></tr>")
+			.append("<td>attacker</td>")
+			.append("<td>" + this.result.attacker_strength + "</td>")
+			.append("<td>" + (this.result.attacker_win*100).toFixed(2) + "%</td>")
+			.append("<td>" + this.result.attacker_hp_exp.toFixed(3) + "</td>")
+			.appendTo(table);
+			$("<tr></tr>")
+			.append("<td>attacker</td>")
+			.append("<td>" + this.result.defender_strength + "</td>")
+			.append("<td>" + (this.result.defender_win*100).toFixed(2) + "%</td>")
+			.append("<td>" + this.result.defender_hp_exp.toFixed(3) + "</td>")
+			.appendTo(table);
+		}
 		calc(){
+			if(!this.loaded) return null;
 			var attacker = this.units.copyUnit(this.attacker);
 			var defender = this.units.copyUnit(this.defender);
 			attacker.hp = +$( "#attacker-current-hp" ).val();
@@ -169,7 +194,10 @@ module FreecivCalc{
 			defender.firepower = +$( "#defender-firepower" ).val();
 			var adjustments = this.adjustments.check();
 			this.calculator.set(attacker, defender, adjustments);
-			return this.calculator.calc();
+			var result = this.calculator.calc();
+			this.result = result;
+			this.showResult();
+			return result;
 		}
 	}
 	export var freecivcalc;

@@ -544,6 +544,7 @@ var FreecivCalc;
             this.flags = new FreecivCalc_1.FlagManager();
             this.adjustments = new FreecivCalc_1.AdjustmentManager(this);
             this.calculator = new FreecivCalc_1.BattleCalc();
+            this.result = null;
             this.loaded = false;
             this.loader = new FreecivCalc_1.Loader({ units: "units.json", veteranlevel: "veteranlevel.json", terrains: "terrains.json", flags: "flags.json", adjustments: "adjustments.json" }, function () {
                 _this.loaded = true;
@@ -621,6 +622,10 @@ var FreecivCalc;
                 if (defender_cb.children().length > 1) {
                     _this.setUnit(_this.units.get(defender_cb.children()[1].value), FreecivCalc_1.UnitSide.defender);
                 }
+                var calc = $("#calc");
+                calc.click(function () {
+                    console.log(_this.calc());
+                });
             });
         };
         FreecivCalc.prototype.createOptions = function () {
@@ -674,7 +679,28 @@ var FreecivCalc;
                 $("#defender-firepower").val(unit.firepower).change();
             }
         };
+        FreecivCalc.prototype.showResult = function () {
+            if (!this.result)
+                return;
+            var wrapper = $("#result-wrapper");
+            wrapper.show();
+            var table = $("#result-table");
+            $("<tr></tr>")
+                .append("<td>attacker</td>")
+                .append("<td>" + this.result.attacker_strength + "</td>")
+                .append("<td>" + (this.result.attacker_win * 100).toFixed(2) + "%</td>")
+                .append("<td>" + this.result.attacker_hp_exp.toFixed(3) + "</td>")
+                .appendTo(table);
+            $("<tr></tr>")
+                .append("<td>attacker</td>")
+                .append("<td>" + this.result.defender_strength + "</td>")
+                .append("<td>" + (this.result.defender_win * 100).toFixed(2) + "%</td>")
+                .append("<td>" + this.result.defender_hp_exp.toFixed(3) + "</td>")
+                .appendTo(table);
+        };
         FreecivCalc.prototype.calc = function () {
+            if (!this.loaded)
+                return null;
             var attacker = this.units.copyUnit(this.attacker);
             var defender = this.units.copyUnit(this.defender);
             attacker.hp = +$("#attacker-current-hp").val();
@@ -685,7 +711,10 @@ var FreecivCalc;
             defender.firepower = +$("#defender-firepower").val();
             var adjustments = this.adjustments.check();
             this.calculator.set(attacker, defender, adjustments);
-            return this.calculator.calc();
+            var result = this.calculator.calc();
+            this.result = result;
+            this.showResult();
+            return result;
         };
         return FreecivCalc;
     }());
