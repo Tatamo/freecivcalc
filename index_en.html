@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>FreecivCalc2</title>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<style>
+.custom-combobox {
+	position: relative;
+	display: inline-block;
+}
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+}
+.ui-autocomplete {
+	max-height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+	</style>
+	<script src="widgets.js"></script>
+	<script src="freecivcalc.js"></script>
+</head>
+<body>
+
+	<fieldset>
+		<legend>attacker unit</legend>
+		<div class="ui-widget">
+			<label>Select unit: </label>
+			<select id="combobox-attack">
+			</select>
+		</div>
+		<label>unit class: </label>
+		<input type="hidden" id="attacker-class"><span id="attacker-class-display"></span>
+		<label>veteran level: </label>
+		<select id="attacker-veteranlevel">
+		</select>
+		<table>
+			<tr>
+				<td style="text-align:right"><label>current HP: </label></td><td><input type="number" value="10" min="1" id="attacker-current-hp"></td>
+				<td style="text-align:right"><label>max HP: </label></td><td><input type="number" value="10" min="1" id="attacker-max-hp"></td>
+			</tr>
+			<tr>
+				<td style="text-align:right"><label>attack: </label></td><td><input type="number" value="1" min="1" id="attacker-strength">
+					<td style="text-align:right"><label>firepower: </label></td><td><input type="number" value="1" min="1" id="attacker-firepower"></td>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset>
+		<legend>defender unit</legend>
+		<div class="ui-widget">
+			<label>Select unit: </label>
+			<select id="combobox-defence">
+			</select>
+		</div>
+		<label>unit class: </label>
+		<input type="hidden" id="defender-class"><span id="defender-class-display"></span>
+		<label>veteran level: </label>
+		<select id="defender-veteranlevel">
+		</select>
+		<table>
+			<tr>
+				<td style="text-align:right"><label>current HP: </label></td><td><input type="number" value="10" min="1" id="defender-current-hp"></td>
+				<td style="text-align:right"><label>max HP: </label></td><td><input type="number" value="10" min="1" id="defender-max-hp"></td>
+			</tr>
+			<tr>
+				<td style="text-align:right"><label>decence: </label></td><td><input type="number" value="1" min="1" id="defender-strength">
+					<td style="text-align:right"><label>firepower: </label></td><td><input type="number" value="1" min="1" id="defender-firepower"></td>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset>
+		<legend>defender adjustments</legend>
+		<fieldset id="fieldset-terrains">
+			<legend>terrains</legend>
+			<label>terrain: </label>
+			<select id="select-terrain">
+			</select>
+			<input type="checkbox" id="terrain-river"><label for="terrain-river">river(150%)</label>
+		</fieldset>
+		<fieldset id="fieldset-in-city">
+			<legend><label for="in-city"  title="land units gain 150% defence adjustments"><input type="radio" name="in-city-or-open" value="city" id="in-city">in city</label></legend>
+			<label>defence structures: </label>
+			<ul style="list-style-type:none; margin-top:3px; padding-left:1em">
+				<li><label for="city-walls"><input type="checkbox" id="city-walls">city walls(300% against land unit or helicopter(except howitzer))</label></li>
+				<li><label for="city-coastal-defense"><input type="checkbox" id="city-coastal-defense">coastal defense(200% against ship)</label></li>
+				<li><label for="city-sam-battery"><input type="checkbox" id="city-sam-battery">SAM battery(200% against aircraft(except helicopter))</label></li>
+				<li><label for="city-sdi-defense"><input type="checkbox" id="city-sdi-defense">SDI defense(200% against missile)</label></li>
+			</ul>
+		</fieldset>
+		<fieldset id="fieldset-in-open">
+			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open">out of city<label></legend>
+			<label for="defender-fortified" title="valid for only land units"><input type="checkbox" id="defender-fortified">land unit fortified(150%)</label>
+			<label for="in-fortress" title="valid for only land units"><input type="checkbox" id="in-fortress">land unit in fortress(200%)</label>
+		</fieldset>
+	</fieldset>
+	<button type="button" id="calc">Calc</button>
+	<div id="result-wrapper" style="display:none">
+		<table id="result-table">
+			<tr>
+				<th>Unit side</th>
+				<th>Strength</th>
+				<th>Probability of winning</th>
+				<th>Ecpected hp left</th>
+			</tr>
+		</table>
+	</div>
+
+</body>
+</html>

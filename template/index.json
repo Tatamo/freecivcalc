@@ -1,0 +1,39 @@
+{
+	"language": "ja",
+	"unit_select": {
+		"legend_atk": "攻撃ユニット",
+		"legend_def": "防御ユニット",
+		"select": "ユニット選択",
+		"class": "ユニットクラス",
+		"veteran": "ベテランレベル",
+		"current_hp": "現在HP",
+		"max_hp": "最大HP",
+		"attack": "攻撃力",
+		"defence": "防御力",
+		"firepower": "火力"
+	},
+	"adjustments": {
+		"legend": "防御補正",
+		"legend_terrains": "防御地形",
+		"select_terrain": "地形",
+		"terrain_river": "川(150%)",
+		"legend_in_city": "都市内(陸上ユニット:150%)",
+		"legend_in_open": "都市外",
+		"defence_structure": {
+			"legend": "防御施設",
+			"city_walls": "城壁(対陸上ユニット、ヘリコプター(榴弾砲を除く))(300%)",
+			"coastal_defense": "沿岸防衛(対船舶ユニット)(200%)",
+			"sam_battery": "対空ミサイル陣地(対航空ユニット(ヘリコプターを除く))(200%)",
+			"sdi_defense": "SDI防衛システム(対ミサイル)(200%)"
+		},
+		"fortified": "防御態勢(150%)",
+		"in_fortress": "要塞(200%)"
+	},
+	"calc": "Calc",
+	"result": {
+		"unit_side": "陣営",
+		"strength": "能力値",
+		"prob": "勝率",
+		"exp": "残HP期待値"
+	}
+}
