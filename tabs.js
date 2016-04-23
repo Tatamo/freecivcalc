@@ -61,21 +61,7 @@ $(function() {
 		table.find("#attacker-detail-firepower-raw"+"-"+id).text(result.attacker_raw.firepower);
 		table.find("#attacker-detail-attack-mod"+"-"+id).text(result.attacker_strength);
 		table.find("#attacker-detail-firepower-mod"+"-"+id).text(result.attacker_fp);
-		// create adjustments table
-		var table = $( "#adjustments-detail"+"-"+id);
-		var effect_names = JSON.parse(table.attr("data-effects"));
-		for(var i=0; i<result.adjustments.length; i++){
-			var adj = result.adjustments[i];
-			for(var ii=0; ii<adj.effect.length; ii++){
-				var eff = adj.effect[ii];
-				var tr = $("<tr></tr>");
-				if(ii==0) tr.append("<td>"+adj.name+"</td>");
-				else tr.append("<td></td>");
-				tr.append("<td>"+effect_names[eff.type]+"</td>");
-				tr.append("<td>"+eff.value+"</td>");
-				tr.appendTo(table);
-			}
-		}
+
 		$( "#defender-detail-unitname"+"-"+id ).text(result.defender_raw.label);
 		var table = $( "#defender-detail"+"-"+id );
 		table.find("#defender-detail-hp"+"-"+id).text(result.defender_raw.hp);
@@ -83,6 +69,7 @@ $(function() {
 		table.find("#defender-detail-firepower-raw"+"-"+id).text(result.defender_raw.firepower);
 		table.find("#defender-detail-defence-mod"+"-"+id).text(result.defender_strength);
 		table.find("#defender-detail-firepower-mod"+"-"+id).text(result.defender_fp);
+
 		// create adjustments table
 		var table = $( "#adjustments-detail"+"-"+id);
 		var effect_names = JSON.parse(table.attr("data-effects"));
