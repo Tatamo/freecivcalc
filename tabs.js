@@ -1,3 +1,4 @@
+// Tab
 $(function() {
 	var tabTitle = $( "#tab_title" ),
 		tabContent = $( "#result-template" ),
@@ -26,24 +27,24 @@ $(function() {
 			var result = JSON.parse($( "#calc" ).attr("data-result"));
 			console.log(result);
 			var label = tabTitle.val() || "Tab " + tabCounter,
-				id = "tabs-" + tabCounter,
-				li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
+				tabid = "tabs-" + tabCounter,
+				li = $( tabTemplate.replace( /#\{href\}/g, "#" + tabid ).replace( /#\{label\}/g, label ) ),
 				tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
 
 			tabs.find( ".ui-tabs-nav" ).append( li );
 
 			var clone = $("#result-template").clone().css("display","block");
 			setId(clone, tabCounter);
-			//tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
-			var el = $("<div id='" + id + "'></div>").append(clone);
+			//tabs.append( "<div id='" + tabid + "'><p>" + tabContentHtml + "</p></div>" );
+			var el = $("<div id='" + tabid + "'></div>").append(clone);
 			tabs.append( el );
 			tabs.tabs( "refresh" );
+			createDetailResult(clone, result, tabCounter);
 			tabList.push(tabCounter);
 			tabs.tabs("option","active",tabList.length-1);
 		}
 	}
 	function setId(el, id){
-		console.log(el);
 		var attr = el.attr("id");
 		if(attr !== undefined) el.attr("id", attr+"-"+id);
 		var children = el.children();
@@ -52,6 +53,81 @@ $(function() {
 		}
 	}
 	function createDetailResult(el, result, id){
+		// create adjustments table
+		var table = $( "#adjustments-detail"+"-"+id);
+		var effect_names = JSON.parse(table.attr("data-effects"));
+		for(var i=0; i<result.adjustments.length; i++){
+			var adj = result.adjustments[i];
+			for(var ii=0; ii<adj.effect.length; ii++){
+				var eff = adj.effect[ii];
+				var tr = $("<tr></tr>");
+				if(ii==0) tr.append("<td>"+adj.name+"</td>");
+				else tr.append("<td></td>");
+				tr.append("<td>"+effect_names[eff.type]+"</td>");
+				tr.append("<td>"+eff.value+"</td>");
+				tr.appendTo(table);
+			}
+		}
+		// create charts
+		var chartData = [];
+		var a_exp = result.attacker_hp_exp_list;
+		for(var i=a_exp.length-1; i>=0; i--){
+			chartData.push({
+				"hp": i,
+				"prob": a_exp[i]*100
+			});
+		}
+		var chart = createUnitHPExpChart(chartData);
+		chart.write("chart-exp-attacker-"+id);
+
+		var chartData = [];
+		var d_exp = result.defender_hp_exp_list;
+		for(var i=d_exp.length-1; i>=0; i--){
+			chartData.push({
+				"hp": i,
+				"prob": d_exp[i]*100
+			});
+		}
+		var chart = createUnitHPExpChart(chartData);
+		chart.write("chart-exp-defender"+"-"+id);
+	}
+	function createUnitHPExpChart(chartData){
+		// SERIAL CHART
+		var chart = new AmCharts.AmSerialChart();
+		chart.dataProvider = chartData;
+		chart.categoryField = "hp";
+		chart.startDuration = 1;
+		chart.rotate = true;
+
+		// AXES
+		// category
+		var categoryAxis = chart.categoryAxis;
+		categoryAxis.labelRotation = 90;
+		categoryAxis.gridPosition = "start";
+
+		// value
+		// in case you don't want to change default settings of value axis,
+		// you don't need to create it, as one value axis is created automatically.
+
+		// GRAPH
+		var graph = new AmCharts.AmGraph();
+		graph.valueField = "prob";
+		graph.balloonText = "[[category]]: <b>[[value]]%</b>";
+		graph.type = "column";
+		graph.lineAlpha = 0;
+		graph.fillAlphas = 0.8;
+		chart.addGraph(graph);
+
+		// CURSOR
+		var chartCursor = new AmCharts.ChartCursor();
+		chartCursor.cursorAlpha = 0;
+		chartCursor.zoomable = false;
+		chartCursor.categoryBalloonEnabled = false;
+		chart.addChartCursor(chartCursor);
+
+		chart.creditsPosition = "top-right";
+
+		return chart;
 	}
 	// close icon: removing the tab on click
 	tabs.delegate( "span.ui-icon-close", "click", function() {

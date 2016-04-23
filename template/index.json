@@ -42,6 +42,18 @@
 			"label": "補正",
 			"effect": "効果",
 			"value": "補正値"
+		},
+		"adjustment_effect_name":{
+			"attacker-strength-multiply":"攻撃側能力値補正(%)",
+			"defender-strength-multiply":"防御側能力値補正(%)",
+			"attacker-firepower-multiply":"攻撃側火力補正(%)",
+			"defender-firepower-multiply":"防御側火力補正(%)",
+			"attacker-firepower-set":"攻撃側火力変更",
+			"defender-firepower-set":"防御側火力変更"
+		},
+		"exp":{
+			"atk_legend": "攻撃ユニット残HP",
+			"def_legend": "防御ユニット残HP"
 		}
 	}
 }

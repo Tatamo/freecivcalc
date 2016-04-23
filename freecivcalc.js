@@ -452,6 +452,9 @@ var FreecivCalc;
             for (var i = 0; i <= d_hp; i++) {
                 exp_d_hp += i * p_d_win_with_hp[i];
             }
+            // in case defeated
+            p_a_win_with_hp[0] = p_d_win;
+            p_d_win_with_hp[0] = p_a_win;
             var result = {
                 attacker_raw: this.attacker,
                 defender_raw: this.defender,
