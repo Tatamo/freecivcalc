@@ -126,7 +126,7 @@ module FreecivCalc{
 				}
 				var calc = $( "#calc" );
 				calc.click(()=>{
-					console.log(this.calc());
+					calc.attr("data-result", JSON.stringify(this.calc()));
 				});
 			});
 		}

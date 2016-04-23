@@ -35,5 +35,13 @@
 		"strength": "Strength",
 		"prob": "Probability of winning",
 		"exp": "Ecpected hp left"
+	},
+	"result_detail":{
+		"adjustments":{
+			"legend": "strength adjustments",
+			"label": "adjustment",
+			"effect": "effect",
+			"value": "value"
+		}
 	}
 }

@@ -629,7 +629,7 @@ var FreecivCalc;
                 }
                 var calc = $("#calc");
                 calc.click(function () {
-                    console.log(_this.calc());
+                    calc.attr("data-result", JSON.stringify(_this.calc()));
                 });
             });
         };

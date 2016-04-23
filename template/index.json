@@ -29,11 +29,19 @@
 		"fortified": "防御態勢(150%)",
 		"in_fortress": "要塞(200%)"
 	},
-	"calc": "Calc",
+	"calc": "計算",
 	"result": {
 		"unit_side": "陣営",
 		"strength": "能力値",
 		"prob": "勝率",
 		"exp": "残HP期待値"
+	},
+	"result_detail":{
+		"adjustments":{
+			"legend": "補正一覧",
+			"label": "補正",
+			"effect": "効果",
+			"value": "補正値"
+		}
 	}
 }
