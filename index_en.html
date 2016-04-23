@@ -139,6 +139,60 @@
 	</div>
 <button id="add-tab">addTab</button>
 <div style="display:none" id="result-template">
+	<div class="flex-container" style="width:900px">
+		<fieldset id="fieldset-attacker-detail">
+			<legend>攻撃ユニット</legend>
+			<span id="attacker-detail-unitname"></span>
+			<table id="attacker-detail">
+				<tr>
+					<th>HP</th>
+					<th>攻撃力</th>
+					<th>火力</th>
+				</tr>
+				<tr>
+					<td id="attacker-detail-hp"></td>
+					<td id="attacker-detail-attack-raw"></td>
+					<td id="attacker-detail-firepower-raw"></td>
+				</tr>
+				<tr>
+					<th>補正後</th>
+					<th>最終能力値</th>
+					<th>火力</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td id="attacker-detail-attack-mod"></td>
+					<td id="attacker-detail-firepower-mod"></td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset id="fieldset-defender-detail">
+			<legend>防御ユニット</legend>
+			<span id="defender-detail-unitname"></span>
+			<table id="defender-detail">
+				<tr>
+					<th>HP</th>
+					<th>防御力</th>
+					<th>火力</th>
+				</tr>
+				<tr>
+					<td id="defender-detail-hp"></td>
+					<td id="defender-detail-defence-raw"></td>
+					<td id="defender-detail-firepower-raw"></td>
+				</tr>
+				<tr>
+					<th>補正後</th>
+					<th>最終能力値</th>
+					<th>火力</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td id="defender-detail-defence-mod"></td>
+					<td id="defender-detail-firepower-mod"></td>
+				</tr>
+			</table>
+		</fieldset>
+	</div>
 	<fieldset id="fieldset-adjustments">
 		<legend>strength adjustments</legend>
 		<table id="adjustments-detail" data-effects='{&#34;attacker-strength-multiply&#34;:&#34;攻撃側能力値補正(%)&#34;,&#34;defender-strength-multiply&#34;:&#34;防御側能力値補正(%)&#34;,&#34;attacker-firepower-multiply&#34;:&#34;攻撃側火力補正(%)&#34;,&#34;defender-firepower-multiply&#34;:&#34;防御側火力補正(%)&#34;,&#34;attacker-firepower-set&#34;:&#34;攻撃側火力変更&#34;,&#34;defender-firepower-set&#34;:&#34;防御側火力変更&#34;}'>

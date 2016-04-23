@@ -37,6 +37,17 @@
 		"exp": "残HP期待値"
 	},
 	"result_detail":{
+		"units":{
+			"atk_legend": "攻撃ユニット",
+			"def_legend": "防御ユニット",
+			"hp": "HP",
+			"attack": "攻撃力",
+			"defence": "防御力",
+			"firepower": "火力",
+			"mod": "補正後",
+			"modified_strength": "最終能力値"
+			
+		},
 		"adjustments":{
 			"legend": "補正一覧",
 			"label": "補正",
