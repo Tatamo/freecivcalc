@@ -126,7 +126,7 @@ var FreecivCalc;
         }
         FlagManager.prototype.init = function (flags) {
             for (var i = 0; i < flags.length; i++) {
-                var f = { id: flags[i], value: false, ignore: false };
+                var f = { id: flags[i], value: false };
                 this._flags[f.id] = f;
             }
         };
@@ -134,21 +134,9 @@ var FreecivCalc;
             this._flags[key].value = value;
         };
         FlagManager.prototype.get = function (key) {
-            if (this._flags[key] && this._flags[key].value && !this._flags[key].ignore)
+            if (this._flags[key] && this._flags[key].value)
                 return true;
             return false;
-        };
-        FlagManager.prototype.setIgnore = function (key, value) {
-            if (value === void 0) { value = true; }
-            if (!this._flags[key])
-                throw new Error("key does not exist");
-            this._flags[key].ignore = value;
-        };
-        FlagManager.prototype.clearIgnore = function () {
-            for (var key in this._flags) {
-                var flag = this._flags[key];
-                flag.ignore = false;
-            }
         };
         return FlagManager;
     }());
