@@ -25,7 +25,7 @@
 				$( "<option>" )
 					.appendTo(this.element)
 					.val( item.id )
-					.text( item.label );
+					.text( item.label_detail );
 				this._map[item.id] = i;
 			}
 		},
@@ -101,10 +101,11 @@
 					for(var i=0; i<list.length; i++){
 						if(matcher.test(list[i])) return true;
 					}
+					if(matcher.test(data.label_detail)) return true;
 					return false;
 				}( data.pronunciation )) ) )
 					return {
-						label: data.label,
+						label: data.label_detail,
 						value: data.value,
 						option: this
 					};

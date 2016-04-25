@@ -6,6 +6,7 @@ module FreecivCalc{
 	export interface Unit{
 		id :string;
 		label :string;
+		label_detail :string;
 		pronunciation :Array<string>;
 		class :string;
 		flags :Array<string>;
@@ -50,6 +51,7 @@ module FreecivCalc{
 			var u: Unit = {
 				id : unit.id,
 				label : unit.label,
+				label_detail : unit.label_detail,
 				pronunciation : unit.pronunciation,
 				class : unit.class,
 				flags : unit.flags,

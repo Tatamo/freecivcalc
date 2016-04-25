@@ -38,6 +38,7 @@ var FreecivCalc;
             var u = {
                 id: unit.id,
                 label: unit.label,
+                label_detail: unit.label_detail,
                 pronunciation: unit.pronunciation,
                 class: unit.class,
                 flags: unit.flags,

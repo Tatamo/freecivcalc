@@ -1,7 +1,8 @@
 {
 	"units": [{
 		"id": "warriors",
-		"label": "戦士(Warriors)",
+		"label": "戦士",
+		"label_detail": "戦士(Warriors)",
 		"pronunciation": ["戦士", "せんし", "senshi", "sennshi", "sensi", "sennsi", "warriors"],
 		"class": "land",
 		"flags": [],
@@ -11,7 +12,8 @@
 		"firepower": 1
 	}, {
 		"id": "phalanx",
-		"label": "ファランクス(Phalanx)",
+		"label": "ファランクス",
+		"label_detail": "ファランクス(Phalanx)",
 		"pronunciation": ["ファランクス", "ふぁらんくす", "farankusu", "farannkusu", "phalanx"],
 		"class": "land",
 		"flags": [],
@@ -21,7 +23,8 @@
 		"firepower": 1
 	}, {
 		"id": "pikemen",
-		"label": "長槍兵(Pikemen)",
+		"label": "長槍兵",
+		"label_detail": "長槍兵(Pikemen)",
 		"pronunciation": ["長槍兵", "ながやりへい", "nagayarihei", "pikemen"],
 		"class": "land",
 		"flags": ["pikemen"],
@@ -31,7 +34,8 @@
 		"firepower": 1
 	}, {
 		"id": "archers",
-		"label": "弓兵(Archers)",
+		"label": "弓兵",
+		"label_detail": "弓兵(Archers)",
 		"pronunciation": ["弓兵", "きゅうへい", "kyuuhei", "archers"],
 		"class": "land",
 		"flags": [],
@@ -41,7 +45,8 @@
 		"firepower": 1
 	}, {
 		"id": "legion",
-		"label": "レギオン(Legion)",
+		"label": "レギオン",
+		"label_detail": "レギオン(Legion)",
 		"pronunciation": ["レギオン", "れぎおん", "regionn", "legion"],
 		"class": "land",
 		"flags": [],
@@ -51,7 +56,8 @@
 		"firepower": 1
 	}, {
 		"id": "musketeers",
-		"label": "マスケット(Musketeers)",
+		"label": "マスケット兵",
+		"label_detail": "マスケット兵(Musketeers)",
 		"pronunciation": ["マスケット兵", "ますけっとへい", "masukettohei", "musketeers"],
 		"class": "land",
 		"flags": [],
@@ -61,7 +67,8 @@
 		"firepower": 1
 	}, {
 		"id": "riflemen",
-		"label": "ライフル兵(Riflemen)",
+		"label": "ライフル兵",
+		"label_detail": "ライフル兵(Riflemen)",
 		"pronunciation": ["ライフル兵", "らいふるへい", "raihuruhei", "riflemen"],
 		"class": "land",
 		"flags": [],
@@ -71,7 +78,8 @@
 		"firepower": 1
 	}, {
 		"id": "alpine-troops",
-		"label": "山岳部隊(Alpine Troops)",
+		"label": "山岳部隊",
+		"label_detail": "山岳部隊(Alpine Troops)",
 		"pronunciation": ["山岳部隊", "さんがくぶたい", "sangakubutai", "sanngakubutai", "alpine troops"],
 		"class": "land",
 		"flags": [],
@@ -81,7 +89,8 @@
 		"firepower": 1
 	}, {
 		"id": "mech-inf",
-		"label": "機械化歩兵(Mech. Inf.)",
+		"label": "機械化歩兵",
+		"label_detail": "機械化歩兵(Mech. Inf.)",
 		"pronunciation": ["機械化歩兵", "きかいかほへい", "kikaikahohei", "mech. inf."],
 		"class": "land",
 		"flags": [],
@@ -91,7 +100,8 @@
 		"firepower": 1
 	}, {
 		"id": "horsemen",
-		"label": "騎馬兵(Horsemen)",
+		"label": "騎馬兵",
+		"label_detail": "騎馬兵(Horsemen)",
 		"pronunciation": ["騎馬兵", "きばへい", "kibahei", "horsemen"],
 		"class": "land",
 		"flags": ["mounted"],
@@ -101,7 +111,8 @@
 		"firepower": 1
 	}, {
 		"id": "chariot",
-		"label": "チャリオット(Chariot)",
+		"label": "チャリオット",
+		"label_detail": "チャリオット(Chariot)",
 		"pronunciation": ["チャリオット", "ちゃりおっと", "tyariotto", "chariot"],
 		"class": "land",
 		"flags": ["mounted"],
@@ -111,7 +122,8 @@
 		"firepower": 1
 	}, {
 		"id": "knights",
-		"label": "騎士(Knights)",
+		"label": "騎士",
+		"label_detail": "騎士(Knights)",
 		"pronunciation": ["騎士", "きし", "kisi", "kishi", "knights"],
 		"class": "land",
 		"flags": ["mounted"],
@@ -121,7 +133,8 @@
 		"firepower": 1
 	}, {
 		"id": "dragoons",
-		"label": "竜騎兵(Dragoons)",
+		"label": "竜騎兵",
+		"label_detail": "竜騎兵(Dragoons)",
 		"pronunciation": ["竜騎兵", "りゅうきへい", "ryuukihei", "dragoons"],
 		"class": "land",
 		"flags": ["mounted"],
@@ -131,7 +144,8 @@
 		"firepower": 1
 	}, {
 		"id": "cavalry",
-		"label": "騎兵隊(Cavalry)",
+		"label": "騎兵隊",
+		"label_detail": "騎兵隊(Cavalry)",
 		"pronunciation": ["騎兵隊", "きへいたい", "kiheitai", "cavalry"],
 		"class": "land",
 		"flags": [],
@@ -141,7 +155,8 @@
 		"firepower": 1
 	}, {
 		"id": "armor",
-		"label": "機甲部隊(Armor)",
+		"label": "機甲部隊",
+		"label_detail": "機甲部隊(Armor)",
 		"pronunciation": ["機甲部隊", "きこうぶたい", "kikoubutai", "armor"],
 		"class": "land",
 		"flags": [],
@@ -151,7 +166,8 @@
 		"firepower": 1
 	}, {
 		"id": "catapult",
-		"label": "カタパルト(Catapult)",
+		"label": "カタパルト",
+		"label_detail": "カタパルト(Catapult)",
 		"pronunciation": ["カタパルト", "かたぱると", "kataparuto", "catapult"],
 		"class": "land",
 		"flags": [],
@@ -161,7 +177,8 @@
 		"firepower": 1
 	}, {
 		"id": "cannon",
-		"label": "カノン砲(Cannon)",
+		"label": "カノン砲",
+		"label_detail": "カノン砲(Cannon)",
 		"pronunciation": ["カノン砲", "かのんほう", "kanonhou", "kanonnhou", "cannon"],
 		"class": "land",
 		"flags": [],
@@ -171,7 +188,8 @@
 		"firepower": 1
 	}, {
 		"id": "artillery",
-		"label": "大砲(Artillery)",
+		"label": "大砲",
+		"label_detail": "大砲(Artillery)",
 		"pronunciation": ["大砲", "たいほう", "taihou", "artillery"],
 		"class": "land",
 		"flags": [],
@@ -181,7 +199,8 @@
 		"firepower": 2
 	}, {
 		"id": "howitzer",
-		"label": "榴弾砲(Howitzer)",
+		"label": "榴弾砲",
+		"label_detail": "榴弾砲(Howitzer)",
 		"pronunciation": ["榴弾砲", "りゅうだんほう", "ryuudanhou", "howitzer"],
 		"class": "land",
 		"flags": ["igwall"],
@@ -191,7 +210,8 @@
 		"firepower": 2
 	}, {
 		"id": "partisan",
-		"label": "パルチザン(Partisan)",
+		"label": "パルチザン",
+		"label_detail": "パルチザン(Partisan)",
 		"pronunciation": ["パルチザン", "ぱるちざん", "parutizann", "paruchizann", "partisan"],
 		"class": "land",
 		"flags": [],
@@ -201,7 +221,8 @@
 		"firepower": 1
 	}, {
 		"id": "marines",
-		"label": "海兵隊(Marines)",
+		"label": "海兵隊",
+		"label_detail": "海兵隊(Marines)",
 		"pronunciation": ["海兵隊", "かいへいたい", "kaiheitai", "marines"],
 		"class": "land",
 		"flags": [],
@@ -211,7 +232,8 @@
 		"firepower": 1
 	}, {
 		"id": "paratroopers",
-		"label": "空挺部隊(Paratroopers)",
+		"label": "空挺部隊",
+		"label_detail": "空挺部隊(Paratroopers)",
 		"pronunciation": ["空挺部隊", "くうていぶたい", "kuuteibutai", "paratroopers"],
 		"class": "land",
 		"flags": [],
@@ -221,7 +243,8 @@
 		"firepower": 1
 	}, {
 		"id": "trireme",
-		"label": "トライリーム(Trireme)",
+		"label": "トライリーム",
+		"label_detail": "トライリーム(Trireme)",
 		"pronunciation": ["トライリーム", "とらいりーむ", "torairi-mu", "trireme"],
 		"class": "trireme",
 		"flags": [],
@@ -231,7 +254,8 @@
 		"firepower": 1
 	}, {
 		"id": "caravel",
-		"label": "キャラベル船(Caravel)",
+		"label": "キャラベル船",
+		"label_detail": "キャラベル船(Caravel)",
 		"pronunciation": ["キャラベル船", "きゃらべるせん", "kyaraberusenn", "caravel"],
 		"class": "sea",
 		"flags": [],
@@ -241,7 +265,8 @@
 		"firepower": 1
 	}, {
 		"id": "galleon",
-		"label": "ガレオン船(Galleon)",
+		"label": "ガレオン船",
+		"label_detail": "ガレオン船(Galleon)",
 		"pronunciation": ["ガレオン船", "がれおんせん", "gareonsenn", "gareonnsenn", "galleon"],
 		"class": "sea",
 		"flags": [],
@@ -251,7 +276,8 @@
 		"firepower": 1
 	}, {
 		"id": "transport",
-		"label": "輸送船(Transport)",
+		"label": "輸送船",
+		"label_detail": "輸送船(Transport)",
 		"pronunciation": ["輸送船", "ゆそうかん", "yusoukann", "transport"],
 		"class": "sea",
 		"flags": [],
@@ -261,7 +287,8 @@
 		"firepower": 1
 	}, {
 		"id": "frigate",
-		"label": "フリゲート艦(Frigate)",
+		"label": "フリゲート艦",
+		"label_detail": "フリゲート艦(Frigate)",
 		"pronunciation": ["フリゲート艦", "ふりげーとかん", "hurige-tokann", "frigate"],
 		"class": "sea",
 		"flags": [],
@@ -271,7 +298,8 @@
 		"firepower": 1
 	}, {
 		"id": "ironclad",
-		"label": "装甲艦(Ironclad)",
+		"label": "装甲艦",
+		"label_detail": "装甲艦(Ironclad)",
 		"pronunciation": ["装甲艦", "そうこうかん", "soukoukann", "ironclad"],
 		"class": "sea",
 		"flags": [],
@@ -281,7 +309,8 @@
 		"firepower": 1
 	}, {
 		"id": "destroyer",
-		"label": "駆逐艦(Destroyer)",
+		"label": "駆逐艦",
+		"label_detail": "駆逐艦(Destroyer)",
 		"pronunciation": ["駆逐艦", "くちくかん", "kutikukann", "kuchikukann", "destroyer"],
 		"class": "sea",
 		"flags": [],
@@ -291,7 +320,8 @@
 		"firepower": 1
 	}, {
 		"id": "cruiser",
-		"label": "巡洋艦(Cruiser)",
+		"label": "巡洋艦",
+		"label_detail": "巡洋艦(Cruiser)",
 		"pronunciation": ["巡洋艦", "じゅんようかん", "zyunnyoukann", "junnyoukann", "cruiser"],
 		"class": "sea",
 		"flags": [],
@@ -301,7 +331,8 @@
 		"firepower": 2
 	}, {
 		"id": "aegis-cruiser",
-		"label": "イージス巡洋艦(AEGIS Cruiser)",
+		"label": "イージス巡洋艦",
+		"label_detail": "イージス巡洋艦(AEGIS Cruiser)",
 		"pronunciation": ["イージス巡洋艦", "いーじすじゅんようかん", "i-zisuzyunnyoukann", "i-jisuzyunnyoukann", "i-zisujunnyoukann", "i-jisujunnyoukann", "aegis cruiser"],
 		"class": "sea",
 		"flags": ["aegis"],
@@ -311,7 +342,8 @@
 		"firepower": 2
 	}, {
 		"id": "submarine",
-		"label": "潜水艦(Submarine)",
+		"label": "潜水艦",
+		"label_detail": "潜水艦(Submarine)",
 		"pronunciation": ["潜水艦", "せんすいかん", "sensuikann", "sennsuikann", "submarine"],
 		"class": "sea",
 		"flags": [],
@@ -321,7 +353,8 @@
 		"firepower": 2
 	}, {
 		"id": "battleship",
-		"label": "戦艦(Battleship)",
+		"label": "戦艦",
+		"label_detail": "戦艦(Battleship)",
 		"pronunciation": ["戦艦", "せんかん", "senkann", "sennkann", "battleship"],
 		"class": "sea",
 		"flags": [],
@@ -331,7 +364,8 @@
 		"firepower": 2
 	}, {
 		"id": "carrier",
-		"label": "空母(Carrier)",
+		"label": "空母",
+		"label_detail": "空母(Carrier)",
 		"pronunciation": ["空母", "くうぼ", "kuubo", "carrier"],
 		"class": "sea",
 		"flags": [],
@@ -341,7 +375,8 @@
 		"firepower": 2
 	}, {
 		"id": "fighter",
-		"label": "戦闘機(Fighter)",
+		"label": "戦闘機",
+		"label_detail": "戦闘機(Fighter)",
 		"pronunciation": ["戦闘機", "せんとうき", "sentouki", "senntouki", "fighter"],
 		"class": "air",
 		"flags": ["fighter"],
@@ -351,7 +386,8 @@
 		"firepower": 2
 	}, {
 		"id": "bomber",
-		"label": "爆撃機(Bomber)",
+		"label": "爆撃機",
+		"label_detail": "爆撃機(Bomber)",
 		"pronunciation": ["爆撃機", "ばくげきき", "bakugekiki", "bomber"],
 		"class": "air",
 		"flags": [],
@@ -361,7 +397,8 @@
 		"firepower": 2
 	}, {
 		"id": "awacs",
-		"label": "早期警戒管制機(AWACS)",
+		"label": "早期警戒管制機",
+		"label_detail": "早期警戒管制機(AWACS)",
 		"pronunciation": ["早期警戒管制機", "そうきけいかいかんせいき", "soukikeikaikanseiki", "soukikeikaikannseiki", "awacs"],
 		"class": "air",
 		"flags": [],
@@ -371,7 +408,8 @@
 		"firepower": 1
 	}, {
 		"id": "cruise-missile",
-		"label": "巡航ミサイル(Cruise Missile)",
+		"label": "巡航ミサイル",
+		"label_detail": "巡航ミサイル(Cruise Missile)",
 		"pronunciation": ["巡航ミサイル", "じゅんこうみさいる", "zyunnkoumisairu", "junnkoumisairu", "cruise missile"],
 		"class": "missile",
 		"flags": [],
@@ -381,7 +419,8 @@
 		"firepower": 3
 	}, {
 		"id": "nuclear",
-		"label": "核兵器(Nuclear)",
+		"label": "核兵器",
+		"label_detail": "核兵器(Nuclear)",
 		"pronunciation": ["核兵器", "かくへいき", "kakuheiki", "nuclear"],
 		"class": "missile",
 		"flags": [],
@@ -391,7 +430,8 @@
 		"firepower": 1
 	}, {
 		"id": "helicopter",
-		"label": "ヘリコプター(Helicopter)",
+		"label": "ヘリコプター",
+		"label_detail": "ヘリコプター(Helicopter)",
 		"pronunciation": ["ヘリコプター", "へりこぷたー", "herikoputa-", "helicopter"],
 		"class": "helicopter",
 		"flags": [],
@@ -401,7 +441,8 @@
 		"firepower": 2
 	}, {
 		"id": "stealth-fighter",
-		"label": "ステルス戦闘機(Stealth Fighter)",
+		"label": "ステルス戦闘機",
+		"label_detail": "ステルス戦闘機(Stealth Fighter)",
 		"pronunciation": ["ステルス戦闘機", "すてるすせんとうき", "suterususentouki", "suterususenntouki", "stealth fighter"],
 		"class": "air",
 		"flags": ["fighter"],
@@ -411,7 +452,8 @@
 		"firepower": 2
 	}, {
 		"id": "stealth-bomber",
-		"label": "ステルス爆撃機(Stealth Bomber)",
+		"label": "ステルス爆撃機",
+		"label_detail": "ステルス爆撃機(Stealth Bomber)",
 		"pronunciation": ["ステルス爆撃機", "すてるすばくげきき", "suterusubakugekiki", "stealth bomber"],
 		"class": "air",
 		"flags": [],
@@ -421,7 +463,8 @@
 		"firepower": 2
 	}, {
 		"id": "engineers",
-		"label": "エンジニア(Engineers)",
+		"label": "エンジニア",
+		"label_detail": "エンジニア(Engineers)",
 		"pronunciation": ["エンジニア", "えんじにあ", "enzinia", "ennzinia", "enjinia", "ennjinia", "engineers"],
 		"class": "land",
 		"flags": [],
@@ -431,7 +474,8 @@
 		"firepower": 1
 	}, {
 		"id": "leader",
-		"label": "指導者(Leader)",
+		"label": "指導者",
+		"label_detail": "指導者(Leader)",
 		"pronunciation": ["指導者", "しどうしゃ", "sidousya", "sidousha", "leader"],
 		"class": "land",
 		"flags": [],
