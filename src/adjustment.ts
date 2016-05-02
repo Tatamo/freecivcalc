@@ -1,6 +1,6 @@
 /// <reference path="freecivcalc.ts" />
 module FreecivCalc{
-	export interface AdjustmentJSON{
+	export interface AdjustmentData{
 		id: string;
 		name: string;
 		condition: Array<any>;
@@ -27,7 +27,7 @@ module FreecivCalc{
 			this._adjustments = [];
 			this._current_adjustments = [];
 		}
-		init(adjustments: Array<AdjustmentJSON>){
+		init(adjustments: Array<AdjustmentData>){
 			for(var i=0; i<adjustments.length; i++){
 				var adj = adjustments[i];
 				var tmp:ParsedAdjustment = {id:adj.id, name:adj.name, condition:null, effect: adj.effect};
@@ -130,7 +130,7 @@ module FreecivCalc{
 		private getConditionQuery(command:string): (arg?:string)=>boolean {
 			if(command == "flag"){
 				return (arg:string)=>{
-					return this.freecivcalc.flags.get(arg);
+					return this.freecivcalc.flagmanager.get(arg).value;
 				}
 			}
 			if(command == "attacker-class"){

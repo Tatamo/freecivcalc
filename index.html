@@ -108,23 +108,31 @@
 			<label>地形: </label>
 			<select id="select-terrain">
 			</select>
-			<input type="checkbox" id="terrain-river"><label for="terrain-river">川(150%)</label>
+			<span id="flags-roads">
+			<!-- <input type="checkbox" id="river"><label for="river"></label> -->
+	   </span>
 		</fieldset>
 		<fieldset id="fieldset-in-city">
-			<legend><label for="in-city"  title="land units gain 150% defence adjustments"><input type="radio" name="in-city-or-open" value="city" id="in-city">都市内(陸上ユニット:150%)</label></legend>
+			<legend><input type="radio" name="in-city-or-open" value="city" id="in-city"><label for="in-city"  title="land units gain 150% defence adjustments">都市内</label></legend>
 			<label>防御施設: </label>
-			<ul style="list-style-type:none; margin-top:3px; padding-left:1em">
-				<li><label for="city-walls"><input type="checkbox" id="city-walls">城壁(対陸上ユニット、ヘリコプター(榴弾砲を除く))(300%)</label></li>
-				<li><label for="city-coastal-defense"><input type="checkbox" id="city-coastal-defense">沿岸防衛(対船舶ユニット)(200%)</label></li>
-				<li><label for="city-sam-battery"><input type="checkbox" id="city-sam-battery">対空ミサイル陣地(対航空ユニット(ヘリコプターを除く))(200%)</label></li>
-				<li><label for="city-sdi-defense"><input type="checkbox" id="city-sdi-defense">SDI防衛システム(対ミサイル)(200%)</label></li>
+			<ul id="list-structure" style="list-style-type:none; margin-top:3px; padding-left:1em">
+				<!--
+				<li><input type="checkbox" id="city-walls"><label for="city-walls"></label></li>
+				<li><input type="checkbox" id="city-coastal-defense"><label for="city-coastal-defense"></label></li>
+				<li><input type="checkbox" id="city-sam-battery"><label for="city-sam-battery"></label></li>
+				<li><input type="checkbox" id="city-sdi-defense"><label for="city-sdi-defense"></label></li>
+				-->
 			</ul>
 		</fieldset>
 		<fieldset id="fieldset-in-open">
 			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open">都市外<label></legend>
-			<label for="defender-fortified" title="valid for only land units"><input type="checkbox" id="defender-fortified">防御態勢(150%)</label>
-			<label for="in-fortress" title="valid for only land units"><input type="checkbox" id="in-fortress">要塞(200%)</label>
+			<input type="checkbox" id="defender-fortified"><label for="defender-fortified" title="valid for only land units">防御態勢</label>
+			<span id="flags-bases">
+			<!-- <input type="checkbox" id="in-fortress"><label for="in-fortress" title="valid for only land units"></label> -->
+			</span>
 		</fieldset>
+		<span id="flags-ex">
+		</span>
 	</fieldset>
 	<button type="button" id="calc">計算</button>
 	<div id="result-wrapper" style="display:none">

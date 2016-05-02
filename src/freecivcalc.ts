@@ -15,7 +15,8 @@ module FreecivCalc{
 		units: UnitManager;
 		veteranlevelmanager: VeteranLevelManager;
 		terrains: TerrainManager;
-		flags: FlagManager;
+		flagmanager: FlagManager;
+		flags_basic: Array<string>;
 		adjustments: AdjustmentManager;
 		calculator: BattleCalc;
 		result: BattleResult;
@@ -29,7 +30,7 @@ module FreecivCalc{
 			this.units = new UnitManager();
 			this.veteranlevelmanager = new VeteranLevelManager();
 			this.terrains = new TerrainManager();
-			this.flags = new FlagManager();
+			this.flagmanager = new FlagManager();
 			this.adjustments = new AdjustmentManager(this);
 			this.calculator = new BattleCalc();
 			this.result = null;
@@ -46,20 +47,103 @@ module FreecivCalc{
 			this.units.init(this.loader.unitclass,this.loader.units);
 			this.veteranlevelmanager.init(this.loader.veteranlevel);
 			this.terrains.init(this.loader.terrains);
-			this.flags.init(this.loader.flags);
+			var f = this.loader.flags;
+			var f_all = [];
+			for(var k in f){
+				f_all = [...f_all,...f[k]];
+			}
+			this.flagmanager.init(f_all);
 			this.adjustments.init(this.loader.adjustments);
 			this.initElements();
 		}
 		initElements(){
 			this.createOptions();
 			$(()=>{
-				for(var i=0; i<this.loader.flags.length; i++){
-					let flag = this.loader.flags[i];
-					let el = $( "#"+flag );
+				// basic
+				for(var i=0; i<this.loader.flags.basic.length; i++){
+					var flag = this.flagmanager.get(this.loader.flags.basic[i].id);
+					var el = $("label[for="+flag.id+"]");
+					if(flag.label) el.text(flag.label);
+					if(flag.description) el.attr("title",flag.description);
+				}
+				var ul = $( "#list-structure" );
+				// structures
+				for(var i=0; i<this.loader.flags.structure.length; i++){
+					var flag = this.flagmanager.get(this.loader.flags.structure[i].id);
+					$( "<li></li>" )
+					.append(
+						$( "<input>" )
+						.attr("type", "checkbox")
+						.attr("id", flag.id)
+					)
+					.append(
+						$( "<label></label>" )
+						.text(flag.label)
+						.attr("for", flag.id)
+						.attr("title", flag.description?flag.description:null)
+					)
+					.appendTo(ul);
+				}
+				// bases
+				var bases = $( "#flags-bases" );
+				for(var i=0; i<this.loader.flags.bases.length; i++){
+					var flag = this.flagmanager.get(this.loader.flags.bases[i].id);
+					bases.append(
+						$( "<input>" )
+						.attr("type", "checkbox")
+						.attr("id", flag.id)
+					)
+					.append(
+						$( "<label></label>" )
+						.text(flag.label)
+						.attr("for", flag.id)
+						.attr("title", flag.description?flag.description:null)
+					);
+				}
+				// roads
+				var roads = $( "#flags-roads" );
+				for(var i=0; i<this.loader.flags.roads.length; i++){
+					var flag = this.flagmanager.get(this.loader.flags.roads[i].id);
+					roads.append(
+						$( "<input>" )
+						.attr("type", "checkbox")
+						.attr("id", flag.id)
+					)
+					.append(
+						$( "<label></label>" )
+						.text(flag.label)
+						.attr("for", flag.id)
+						.attr("title", flag.description?flag.description:null)
+					);
+				}
+				// ex
+				var ex = $( "#flags-ex" );
+				for(var i=0; i<this.loader.flags.ex.length; i++){
+					var flag = this.flagmanager.get(this.loader.flags.ex[i].id);
+					ex.append(
+						$( "<input>" )
+						.attr("type", "checkbox")
+						.attr("id", flag.id)
+					)
+					.append(
+						$( "<label></label>" )
+						.text(flag.label)
+						.attr("for", flag.id)
+						.attr("title", flag.description?flag.description:null)
+					);
+				}
+				// all
+				var f_all = [];
+				for(var k in this.loader.flags){
+					f_all = [...f_all,...this.loader.flags[k]];
+				}
+				for(var i=0; i<f_all.length; i++){
+					let flag = this.flagmanager.get(f_all[i].id);
+					let el = $( "#"+flag.id );
 					el.change(()=>{
-						this.flags.set(flag, el.prop("checked"));
+						this.flagmanager.set(flag.id, el.prop("checked"));
 					});
-					this.flags.set(flag,el.prop("checked"));
+					this.flagmanager.set(flag.id, el.prop("checked"));
 				}
 				var in_city = $( "#in-city" );
 				in_city.change(()=>{
@@ -68,16 +152,16 @@ module FreecivCalc{
 						$( "#fieldset-in-open" ).prop("disabled", true);
 					}
 				});
-				in_city.change();
+				in_city.prop("checked", true).change();
 				var in_open = $( "#in-open" );
 				in_open.change(()=>{
-					this.flags.set("in-city", false);
+					this.flagmanager.set("in-city", false);
 					if(in_open.prop("checked")){
 						$( "#fieldset-in-open" ).prop("disabled", false);
 						$( "#fieldset-in-city" ).prop("disabled", true);
 					}
 				});
-				in_open.prop("checked", true).change();
+				in_open.change();
 				var attacker_class = $( "#attacker-class" );
 				attacker_class.change(()=>{
 					$( "#attacker-class-display" ).text(this.units.getclass(attacker_class.val()).label);
@@ -87,13 +171,13 @@ module FreecivCalc{
 					$( "#defender-class-display" ).text(this.units.getclass(defender_class.val()).label);
 					if(defender_class.val() && defender_class.val() != "land"){
 						(<any>$( "#select-terrain" )).selectmenu("disable");
-						$( "#terrain-river" ).prop("disabled", true);
+						$( "#river" ).prop("disabled", true);
 						$( "#defender-fortified" ).prop("disabled", true);
 						$( "#in-fortress" ).prop("disabled", true);
 					}
 					else{
 						(<any>$( "#select-terrain" )).selectmenu("enable");
-						$( "#terrain-river" ).prop("disabled", false);
+						$( "#river" ).prop("disabled", false);
 						$( "#defender-fortified" ).prop("disabled", false);
 						$( "#in-fortress" ).prop("disabled", false);
 					}

@@ -108,23 +108,31 @@
 			<label><%= adjustments.select_terrain %>: </label>
 			<select id="select-terrain">
 			</select>
-			<input type="checkbox" id="terrain-river"><label for="terrain-river"><%= adjustments.terrain_river %></label>
+			<span id="flags-roads">
+			<!-- <input type="checkbox" id="river"><label for="river"><%= adjustments.terrain_river %></label> -->
+	   </span>
 		</fieldset>
 		<fieldset id="fieldset-in-city">
-			<legend><label for="in-city"  title="land units gain 150% defence adjustments"><input type="radio" name="in-city-or-open" value="city" id="in-city"><%= adjustments.legend_in_city %></label></legend>
-			<label><%= adjustments.defence_structure.legend %>: </label>
-			<ul style="list-style-type:none; margin-top:3px; padding-left:1em">
-				<li><label for="city-walls"><input type="checkbox" id="city-walls"><%= adjustments.defence_structure.city_walls %></label></li>
-				<li><label for="city-coastal-defense"><input type="checkbox" id="city-coastal-defense"><%= adjustments.defence_structure.coastal_defense %></label></li>
-				<li><label for="city-sam-battery"><input type="checkbox" id="city-sam-battery"><%= adjustments.defence_structure.sam_battery %></label></li>
-				<li><label for="city-sdi-defense"><input type="checkbox" id="city-sdi-defense"><%= adjustments.defence_structure.sdi_defense %></label></li>
+			<legend><input type="radio" name="in-city-or-open" value="city" id="in-city"><label for="in-city"  title="land units gain 150% defence adjustments"><%= adjustments.legend_in_city %></label></legend>
+			<label><%= adjustments.defence_structure %>: </label>
+			<ul id="list-structure" style="list-style-type:none; margin-top:3px; padding-left:1em">
+				<!--
+				<li><input type="checkbox" id="city-walls"><label for="city-walls"><%= adjustments.defence_structure.city_walls %></label></li>
+				<li><input type="checkbox" id="city-coastal-defense"><label for="city-coastal-defense"><%= adjustments.defence_structure.coastal_defense %></label></li>
+				<li><input type="checkbox" id="city-sam-battery"><label for="city-sam-battery"><%= adjustments.defence_structure.sam_battery %></label></li>
+				<li><input type="checkbox" id="city-sdi-defense"><label for="city-sdi-defense"><%= adjustments.defence_structure.sdi_defense %></label></li>
+				-->
 			</ul>
 		</fieldset>
 		<fieldset id="fieldset-in-open">
 			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open"><%= adjustments.legend_in_open %><label></legend>
-			<label for="defender-fortified" title="valid for only land units"><input type="checkbox" id="defender-fortified"><%= adjustments.fortified %></label>
-			<label for="in-fortress" title="valid for only land units"><input type="checkbox" id="in-fortress"><%= adjustments.in_fortress %></label>
+			<input type="checkbox" id="defender-fortified"><label for="defender-fortified" title="valid for only land units"><%= adjustments.fortified %></label>
+			<span id="flags-bases">
+			<!-- <input type="checkbox" id="in-fortress"><label for="in-fortress" title="valid for only land units"><%= adjustments.in_fortress %></label> -->
+			</span>
 		</fieldset>
+		<span id="flags-ex">
+		</span>
 	</fieldset>
 	<button type="button" id="calc"><%= calc %></button>
 	<div id="result-wrapper" style="display:none">

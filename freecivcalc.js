@@ -127,17 +127,20 @@ var FreecivCalc;
         }
         FlagManager.prototype.init = function (flags) {
             for (var i = 0; i < flags.length; i++) {
-                var f = { id: flags[i], value: false };
+                var dsc = flags[i].description ? flags[i].description : null;
+                var f = { id: flags[i].id, label: flags[i].label, description: dsc, value: false };
                 this._flags[f.id] = f;
             }
         };
         FlagManager.prototype.set = function (key, value) {
+            if (!this._flags[key])
+                throw new Error("flag \"" + key + "\" not exists");
             this._flags[key].value = value;
         };
         FlagManager.prototype.get = function (key) {
-            if (this._flags[key] && this._flags[key].value)
-                return true;
-            return false;
+            if (this._flags[key])
+                return this._flags[key];
+            return null;
         };
         return FlagManager;
     }());
@@ -260,7 +263,7 @@ var FreecivCalc;
             var _this = this;
             if (command == "flag") {
                 return function (arg) {
-                    return _this.freecivcalc.flags.get(arg);
+                    return _this.freecivcalc.flagmanager.get(arg).value;
                 };
             }
             if (command == "attacker-class") {
@@ -316,6 +319,11 @@ var FreecivCalc;
     }());
     FreecivCalc.AdjustmentManager = AdjustmentManager;
 })(FreecivCalc || (FreecivCalc = {}));
+/// <reference path="unit.ts" />
+/// <reference path="veteranlevel.ts" />
+/// <reference path="terrain.ts" />
+/// <reference path="flags.ts" />
+/// <reference path="adjustment.ts" />
 /// <reference path="../typings/jquery/jquery.d.ts" />
 /// <reference path="../typings/es6-promise/es6-promise.d.ts" />
 var FreecivCalc;
@@ -523,7 +531,7 @@ var FreecivCalc;
             this.units = new FreecivCalc_1.UnitManager();
             this.veteranlevelmanager = new FreecivCalc_1.VeteranLevelManager();
             this.terrains = new FreecivCalc_1.TerrainManager();
-            this.flags = new FreecivCalc_1.FlagManager();
+            this.flagmanager = new FreecivCalc_1.FlagManager();
             this.adjustments = new FreecivCalc_1.AdjustmentManager(this);
             this.calculator = new FreecivCalc_1.BattleCalc();
             this.result = null;
@@ -537,7 +545,12 @@ var FreecivCalc;
             this.units.init(this.loader.unitclass, this.loader.units);
             this.veteranlevelmanager.init(this.loader.veteranlevel);
             this.terrains.init(this.loader.terrains);
-            this.flags.init(this.loader.flags);
+            var f = this.loader.flags;
+            var f_all = [];
+            for (var k in f) {
+                f_all = f_all.concat(f[k]);
+            }
+            this.flagmanager.init(f_all);
             this.adjustments.init(this.loader.adjustments);
             this.initElements();
         };
@@ -545,15 +558,79 @@ var FreecivCalc;
             var _this = this;
             this.createOptions();
             $(function () {
+                // basic
+                for (var i = 0; i < _this.loader.flags.basic.length; i++) {
+                    var flag = _this.flagmanager.get(_this.loader.flags.basic[i].id);
+                    var el = $("label[for=" + flag.id + "]");
+                    if (flag.label)
+                        el.text(flag.label);
+                    if (flag.description)
+                        el.attr("title", flag.description);
+                }
+                var ul = $("#list-structure");
+                // structures
+                for (var i = 0; i < _this.loader.flags.structure.length; i++) {
+                    var flag = _this.flagmanager.get(_this.loader.flags.structure[i].id);
+                    $("<li></li>")
+                        .append($("<input>")
+                        .attr("type", "checkbox")
+                        .attr("id", flag.id))
+                        .append($("<label></label>")
+                        .text(flag.label)
+                        .attr("for", flag.id)
+                        .attr("title", flag.description ? flag.description : null))
+                        .appendTo(ul);
+                }
+                // bases
+                var bases = $("#flags-bases");
+                for (var i = 0; i < _this.loader.flags.bases.length; i++) {
+                    var flag = _this.flagmanager.get(_this.loader.flags.bases[i].id);
+                    bases.append($("<input>")
+                        .attr("type", "checkbox")
+                        .attr("id", flag.id))
+                        .append($("<label></label>")
+                        .text(flag.label)
+                        .attr("for", flag.id)
+                        .attr("title", flag.description ? flag.description : null));
+                }
+                // roads
+                var roads = $("#flags-roads");
+                for (var i = 0; i < _this.loader.flags.roads.length; i++) {
+                    var flag = _this.flagmanager.get(_this.loader.flags.roads[i].id);
+                    roads.append($("<input>")
+                        .attr("type", "checkbox")
+                        .attr("id", flag.id))
+                        .append($("<label></label>")
+                        .text(flag.label)
+                        .attr("for", flag.id)
+                        .attr("title", flag.description ? flag.description : null));
+                }
+                // ex
+                var ex = $("#flags-ex");
+                for (var i = 0; i < _this.loader.flags.ex.length; i++) {
+                    var flag = _this.flagmanager.get(_this.loader.flags.ex[i].id);
+                    ex.append($("<input>")
+                        .attr("type", "checkbox")
+                        .attr("id", flag.id))
+                        .append($("<label></label>")
+                        .text(flag.label)
+                        .attr("for", flag.id)
+                        .attr("title", flag.description ? flag.description : null));
+                }
+                // all
+                var f_all = [];
+                for (var k in _this.loader.flags) {
+                    f_all = f_all.concat(_this.loader.flags[k]);
+                }
                 var _loop_1 = function() {
-                    var flag = _this.loader.flags[i];
-                    var el = $("#" + flag);
-                    el.change(function () {
-                        _this.flags.set(flag, el.prop("checked"));
+                    var flag_1 = _this.flagmanager.get(f_all[i].id);
+                    var el_1 = $("#" + flag_1.id);
+                    el_1.change(function () {
+                        _this.flagmanager.set(flag_1.id, el_1.prop("checked"));
                     });
-                    _this.flags.set(flag, el.prop("checked"));
+                    _this.flagmanager.set(flag_1.id, el_1.prop("checked"));
                 };
-                for (var i = 0; i < _this.loader.flags.length; i++) {
+                for (var i = 0; i < f_all.length; i++) {
                     _loop_1();
                 }
                 var in_city = $("#in-city");
@@ -563,16 +640,16 @@ var FreecivCalc;
                         $("#fieldset-in-open").prop("disabled", true);
                     }
                 });
-                in_city.change();
+                in_city.prop("checked", true).change();
                 var in_open = $("#in-open");
                 in_open.change(function () {
-                    _this.flags.set("in-city", false);
+                    _this.flagmanager.set("in-city", false);
                     if (in_open.prop("checked")) {
                         $("#fieldset-in-open").prop("disabled", false);
                         $("#fieldset-in-city").prop("disabled", true);
                     }
                 });
-                in_open.prop("checked", true).change();
+                in_open.change();
                 var attacker_class = $("#attacker-class");
                 attacker_class.change(function () {
                     $("#attacker-class-display").text(_this.units.getclass(attacker_class.val()).label);
@@ -582,13 +659,13 @@ var FreecivCalc;
                     $("#defender-class-display").text(_this.units.getclass(defender_class.val()).label);
                     if (defender_class.val() && defender_class.val() != "land") {
                         $("#select-terrain").selectmenu("disable");
-                        $("#terrain-river").prop("disabled", true);
+                        $("#river").prop("disabled", true);
                         $("#defender-fortified").prop("disabled", true);
                         $("#in-fortress").prop("disabled", true);
                     }
                     else {
                         $("#select-terrain").selectmenu("enable");
-                        $("#terrain-river").prop("disabled", false);
+                        $("#river").prop("disabled", false);
                         $("#defender-fortified").prop("disabled", false);
                         $("#in-fortress").prop("disabled", false);
                     }

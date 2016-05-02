@@ -1,6 +1,20 @@
 module FreecivCalc{
+	export interface FlagsDataSet{
+		basic: Array<FlagData>;
+		structure: Array<FlagData>;
+		roads: Array<FlagData>;
+		bases: Array<FlagData>;
+		ex: Array<FlagData>;
+	}
+	export interface FlagData{
+		id: string;
+		label: string;
+		description?: string;
+	}
 	export interface Flag{
 		id: string;
+		label: string;
+		description: string;
 		value: boolean;
 	}
 	export class FlagManager{
@@ -8,18 +22,20 @@ module FreecivCalc{
 		constructor(){
 			this._flags = {};
 		}
-		init(flags:Array<string>){
+		init(flags:Array<FlagData>){
 			for(var i=0; i<flags.length; i++){
-				var f: Flag = {id: flags[i], value:false};
+				var dsc = flags[i].description ? flags[i].description : null;
+				var f: Flag = {id: flags[i].id, label: flags[i].label, description:dsc, value :false};
 				this._flags[f.id] = f;
 			}
 		}
 		set(key:string, value:boolean){
+			if(!this._flags[key]) throw new Error("flag \""+key+"\" not exists");
 			this._flags[key].value = value;
 		}
-		get(key:string): boolean {
-			if(this._flags[key] && this._flags[key].value) return true;
-			return false;
+		get(key:string): Flag {
+			if(this._flags[key]) return this._flags[key];
+			return null;
 		}
 	}
 }

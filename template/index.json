@@ -16,18 +16,10 @@
 		"legend": "防御補正",
 		"legend_terrains": "防御地形",
 		"select_terrain": "地形",
-		"terrain_river": "川(150%)",
-		"legend_in_city": "都市内(陸上ユニット:150%)",
+		"legend_in_city": "都市内",
 		"legend_in_open": "都市外",
-		"defence_structure": {
-			"legend": "防御施設",
-			"city_walls": "城壁(対陸上ユニット、ヘリコプター(榴弾砲を除く))(300%)",
-			"coastal_defense": "沿岸防衛(対船舶ユニット)(200%)",
-			"sam_battery": "対空ミサイル陣地(対航空ユニット(ヘリコプターを除く))(200%)",
-			"sdi_defense": "SDI防衛システム(対ミサイル)(200%)"
-		},
-		"fortified": "防御態勢(150%)",
-		"in_fortress": "要塞(200%)"
+		"defence_structure": "防御施設",
+		"fortified": "防御態勢"
 	},
 	"calc": "計算",
 	"result": {
@@ -46,7 +38,6 @@
 			"firepower": "火力",
 			"mod": "補正後",
 			"modified_strength": "最終能力値"
-			
 		},
 		"adjustments":{
 			"legend": "補正一覧",

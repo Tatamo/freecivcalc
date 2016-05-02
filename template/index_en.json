@@ -16,18 +16,10 @@
 		"legend": "defender adjustments",
 		"legend_terrains": "terrains",
 		"select_terrain": "terrain",
-		"terrain_river": "river(150%)",
 		"legend_in_city": "in city",
 		"legend_in_open": "out of city",
-		"defence_structure": {
-			"legend": "defence structures",
-			"city_walls": "city walls(300% against land unit or helicopter(except howitzer))",
-			"coastal_defense": "coastal defense(200% against ship)",
-			"sam_battery": "SAM battery(200% against aircraft(except helicopter))",
-			"sdi_defense": "SDI defense(200% against missile)"
-		},
-		"fortified": "land unit fortified(150%)",
-		"in_fortress": "land unit in fortress(200%)"
+		"defence_structure": "defence structures",
+		"fortified": "land unit fortified"
 	},
 	"calc": "Calc",
 	"result": {

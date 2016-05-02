@@ -569,7 +569,41 @@
 		"label": "ジャングル(150%)",
 		"value": 150
 	}],
-	"flags": ["terrain-river", "in-city", "in-fortress", "defender-fortified", "city-walls", "city-coastal-defense", "city-sam-battery", "city-sdi-defense"],
+	"flags": {
+		"basic": [{
+			"id": "in-city",
+			"label": "都市内(陸上ユニット:150%)",
+			"description": "陸上ユニットにのみ150%の防御補正"
+		}, {
+			"id": "defender-fortified",
+			"label": "防御態勢(150%)",
+			"description": "防御側が陸上ユニットの場合のみ有効"
+		}],
+		"structure": [{
+			"id": "city-walls",
+			"label": "城壁(対陸上ユニット、ヘリコプター(榴弾砲を除く))(300%)"
+		}, {
+			"id": "city-coastal-defense",
+			"label": "沿岸防衛(対船舶ユニット)(200%)"
+		}, {
+			"id": "city-sam-battery",
+			"label": "対空ミサイル陣地(対航空ユニット(ヘリコプターを除く))(200%)"
+		}, {
+			"id": "city-sdi-defense",
+			"label": "SDI防衛システム(対ミサイル)(200%)"
+		}],
+		"roads": [{
+			"id": "river",
+			"label": "川(150%)",
+			"description": "防御側が陸上ユニットの場合のみ有効"
+		}],
+		"bases": [{
+			"id": "in-fortress",
+			"label": "要塞(200%)",
+			"description": "防御側が陸上ユニットの場合のみ有効"
+		}],
+		"ex": []
+	},
 	"adjustments": [{
 		"id": "attacker-vereran",
 		"name": "ベテランレベル(攻撃側)",
@@ -597,7 +631,7 @@
 	}, {
 		"id": "terrain-river",
 		"name": "地形補正(川)",
-		"condition": ["defender-class(land)", "flag(terrain-river)"],
+		"condition": ["defender-class(land)", "flag(river)"],
 		"effect": [{
 			"type": "defender-strength-multiply",
 			"value": "150"
