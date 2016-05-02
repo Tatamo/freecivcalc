@@ -4,7 +4,6 @@
 /// <reference path="flags.ts" />
 /// <reference path="adjustment.ts" />
 /// <reference path="../typings/jquery/jquery.d.ts" />
-/// <reference path="../typings/es6-promise/es6-promise.d.ts" />
 module FreecivCalc{
 	// load JSON files
 	// TODO: define interface of JSON items

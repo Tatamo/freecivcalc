@@ -8,9 +8,6 @@
     "jquery/jquery.d.ts": {
       "commit": "94d8775a947f626269b06ccadd6f5e61839389d0"
     },
-    "es6-promise/es6-promise.d.ts": {
-      "commit": "94d8775a947f626269b06ccadd6f5e61839389d0"
-    },
     "jqueryui/jqueryui.d.ts": {
       "commit": "94d8775a947f626269b06ccadd6f5e61839389d0"
     }
