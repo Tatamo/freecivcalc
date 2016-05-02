@@ -78,7 +78,7 @@ $(function() {
 			for(var ii=0; ii<adj.effect.length; ii++){
 				var eff = adj.effect[ii];
 				var tr = $("<tr></tr>");
-				if(ii==0) tr.append("<td>"+adj.name+"</td>");
+				if(ii==0) tr.append("<td>"+adj.label+"</td>");
 				else tr.append("<td></td>");
 				tr.append("<td>"+effect_names[eff.type]+"</td>");
 				tr.append("<td>"+eff.value+"</td>");

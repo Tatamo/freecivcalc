@@ -2,20 +2,20 @@
 module FreecivCalc{
 	export interface AdjustmentData{
 		id: string;
-		name: string;
+		label: string;
 		condition: Array<any>;
 		effect: Array<{type: string; value: string;}>;
 	}
 	// internal interface
 	interface ParsedAdjustment{
 		id: string;
-		name: string;
+		label: string;
 		condition: string;
 		effect: Array<{type: string; value: string;}>;
 	}
 	export interface Adjustment{
 		id: string;
-		name: string;
+		label: string;
 		effect: Array<{type: string; value: number;}>;
 	}
 	export class AdjustmentManager{
@@ -30,7 +30,7 @@ module FreecivCalc{
 		init(adjustments: Array<AdjustmentData>){
 			for(var i=0; i<adjustments.length; i++){
 				var adj = adjustments[i];
-				var tmp:ParsedAdjustment = {id:adj.id, name:adj.name, condition:null, effect: adj.effect};
+				var tmp:ParsedAdjustment = {id:adj.id, label:adj.label, condition:null, effect: adj.effect};
 				var condition = this.parseCondition(adj.condition);
 				tmp.condition = condition;
 				this._adjustments.push(tmp);
@@ -41,7 +41,7 @@ module FreecivCalc{
 			for(var i=0; i<this._adjustments.length; i++){
 				var adj = this._adjustments[i];
 				if(this.evalCondition(adj.condition)){
-					var tmp:Adjustment = {id:adj.id, name:adj.name, effect:[]};
+					var tmp:Adjustment = {id:adj.id, label:adj.label, effect:[]};
 					for(var ii=0; ii<adj.effect.length; ii++){
 						var e = adj.effect[ii];
 						var tmp2 = {type: e.type, value: null};
