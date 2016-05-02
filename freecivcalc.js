@@ -640,7 +640,7 @@ var FreecivCalc;
                         $("#fieldset-in-open").prop("disabled", true);
                     }
                 });
-                in_city.prop("checked", true).change();
+                in_city.change();
                 var in_open = $("#in-open");
                 in_open.change(function () {
                     _this.flagmanager.set("in-city", false);
@@ -649,7 +649,7 @@ var FreecivCalc;
                         $("#fieldset-in-city").prop("disabled", true);
                     }
                 });
-                in_open.change();
+                in_open.prop("checked", true).change();
                 var attacker_class = $("#attacker-class");
                 attacker_class.change(function () {
                     $("#attacker-class-display").text(_this.units.getclass(attacker_class.val()).label);
