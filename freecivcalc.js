@@ -757,25 +757,13 @@ var FreecivCalc;
                 return;
             var wrapper = $("#result-wrapper");
             wrapper.show();
-            var table = $("#result-table tbody");
-            var rows = table.children();
-            console.log(table);
-            for (var i = 1; i < rows.length; i++) {
-                console.log(rows[i]);
-                rows[i].remove();
-            }
-            $("<tr></tr>")
-                .append("<td>attacker</td>")
-                .append("<td>" + this.result.attacker_strength + "</td>")
-                .append("<td>" + (this.result.attacker_win * 100).toFixed(2) + "%</td>")
-                .append("<td>" + this.result.attacker_hp_exp.toFixed(3) + "</td>")
-                .appendTo(table);
-            $("<tr></tr>")
-                .append("<td>defender</td>")
-                .append("<td>" + this.result.defender_strength + "</td>")
-                .append("<td>" + (this.result.defender_win * 100).toFixed(2) + "%</td>")
-                .append("<td>" + this.result.defender_hp_exp.toFixed(3) + "</td>")
-                .appendTo(table);
+            var table = $("#result-table");
+            table.find("#attacker-result-strength").text(this.result.attacker_strength);
+            table.find("#attacker-result-prob").text((this.result.attacker_win * 100).toFixed(2));
+            table.find("#attacker-result-exp").text(this.result.attacker_hp_exp.toFixed(3));
+            table.find("#defender-result-strength").text(this.result.defender_strength);
+            table.find("#defender-result-prob").text((this.result.defender_win * 100).toFixed(2));
+            table.find("#defender-result-exp").text(this.result.defender_hp_exp.toFixed(3));
         };
         FreecivCalc.prototype.calc = function () {
             if (!this.loaded)

@@ -24,6 +24,8 @@
 	"calc": "Calc",
 	"result": {
 		"unit_side": "Unit side",
+		"unit_side_attacker": "Attacker",
+		"unit_side_defender": "Defender",
 		"strength": "Strength",
 		"prob": "Probability of winning",
 		"exp": "Ecpected hp left"

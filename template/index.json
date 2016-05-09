@@ -24,6 +24,8 @@
 	"calc": "計算",
 	"result": {
 		"unit_side": "陣営",
+		"unit_side_attacker": "攻撃側",
+		"unit_side_defender": "防御側",
 		"strength": "能力値",
 		"prob": "勝率",
 		"exp": "残HP期待値"
