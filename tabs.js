@@ -35,7 +35,6 @@ $(function() {
 
 			var clone = $("#result-template").clone().css("display","block");
 			setId(clone, tabCounter);
-			//tabs.append( "<div id='" + tabid + "'><p>" + tabContentHtml + "</p></div>" );
 			var el = $("<div id='" + tabid + "'></div>").append(clone);
 			tabs.append( el );
 			tabs.tabs( "refresh" );
@@ -95,7 +94,7 @@ $(function() {
 			});
 		}
 		var chart = createUnitHPExpChart(chartData);
-		chart.write("chart-exp-attacker-"+id);
+		chart.write("chart-exp-attacker"+"-"+id);
 
 		var chartData = [];
 		var d_exp = result.defender_hp_exp_list;

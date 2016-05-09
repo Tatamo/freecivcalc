@@ -1,0 +1,71 @@
+.custom-combobox {
+	position: relative;
+	display: inline-block;
+}
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+}
+.ui-autocomplete {
+	max-height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+fieldset{
+	margin: 0;
+}
+
+.flex-container{
+	display: -webkit-flex;
+	display: flex;
+	width: 940px;
+}
+#fieldset-attacker{
+	-webkit-flex: 1;
+	flex: 1;
+	margin-right: 20px;
+}
+#fieldset-defender{
+	-webkit-flex: 1;
+	flex: 1;
+}
+.fieldset-attacker-detail{
+	-webkit-flex: 1;
+	flex: 1;
+	margin-right: 20px;
+}
+.fieldset-defender-detail{
+	-webkit-flex: 1;
+	flex: 1;
+}
+.fieldset-exp-attacker{
+	-webkit-flex: 1;
+	flex: 1;
+	margin-right: 20px;
+}
+.fieldset-exp-defender{
+	-webkit-flex: 1;
+	flex: 1;
+}
+
+#tabs{
+	width: calc(940px + 10px + 10px);
+}
+.ui-tabs-panel{
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+}
+
+input[type="number"]{
+	width: 60px;
+}
+
+p{
+	margin-top: 0;
+	margin-bottom: 0;
+	line-height: 1.4;
+}
