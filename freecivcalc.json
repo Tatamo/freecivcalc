@@ -689,7 +689,7 @@
 	}, {
 		"id": "pikemen-attacked-by-mounted",
 		"label": "長槍兵の対騎乗ユニット補正",
-		"condition": ["defender-flag(pikeman)", "attacker-flag(mounted)"],
+		"condition": ["defender-flag(pikemen)", "attacker-flag(mounted)"],
 		"effect": [{
 			"type": "defender-strength-multiply",
 			"value": "200"
@@ -697,7 +697,7 @@
 	}, {
 		"id": "aegis-cruiser-attacked-by-aircraft-missile-or-helicopter",
 		"label": "イージス巡洋艦の対航空・ミサイル・ヘリコプターユニット補正",
-		"condition": ["defender-flag(aegis-cruiser)", ["OR", "attacker-class(air)", "attacker-class(missile)", "attacker-class(helicopter)"]],
+		"condition": ["defender-flag(aegis)", ["OR", "attacker-class(air)", "attacker-class(missile)", "attacker-class(helicopter)"]],
 		"effect": [{
 			"type": "defender-strength-multiply",
 			"value": "500"
