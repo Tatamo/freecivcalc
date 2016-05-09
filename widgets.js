@@ -93,7 +93,7 @@
 		},
 
 		_source: function( request, response ) {
-			var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+			var matcher = new RegExp( "^"+$.ui.autocomplete.escapeRegex(request.term), "i" );
 			var _self = this;
 			response( this.element.children( "option" ).map(function() {
 				var data = this.value?_self.options.list[_self._map[this.value]]:{};
