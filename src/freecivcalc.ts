@@ -183,22 +183,26 @@ module FreecivCalc{
 					}
 				});
 				var attacker_max_hp = $( "#attacker-max-hp" );
+				var attacker_current_hp = $( "#attacker-current-hp" );
 				attacker_max_hp.change(()=>{
-					var current = $( "#attacker-current-hp" );
 					var maxhp = +attacker_max_hp.val();
-					current.attr("max", maxhp);
-					if(+current.val() > maxhp) {
-						current.val(maxhp).change();
-					}
+					attacker_current_hp.attr("max", maxhp);
+					//if(+attacker_current_hp.val() > maxhp) attacker_current_hp.val(maxhp).change();
+					attacker_current_hp.val(maxhp).change();
+				});
+				attacker_current_hp.change(()=>{
+					if(+attacker_current_hp.val() > +attacker_max_hp.val()) attacker_current_hp.val(+attacker_max_hp.val()).change();
 				});
 				var defender_max_hp = $( "#defender-max-hp" );
+				var defender_current_hp = $( "#defender-current-hp" );
 				defender_max_hp.change(()=>{
-					var current = $( "#defender-current-hp" );
 					var maxhp = +defender_max_hp.val();
-					current.attr("max", maxhp);
-					if(+current.val() > maxhp) {
-						current.val(maxhp).change();
-					}
+					defender_current_hp.attr("max", maxhp);
+					// if(+defender_current_hp.val() > maxhp) defender_current_hp.val(maxhp).change();
+					defender_current_hp.val(maxhp).change();
+				});
+				defender_current_hp.change(()=>{
+					if(+defender_current_hp.val() > +defender_max_hp.val()) defender_current_hp.val(+defender_max_hp.val()).change();
 				});
 				var attacker_cb = $( "#combobox-attack" );
 				if(attacker_cb.children().length > 1) {
