@@ -26,10 +26,9 @@ $(function() {
 		else{
 			var result = JSON.parse($( "#calc" ).attr("data-result"));
 			console.log(result);
-			var label = tabTitle.val() || "Tab " + tabCounter,
-				tabid = "tabs-" + tabCounter,
-				li = $( tabTemplate.replace( /#\{href\}/g, "#" + tabid ).replace( /#\{label\}/g, label ) ),
-				tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+			var label = tabTitle.val() || "<span class=\"label-tab-detail\">"+result.attacker_raw.label+" - "+result.defender_raw.label+"</span>",
+				tabid = "tab-detail-" + tabCounter,
+				li = $( tabTemplate.replace( /#\{href\}/g, "#" + tabid ).replace( /#\{label\}/g, label ) );
 
 			tabs.find( ".ui-tabs-nav" ).append( li );
 
@@ -54,6 +53,8 @@ $(function() {
 	function createDetailResult(el, result, id){
 		// create unit detail
 		$( "#attacker-detail-unitname"+"-"+id ).text(result.attacker_raw.label);
+		$( "#attacker-detail-prob"+"-"+id ).text((result.attacker_win*100).toFixed(2)+"%");
+		$( "#attacker-detail-exp"+"-"+id ).text(result.attacker_hp_exp.toFixed(3)+" / "+result.attacker_raw.hp);
 		var table = $( "#attacker-detail"+"-"+id );
 		table.find("#attacker-detail-hp"+"-"+id).text(result.attacker_raw.hp);
 		table.find("#attacker-detail-attack-raw"+"-"+id).text(result.attacker_raw.attack);
@@ -62,6 +63,8 @@ $(function() {
 		table.find("#attacker-detail-firepower-mod"+"-"+id).text(result.attacker_fp);
 
 		$( "#defender-detail-unitname"+"-"+id ).text(result.defender_raw.label);
+		$( "#defender-detail-prob"+"-"+id ).text((result.defender_win*100).toFixed(2)+"%");
+		$( "#defender-detail-exp"+"-"+id ).text(result.defender_hp_exp.toFixed(3)+" / "+result.defender_raw.hp);
 		var table = $( "#defender-detail"+"-"+id );
 		table.find("#defender-detail-hp"+"-"+id).text(result.defender_raw.hp);
 		table.find("#defender-detail-defence-raw"+"-"+id).text(result.defender_raw.defence);
@@ -150,13 +153,14 @@ $(function() {
 		var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
 		$( "#" + panelId ).remove();
 		console.log("panelId",panelId);
-		var numid = +(panelId.split("-")[1]);
+		var numid = +(panelId.split("-")[2]); // tab-detail-N
 		for(var i=tabList.length-1; i>=0; i--){
 			if(tabList[i] == numid){
 				tabList.splice(i,1);
 				break;
 			}
 		}
+		console.log("tabList",tabList);
 		tabs.tabs( "refresh" );
 	});
 

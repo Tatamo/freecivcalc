@@ -35,6 +35,7 @@
 		"units":{
 			"atk_legend": "攻撃ユニット",
 			"def_legend": "防御ユニット",
+			"prob": "勝率",
 			"hp": "HP",
 			"attack": "攻撃力",
 			"defence": "防御力",
@@ -56,9 +57,10 @@
 			"attacker-firepower-set":"攻撃側火力変更",
 			"defender-firepower-set":"防御側火力変更"
 		},
-		"exp":{
+		"hp_graph":{
 			"atk_legend": "攻撃ユニット残HP",
-			"def_legend": "防御ユニット残HP"
+			"def_legend": "防御ユニット残HP",
+			"exp": "期待値"
 		}
 	}
 }

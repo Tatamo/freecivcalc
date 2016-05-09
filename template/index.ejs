@@ -96,7 +96,6 @@
 			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open"><%= adjustments.legend_in_open %><label></legend>
 			<input type="checkbox" id="defender-fortified"><label for="defender-fortified" title="valid for only land units"><%= adjustments.fortified %></label>
 			<span id="flags-bases">
-			<!-- <input type="checkbox" id="in-fortress"><label for="in-fortress" title="valid for only land units"><%= adjustments.in_fortress %></label> -->
 			</span>
 		</fieldset>
 		<span id="flags-ex">
@@ -129,8 +128,8 @@
 <div style="display:none" id="result-template">
 	<div class="flex-container">
 		<fieldset id="fieldset-attacker-detail" class="fieldset-attacker-detail">
-			<legend><%= result_detail.units.atk_legend %></legend>
-			<span id="attacker-detail-unitname"></span>
+			<legend><%= result_detail.units.atk_legend %>: <span id="attacker-detail-unitname"></span></legend>
+			<p><%= result_detail.units.prob %>: <span id="attacker-detail-prob"></span></p>
 			<table id="attacker-detail">
 				<tr>
 					<th><%= result_detail.units.hp %></th>
@@ -155,8 +154,8 @@
 			</table>
 		</fieldset>
 		<fieldset id="fieldset-defender-detail" class="fieldset-defender-detail">
-			<legend><%= result_detail.units.def_legend %></legend>
-			<span id="defender-detail-unitname"></span>
+			<legend><%= result_detail.units.def_legend %>: <span id="defender-detail-unitname"></span></legend>
+			<p><%= result_detail.units.prob %>: <span id="defender-detail-prob"></span></p>
 			<table id="defender-detail">
 				<tr>
 					<th><%= result_detail.units.hp %></th>
@@ -193,11 +192,13 @@
 	</fieldset>
 	<div class="flex-container">
 		<fieldset id="fieldset-exp-attacker" class="fieldset-exp-attacker">
-			<legend><%= result_detail.exp.atk_legend %></legend>
+			<legend><%= result_detail.hp_graph.atk_legend %></legend>
+			<p><%= result_detail.hp_graph.exp %>: <span id="attacker-detail-exp"></span></p>
 			<div id="chart-exp-attacker" style="width: 100%; height: 300px;"></div>
 		</fieldset>
 		<fieldset id="fieldset-exp-defender" class="fieldset-exp-defender">
-			<legend><%= result_detail.exp.def_legend %></legend>
+			<legend><%= result_detail.hp_graph.def_legend %></legend>
+			<p><%= result_detail.hp_graph.exp %>: <span id="defender-detail-exp"></span></p>
 			<div id="chart-exp-defender" style="width: 100%; height: 300px;"></div>
 		</fieldset>
 	</div>

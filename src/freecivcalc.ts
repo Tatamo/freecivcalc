@@ -276,10 +276,10 @@ module FreecivCalc{
 			wrapper.show();
 			var table = $( "#result-table" );
 			table.find("#attacker-result-strength").text(this.result.attacker_strength);
-			table.find("#attacker-result-prob").text((this.result.attacker_win*100).toFixed(2));
+			table.find("#attacker-result-prob").text((this.result.attacker_win*100).toFixed(2)+"%");
 			table.find("#attacker-result-exp").text(this.result.attacker_hp_exp.toFixed(3));
 			table.find("#defender-result-strength").text(this.result.defender_strength);
-			table.find("#defender-result-prob").text((this.result.defender_win*100).toFixed(2));
+			table.find("#defender-result-prob").text((this.result.defender_win*100).toFixed(2)+"%");
 			table.find("#defender-result-exp").text(this.result.defender_hp_exp.toFixed(3));
 		}
 		calc(){

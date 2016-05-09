@@ -28,13 +28,14 @@
 		"unit_side_defender": "Defender",
 		"strength": "Strength",
 		"prob": "Probability of winning",
-		"exp": "Ecpected hp left"
+		"exp": "Expected hp left"
 	},
 	"show_detail_tab": "Open detail tab",
 	"result_detail":{
 		"units":{
 			"atk_legend": "攻撃ユニット",
 			"def_legend": "防御ユニット",
+			"prob": "Probability of winning",
 			"hp": "HP",
 			"attack": "攻撃力",
 			"defence": "防御力",
@@ -56,9 +57,10 @@
 			"attacker-firepower-set":"攻撃側火力変更",
 			"defender-firepower-set":"防御側火力変更"
 		},
-		"exp":{
+		"hp_graph":{
 			"atk_legend": "攻撃ユニット残HP期待値",
-			"def_legend": "防御ユニット残HP期待値"
+			"def_legend": "防御ユニット残HP期待値",
+			"exp": "Expected hp left"
 		}
 	}
 }

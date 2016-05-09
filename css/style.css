@@ -36,12 +36,31 @@ fieldset{
 	flex: 1;
 }
 
+/* -- タブ -- */
 #tabs{
 	width: calc(940px + 10px + 10px);
 }
 .ui-tabs .ui-tabs-panel{
 	padding-left: 10px;
 	padding-right: 10px;
+}
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor{
+	padding: 8px;
+	padding-top: 10px;
+	max-width: 200px;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor .label-tab-detail{
+	font-size: 0.8em;
+}
+
+.ui-icon-close{
+	position: absolute;
+	top: -1px;
+	right: 0;
 }
 
 /* -- テーブル -- */
