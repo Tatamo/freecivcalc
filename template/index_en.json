@@ -30,6 +30,7 @@
 		"prob": "Probability of winning",
 		"exp": "Ecpected hp left"
 	},
+	"show_detail_tab": "Open detail tab",
 	"result_detail":{
 		"units":{
 			"atk_legend": "攻撃ユニット",

@@ -30,6 +30,7 @@
 		"prob": "勝率",
 		"exp": "残HP期待値"
 	},
+	"show_detail_tab": "詳細タブを開く",
 	"result_detail":{
 		"units":{
 			"atk_legend": "攻撃ユニット",
