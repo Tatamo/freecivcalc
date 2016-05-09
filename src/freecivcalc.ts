@@ -5,7 +5,8 @@
 /// <reference path="adjustment.ts" />
 /// <reference path="loader.ts" />
 /// <reference path="calc.ts" />
-/// <reference path="../typings/jquery/jquery.d.ts" />
+/// <reference path="tabs.ts" />
+/// <reference path="../typings/main.d.ts" />
 module FreecivCalc{
 	export class FreecivCalc{
 		attacker: Unit;
@@ -20,6 +21,7 @@ module FreecivCalc{
 		adjustments: AdjustmentManager;
 		calculator: BattleCalc;
 		result: BattleResult;
+		detailtabs: DetailTabs;
 		loader: Loader;
 		loaded: boolean;
 		constructor(){
@@ -34,6 +36,7 @@ module FreecivCalc{
 			this.adjustments = new AdjustmentManager(this);
 			this.calculator = new BattleCalc();
 			this.result = null;
+			this.detailtabs = new DetailTabs();
 			this.loaded = false;
 			this.loader = new Loader(
 				"freecivcalc.json",
@@ -57,6 +60,7 @@ module FreecivCalc{
 			this.initElements();
 		}
 		initElements(){
+			this.detailtabs.init();
 			this.createOptions();
 			$(()=>{
 				// basic

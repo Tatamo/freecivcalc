@@ -13,8 +13,8 @@
     "gulp": "^3.9.1",
     "gulp-ejs": "^2.1.1",
     "gulp-rename": "^1.2.2",
-    "tsd": "^0.6.5",
-    "typescript": "^1.8.10"
+    "typescript": "^1.8.10",
+    "typings": "^0.8.1"
   },
   "dependencies": {
     "gulp": "^3.9.1",

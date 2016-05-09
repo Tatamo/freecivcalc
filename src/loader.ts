@@ -3,7 +3,7 @@
 /// <reference path="terrain.ts" />
 /// <reference path="flags.ts" />
 /// <reference path="adjustment.ts" />
-/// <reference path="../typings/jquery/jquery.d.ts" />
+/// <reference path="../typings/main.d.ts" />
 module FreecivCalc{
 	// load JSON files
 	// TODO: define interface of JSON items
@@ -17,16 +17,14 @@ module FreecivCalc{
 		onload:()=>any;
 		constructor(path:string, cb = ()=>{}) {
 			this.onload = cb;
-			$(()=>{
-				$.getJSON(path).done((data)=>{
-					this.units = data.units;
-					this.unitclass = data.unitclass;
-					this.veteranlevel = data.veteranlevel;
-					this.terrains = data.terrains;
-					this.flags = data.flags;
-					this.adjustments = data.adjustments;
-					this.onload();
-				});
+			$.getJSON(path).done((data)=>{
+				this.units = data.units;
+				this.unitclass = data.unitclass;
+				this.veteranlevel = data.veteranlevel;
+				this.terrains = data.terrains;
+				this.flags = data.flags;
+				this.adjustments = data.adjustments;
+				this.onload();
 			});
 		}
 	}
