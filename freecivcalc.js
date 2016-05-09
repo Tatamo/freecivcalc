@@ -656,18 +656,21 @@ var FreecivCalc;
                 var defender_class = $("#defender-class");
                 defender_class.change(function () {
                     $("#defender-class-display").text(_this.units.getclass(defender_class.val()).label);
-                    if (defender_class.val() && defender_class.val() != "land") {
-                        $("#select-terrain").selectmenu("disable");
-                        $("#river").prop("disabled", true);
-                        $("#defender-fortified").prop("disabled", true);
-                        $("#in-fortress").prop("disabled", true);
+                    /*
+                    // depend on ruleset
+                    if(defender_class.val() && defender_class.val() != "land"){
+                        (<any>$( "#select-terrain" )).selectmenu("disable");
+                        $( "#river" ).prop("disabled", true);
+                        $( "#defender-fortified" ).prop("disabled", true);
+                        $( "#in-fortress" ).prop("disabled", true);
                     }
-                    else {
-                        $("#select-terrain").selectmenu("enable");
-                        $("#river").prop("disabled", false);
-                        $("#defender-fortified").prop("disabled", false);
-                        $("#in-fortress").prop("disabled", false);
+                    else{
+                        (<any>$( "#select-terrain" )).selectmenu("enable");
+                        $( "#river" ).prop("disabled", false);
+                        $( "#defender-fortified" ).prop("disabled", false);
+                        $( "#in-fortress" ).prop("disabled", false);
                     }
+                    */
                 });
                 var attacker_max_hp = $("#attacker-max-hp");
                 var attacker_current_hp = $("#attacker-current-hp");

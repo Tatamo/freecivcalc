@@ -169,6 +169,8 @@ module FreecivCalc{
 				var defender_class = $( "#defender-class" );
 				defender_class.change(()=>{
 					$( "#defender-class-display" ).text(this.units.getclass(defender_class.val()).label);
+					/*
+					// depend on ruleset
 					if(defender_class.val() && defender_class.val() != "land"){
 						(<any>$( "#select-terrain" )).selectmenu("disable");
 						$( "#river" ).prop("disabled", true);
@@ -181,6 +183,7 @@ module FreecivCalc{
 						$( "#defender-fortified" ).prop("disabled", false);
 						$( "#in-fortress" ).prop("disabled", false);
 					}
+					*/
 				});
 				var attacker_max_hp = $( "#attacker-max-hp" );
 				var attacker_current_hp = $( "#attacker-current-hp" );
