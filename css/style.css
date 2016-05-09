@@ -1,20 +1,4 @@
-.custom-combobox {
-	position: relative;
-	display: inline-block;
-}
-.custom-combobox-toggle {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	margin-left: -1px;
-	padding: 0;
-}
-.ui-autocomplete {
-	max-height: 400px;
-	overflow-y: auto;
-	overflow-x: hidden;
-}
-
+/* -- 全体レイアウト -- */
 fieldset{
 	margin: 0;
 }
@@ -55,17 +39,69 @@ fieldset{
 #tabs{
 	width: calc(940px + 10px + 10px);
 }
-.ui-tabs-panel{
-	padding-left: 10px !important;
-	padding-right: 10px !important;
+.ui-tabs .ui-tabs-panel{
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
-input[type="number"]{
-	width: 60px;
+/* -- テーブル -- */
+th {
+	padding: 1px 5px;
+}
+td {
+	padding: 1px 5px;
+	text-align: right;
+}
+.table-unit-select td{
+	text-align: left;
 }
 
+/* -- 行間調整 -- */
 p{
 	margin-top: 0;
 	margin-bottom: 0;
 	line-height: 1.4;
+}
+
+/* -- コンボボックス -- */
+.custom-combobox {
+	position: relative;
+	display: inline-block;
+}
+.custom-combobox-input {
+	padding-left: 12px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+}
+.ui-autocomplete {
+	max-height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/* -- 各input要素/widgetの幅調整 -- */
+.ui-selectmenu-button{
+	min-width: 220px;
+}
+.ui-selectmenu-button span.ui-selectmenu-text{
+	padding-left: 12px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+input[type="number"]{
+	width: 80px;
+}
+
+/* -- リスト -- */
+ul#list-structure{
+	list-style-type:none;
+	margin-top:3px;
+	padding-left:1em;
 }

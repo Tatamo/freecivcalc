@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div style="clear:both" id="tabs">
+<div id="tabs">
 <ul>
 	<li><a href="#tab-main">FreecivCalc</a></li>
 </ul>
@@ -23,47 +23,55 @@
 	<div class="flex-container">
 		<fieldset id="fieldset-attacker">
 			<legend><%= unit_select.legend_atk %></legend>
-			<div class="ui-widget">
-				<label><%= unit_select.select %>: </label>
-				<select id="combobox-attack">
-				</select>
-			</div>
-			<p><label><%= unit_select.class %>: </label>
-			<input type="hidden" id="attacker-class"><span id="attacker-class-display"></span></p>
-			<p><label><%= unit_select.veteran %>: </label>
-			<select id="attacker-veteranlevel">
-			</select></p>
-			<table>
+			<table class="table-unit-select">
 				<tr>
-					<td style="text-align:right"><label><%= unit_select.current_hp %>: </label></td><td><input type="number" value="10" min="1" id="attacker-current-hp"></td>
-					<td style="text-align:right"><label><%= unit_select.max_hp %>: </label></td><td><input type="number" value="10" min="1" id="attacker-max-hp"></td>
+					<td><label><%= unit_select.select %>: </label></td>
+					<td><select id="combobox-attack"></select></td>
 				</tr>
 				<tr>
-					<td style="text-align:right"><label><%= unit_select.attack %>: </label></td><td><input type="number" value="1" min="1" id="attacker-strength">
-						<td style="text-align:right"><label><%= unit_select.firepower %>: </label></td><td><input type="number" value="1" min="1" id="attacker-firepower"></td>
+					<td><label><%= unit_select.class %>: </label></td>
+					<td><input type="hidden" id="attacker-class"><span id="attacker-class-display"></span></td>
+				</tr>
+				<tr>
+					<td><label><%= unit_select.veteran %>: </label></td>
+					<td><select id="attacker-veteranlevel"></select></td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><label><%= unit_select.current_hp %>: </label></td><td><input type="number" value="10" min="1" id="attacker-current-hp"></td>
+					<td><label><%= unit_select.max_hp %>: </label></td><td><input type="number" value="10" min="1" id="attacker-max-hp"></td>
+				</tr>
+				<tr>
+					<td><label><%= unit_select.attack %>: </label></td><td><input type="number" value="1" min="1" id="attacker-strength">
+						<td><label><%= unit_select.firepower %>: </label></td><td><input type="number" value="1" min="1" id="attacker-firepower"></td>
 				</tr>
 			</table>
 		</fieldset>
 		<fieldset id="fieldset-defender">
 			<legend><%= unit_select.legend_def %></legend>
-			<div class="ui-widget">
-				<label><%= unit_select.select %>: </label>
-				<select id="combobox-defence">
-				</select>
-			</div>
-			<p><label><%= unit_select.class %>: </label>
-			<input type="hidden" id="defender-class"><span id="defender-class-display"></span></p>	
-			<p><label><%= unit_select.veteran %>: </label>
-			<select id="defender-veteranlevel">
-			</select></p>
-			<table>
+			<table class="table-unit-select">
 				<tr>
-					<td style="text-align:right"><label><%= unit_select.current_hp %>: </label></td><td><input type="number" value="10" min="1" id="defender-current-hp"></td>
-					<td style="text-align:right"><label><%= unit_select.max_hp %>: </label></td><td><input type="number" value="10" min="1" id="defender-max-hp"></td>
+					<td><label><%= unit_select.select %>: </label></td>
+					<td><select id="combobox-defence"></select></td>
 				</tr>
 				<tr>
-					<td style="text-align:right"><label><%= unit_select.defence %>: </label></td><td><input type="number" value="1" min="1" id="defender-strength">
-						<td style="text-align:right"><label><%= unit_select.firepower %>: </label></td><td><input type="number" value="1" min="1" id="defender-firepower"></td>
+					<td><label><%= unit_select.class %>: </label></td>
+					<td><input type="hidden" id="defender-class"><span id="defender-class-display"></span></td>
+				</tr>
+				<tr>
+					<td><label><%= unit_select.veteran %>: </label></td>
+					<td><select id="defender-veteranlevel"></select></td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><label><%= unit_select.current_hp %>: </label></td><td><input type="number" value="10" min="1" id="defender-current-hp"></td>
+					<td><label><%= unit_select.max_hp %>: </label></td><td><input type="number" value="10" min="1" id="defender-max-hp"></td>
+				</tr>
+				<tr>
+					<td><label><%= unit_select.defence %>: </label></td><td><input type="number" value="1" min="1" id="defender-strength">
+						<td><label><%= unit_select.firepower %>: </label></td><td><input type="number" value="1" min="1" id="defender-firepower"></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -76,19 +84,12 @@
 			<select id="select-terrain">
 			</select>
 			<span id="flags-roads">
-			<!-- <input type="checkbox" id="river"><label for="river"><%= adjustments.terrain_river %></label> -->
 	   </span>
 		</fieldset>
 		<fieldset id="fieldset-in-city">
 			<legend><input type="radio" name="in-city-or-open" value="city" id="in-city"><label for="in-city"  title="land units gain 150% defence adjustments"><%= adjustments.legend_in_city %></label></legend>
 			<label><%= adjustments.defence_structure %>: </label>
-			<ul id="list-structure" style="list-style-type:none; margin-top:3px; padding-left:1em">
-				<!--
-				<li><input type="checkbox" id="city-walls"><label for="city-walls"><%= adjustments.defence_structure.city_walls %></label></li>
-				<li><input type="checkbox" id="city-coastal-defense"><label for="city-coastal-defense"><%= adjustments.defence_structure.coastal_defense %></label></li>
-				<li><input type="checkbox" id="city-sam-battery"><label for="city-sam-battery"><%= adjustments.defence_structure.sam_battery %></label></li>
-				<li><input type="checkbox" id="city-sdi-defense"><label for="city-sdi-defense"><%= adjustments.defence_structure.sdi_defense %></label></li>
-				-->
+			<ul id="list-structure">
 			</ul>
 		</fieldset>
 		<fieldset id="fieldset-in-open">
