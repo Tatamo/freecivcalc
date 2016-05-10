@@ -58,6 +58,7 @@ module FreecivCalc{
 			this.flagmanager.init(f_all);
 			this.adjustments.init(this.loader.adjustments);
 			this.initElements();
+			this.createConfigTab();
 		}
 		initElements(){
 			this.detailtabs.init();
@@ -224,6 +225,20 @@ module FreecivCalc{
 					calc.attr("data-result", JSON.stringify(this.calc()));
 				});
 			});
+		}
+		createConfigTab(){
+			// dataset download button
+			var select = $( "#select-dataset" );
+			var a = $( "#dataset-download" );
+			var option = select.find("option:selected");
+			select.change(()=>{
+				var url = option.val();
+				var filename = option.text();
+				a.attr("href", url);
+				a.attr("target", "_blank");
+				a.attr("download", filename);
+			});
+			select.change();
 		}
 		createOptions(){
 			$(()=>{

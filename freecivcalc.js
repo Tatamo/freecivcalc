@@ -555,7 +555,8 @@ var FreecivCalc;
                 var result = JSON.parse($("#calc").attr("data-result"));
                 console.log(result);
                 var label = this.tabTitle.val() || "<span class=\"label-tab-detail\">" + result.attacker_raw.label + " - " + result.defender_raw.label + "</span>", tabid = "tab-detail-" + this.tabCounter, li = $(this.tabTemplate.replace(/#\{href\}/g, "#" + tabid).replace(/#\{label\}/g, label));
-                this.tabs.find(".ui-tabs-nav").append(li);
+                this.tabs.find(".ui-tabs-nav :nth-last-of-type(2)").after(li);
+                console.log(this.tabs.find(".ui-tabs-nav"));
                 var clone = $("#result-template").clone().css("display", "block");
                 this.setId(clone, this.tabCounter);
                 var el = $("<div id='" + tabid + "'></div>").append(clone);
@@ -714,6 +715,7 @@ var FreecivCalc;
             this.flagmanager.init(f_all);
             this.adjustments.init(this.loader.adjustments);
             this.initElements();
+            this.createConfigTab();
         };
         FreecivCalc.prototype.initElements = function () {
             var _this = this;
@@ -872,6 +874,20 @@ var FreecivCalc;
                     calc.attr("data-result", JSON.stringify(_this.calc()));
                 });
             });
+        };
+        FreecivCalc.prototype.createConfigTab = function () {
+            // dataset download button
+            var select = $("#select-dataset");
+            var a = $("#dataset-download");
+            var option = select.find("option:selected");
+            select.change(function () {
+                var url = option.val();
+                var filename = option.text();
+                a.attr("href", url);
+                a.attr("target", "_blank");
+                a.attr("download", filename);
+            });
+            select.change();
         };
         FreecivCalc.prototype.createOptions = function () {
             var _this = this;

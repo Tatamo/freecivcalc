@@ -1,5 +1,9 @@
 {
 	"language": "ja",
+	"tab_label": {
+		"main": "FreecivCalc",
+		"config": "設定"
+	},
 	"unit_select": {
 		"legend_atk": "攻撃ユニット",
 		"legend_def": "防御ユニット",
@@ -62,5 +66,12 @@
 			"def_legend": "防御ユニット残HP",
 			"exp": "期待値"
 		}
+	},
+	"config":{
+		"dataset":[{
+			"filename": "freecivcalc.json",
+			"path": "./freecivcalc.json",
+			"default": true
+		}]
 	}
 }

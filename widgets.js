@@ -1,3 +1,4 @@
+// define jQueryUI widgets
 (function( $ ) {
 	$.widget( "custom.combobox", {
 		options: {
@@ -192,6 +193,5 @@
 })( jQuery );
 
 $(function() {
-	
 	$( document ).tooltip();
 });

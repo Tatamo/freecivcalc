@@ -1,5 +1,9 @@
 {
 	"language": "en",
+	"tab_label": {
+		"main": "FreecivCalc",
+		"config": "Config"
+	},
 	"unit_select": {
 		"legend_atk": "attacker unit",
 		"legend_def": "defender unit",
@@ -62,5 +66,12 @@
 			"def_legend": "防御ユニット残HP期待値",
 			"exp": "Expected hp left"
 		}
+	},
+	"config":{
+		"dataset":[{
+			"filename": "freecivcalc.json",
+			"path": "./freecivcalc.json",
+			"default": true
+		}]
 	}
 }

@@ -17,6 +17,7 @@
 <div id="tabs">
 <ul>
 	<li><a href="#tab-main">FreecivCalc</a></li>
+	<li><a href="#tab-config">Config</a></li>
 </ul>
 <div id="tab-main">
 	<div class="flex-container">
@@ -124,6 +125,20 @@
 		</table>
 		<button id="add-tab">Open detail tab</button>
 	</div>
+</div>
+<div id="tab-config">
+	<fieldset>
+		<legend>config</legend>
+		<label>select_dataset: </label>
+		<select id="select-dataset">
+		
+		   <option value="./freecivcalc.json">freecivcalc.json</option>
+		
+		</select>
+		<button id="dataset-apply">apply</button>
+		<a id="dataset-download">Download this dataset</a>
+	</fieldset>
+</div>
 <div style="display:none" id="result-template">
 	<div class="flex-container">
 		<fieldset id="fieldset-attacker-detail" class="fieldset-attacker-detail">

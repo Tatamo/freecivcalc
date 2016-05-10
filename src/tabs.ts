@@ -53,7 +53,8 @@ module FreecivCalc{
 					tabid = "tab-detail-" + this.tabCounter,
 					li = $( this.tabTemplate.replace( /#\{href\}/g, "#" + tabid ).replace( /#\{label\}/g, label ) );
 
-				this.tabs.find( ".ui-tabs-nav" ).append( li );
+				this.tabs.find( ".ui-tabs-nav :nth-last-of-type(2)" ).after( li );
+				console.log(this.tabs.find( ".ui-tabs-nav" ));
 
 				var clone = $("#result-template").clone().css("display","block");
 				this.setId(clone, this.tabCounter);
