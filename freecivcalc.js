@@ -45,7 +45,7 @@ var FreecivCalc;
                 hp: unit.hp,
                 attack: unit.attack,
                 defence: unit.defence,
-                firepower: unit.firepower
+                firepower: unit.firepower,
             };
             return u;
         };
@@ -145,179 +145,6 @@ var FreecivCalc;
         return FlagManager;
     }());
     FreecivCalc.FlagManager = FlagManager;
-})(FreecivCalc || (FreecivCalc = {}));
-/// <reference path="freecivcalc.ts" />
-var FreecivCalc;
-(function (FreecivCalc) {
-    var AdjustmentManager = (function () {
-        function AdjustmentManager(calc) {
-            this.freecivcalc = calc;
-            this._adjustments = [];
-            this._current_adjustments = [];
-        }
-        AdjustmentManager.prototype.init = function (adjustments) {
-            for (var i = 0; i < adjustments.length; i++) {
-                var adj = adjustments[i];
-                var tmp = { id: adj.id, label: adj.label, condition: null, effect: adj.effect };
-                var condition = this.parseCondition(adj.condition);
-                tmp.condition = condition;
-                this._adjustments.push(tmp);
-            }
-        };
-        AdjustmentManager.prototype.check = function () {
-            var result = [];
-            for (var i = 0; i < this._adjustments.length; i++) {
-                var adj = this._adjustments[i];
-                if (this.evalCondition(adj.condition)) {
-                    var tmp = { id: adj.id, label: adj.label, effect: [] };
-                    for (var ii = 0; ii < adj.effect.length; ii++) {
-                        var e = adj.effect[ii];
-                        var tmp2 = { type: e.type, value: null };
-                        if (this.isNumber(e.value)) {
-                            tmp2.value = +e.value;
-                        }
-                        else {
-                            var f = this.parseFunction(e.value);
-                            tmp2.value = this.getEffectValueQuery(f.command)(f.arg);
-                        }
-                        tmp.effect.push(tmp2);
-                    }
-                    result.push(tmp);
-                }
-            }
-            return result;
-        };
-        AdjustmentManager.prototype.isNumber = function (s) {
-            return (/^([1-9]\d*|0)$/).test(s.trim());
-        };
-        AdjustmentManager.prototype.evalCondition = function (condition) {
-            var _this = this;
-            var func = function (command, arg) {
-                return _this.getConditionQuery(command)(arg);
-            };
-            return eval(condition);
-        };
-        AdjustmentManager.prototype.parseFunction = function (s) {
-            // "foo(bar)" -> ("foo", "bar")
-            if (s[s.length - 1] != ")" || s.indexOf("(") == -1)
-                throw new Error("invalid syntax");
-            s = s.substr(0, s.length - 1);
-            var tmp = s.split("(");
-            return { command: tmp[0], arg: tmp[1] };
-        };
-        AdjustmentManager.prototype.parseCondition = function (condition) {
-            if (typeof condition == "string") {
-                if (condition.toLowerCase() == "true") {
-                    return "true";
-                }
-                else if (condition.toLowerCase() == "false") {
-                    return "false";
-                }
-                else {
-                    var f = this.parseFunction(condition);
-                    return "func(\"" + f.command + "\", \"" + f.arg + "\")";
-                }
-            }
-            else if (Array.isArray(condition)) {
-                if (condition.length > 0) {
-                    var opr = "AND";
-                    if (typeof condition[0] == "string" && condition[0].toUpperCase() == "AND") {
-                        condition.shift();
-                        opr = "AND";
-                    }
-                    else if (typeof condition[0] == "string" && condition[0].toUpperCase() == "OR") {
-                        condition.shift();
-                        opr = "OR";
-                    }
-                    else if (typeof condition[0] == "string" && condition[0].toUpperCase() == "NOT") {
-                        condition.shift();
-                        opr = "NOT";
-                    }
-                    if (condition.length == 0) {
-                        throw new Error("conditions not enough");
-                    }
-                    if (opr == "NOT") {
-                        return "!(" + this.parseCondition(condition[0]) + ")";
-                    }
-                    else {
-                        var result = "";
-                        for (var i = 0; i < condition.length; i++) {
-                            var tmp = "(" + this.parseCondition(condition[i]) + ")";
-                            if (i != condition.length - 1) {
-                                if (opr == "AND")
-                                    tmp += " && ";
-                                else if (opr == "OR")
-                                    tmp += " || ";
-                            }
-                            result += tmp;
-                        }
-                        return result;
-                    }
-                }
-                else {
-                    throw new Error("empty conditions");
-                }
-            }
-        };
-        AdjustmentManager.prototype.getConditionQuery = function (command) {
-            var _this = this;
-            if (command == "flag") {
-                return function (arg) {
-                    return _this.freecivcalc.flagmanager.get(arg).value;
-                };
-            }
-            if (command == "attacker-class") {
-                return function (arg) {
-                    return _this.freecivcalc.attacker.class == arg;
-                };
-            }
-            if (command == "defender-class") {
-                return function (arg) {
-                    return _this.freecivcalc.defender.class == arg;
-                };
-            }
-            if (command == "attacker-flag") {
-                return function (arg) {
-                    var flags = _this.freecivcalc.attacker.flags;
-                    for (var i = 0; i < flags.length; i++) {
-                        if (flags[i] == arg)
-                            return true;
-                    }
-                    return false;
-                };
-            }
-            if (command == "defender-flag") {
-                return function (arg) {
-                    var flags = _this.freecivcalc.defender.flags;
-                    for (var i = 0; i < flags.length; i++) {
-                        if (flags[i] == arg)
-                            return true;
-                    }
-                    return false;
-                };
-            }
-        };
-        AdjustmentManager.prototype.getEffectValueQuery = function (command) {
-            var _this = this;
-            if (command == "attacker-veteran") {
-                return function (arg) {
-                    return _this.freecivcalc.attacker_vl.value;
-                };
-            }
-            if (command == "defender-veteran") {
-                return function (arg) {
-                    return _this.freecivcalc.defender_vl.value;
-                };
-            }
-            if (command == "terrain") {
-                return function (arg) {
-                    return _this.freecivcalc.terrains.current().value;
-                };
-            }
-        };
-        return AdjustmentManager;
-    }());
-    FreecivCalc.AdjustmentManager = AdjustmentManager;
 })(FreecivCalc || (FreecivCalc = {}));
 /// <reference path="unit.ts" />
 /// <reference path="veteranlevel.ts" />
@@ -1081,4 +908,177 @@ var FreecivCalc;
     window.onload = function () {
         FreecivCalc_1.freecivcalc = new FreecivCalc();
     };
+})(FreecivCalc || (FreecivCalc = {}));
+/// <reference path="freecivcalc.ts" />
+var FreecivCalc;
+(function (FreecivCalc) {
+    var AdjustmentManager = (function () {
+        function AdjustmentManager(calc) {
+            this.freecivcalc = calc;
+            this._adjustments = [];
+            this._current_adjustments = [];
+        }
+        AdjustmentManager.prototype.init = function (adjustments) {
+            for (var i = 0; i < adjustments.length; i++) {
+                var adj = adjustments[i];
+                var tmp = { id: adj.id, label: adj.label, condition: null, effect: adj.effect };
+                var condition = this.parseCondition(adj.condition);
+                tmp.condition = condition;
+                this._adjustments.push(tmp);
+            }
+        };
+        AdjustmentManager.prototype.check = function () {
+            var result = [];
+            for (var i = 0; i < this._adjustments.length; i++) {
+                var adj = this._adjustments[i];
+                if (this.evalCondition(adj.condition)) {
+                    var tmp = { id: adj.id, label: adj.label, effect: [] };
+                    for (var ii = 0; ii < adj.effect.length; ii++) {
+                        var e = adj.effect[ii];
+                        var tmp2 = { type: e.type, value: null };
+                        if (this.isNumber(e.value)) {
+                            tmp2.value = +e.value;
+                        }
+                        else {
+                            var f = this.parseFunction(e.value);
+                            tmp2.value = this.getEffectValueQuery(f.command)(f.arg);
+                        }
+                        tmp.effect.push(tmp2);
+                    }
+                    result.push(tmp);
+                }
+            }
+            return result;
+        };
+        AdjustmentManager.prototype.isNumber = function (s) {
+            return (/^([1-9]\d*|0)$/).test(s.trim());
+        };
+        AdjustmentManager.prototype.evalCondition = function (condition) {
+            var _this = this;
+            var func = function (command, arg) {
+                return _this.getConditionQuery(command)(arg);
+            };
+            return eval(condition);
+        };
+        AdjustmentManager.prototype.parseFunction = function (s) {
+            // "foo(bar)" -> ("foo", "bar")
+            if (s[s.length - 1] != ")" || s.indexOf("(") == -1)
+                throw new Error("invalid syntax");
+            s = s.substr(0, s.length - 1);
+            var tmp = s.split("(");
+            return { command: tmp[0], arg: tmp[1] };
+        };
+        AdjustmentManager.prototype.parseCondition = function (condition) {
+            if (typeof condition == "string") {
+                if (condition.toLowerCase() == "true") {
+                    return "true";
+                }
+                else if (condition.toLowerCase() == "false") {
+                    return "false";
+                }
+                else {
+                    var f = this.parseFunction(condition);
+                    return "func(\"" + f.command + "\", \"" + f.arg + "\")";
+                }
+            }
+            else if (Array.isArray(condition)) {
+                if (condition.length > 0) {
+                    var opr = "AND";
+                    if (typeof condition[0] == "string" && condition[0].toUpperCase() == "AND") {
+                        condition.shift();
+                        opr = "AND";
+                    }
+                    else if (typeof condition[0] == "string" && condition[0].toUpperCase() == "OR") {
+                        condition.shift();
+                        opr = "OR";
+                    }
+                    else if (typeof condition[0] == "string" && condition[0].toUpperCase() == "NOT") {
+                        condition.shift();
+                        opr = "NOT";
+                    }
+                    if (condition.length == 0) {
+                        throw new Error("conditions not enough");
+                    }
+                    if (opr == "NOT") {
+                        return "!(" + this.parseCondition(condition[0]) + ")";
+                    }
+                    else {
+                        var result = "";
+                        for (var i = 0; i < condition.length; i++) {
+                            var tmp = "(" + this.parseCondition(condition[i]) + ")";
+                            if (i != condition.length - 1) {
+                                if (opr == "AND")
+                                    tmp += " && ";
+                                else if (opr == "OR")
+                                    tmp += " || ";
+                            }
+                            result += tmp;
+                        }
+                        return result;
+                    }
+                }
+                else {
+                    throw new Error("empty conditions");
+                }
+            }
+        };
+        AdjustmentManager.prototype.getConditionQuery = function (command) {
+            var _this = this;
+            if (command == "flag") {
+                return function (arg) {
+                    return _this.freecivcalc.flagmanager.get(arg).value;
+                };
+            }
+            if (command == "attacker-class") {
+                return function (arg) {
+                    return _this.freecivcalc.attacker.class == arg;
+                };
+            }
+            if (command == "defender-class") {
+                return function (arg) {
+                    return _this.freecivcalc.defender.class == arg;
+                };
+            }
+            if (command == "attacker-flag") {
+                return function (arg) {
+                    var flags = _this.freecivcalc.attacker.flags;
+                    for (var i = 0; i < flags.length; i++) {
+                        if (flags[i] == arg)
+                            return true;
+                    }
+                    return false;
+                };
+            }
+            if (command == "defender-flag") {
+                return function (arg) {
+                    var flags = _this.freecivcalc.defender.flags;
+                    for (var i = 0; i < flags.length; i++) {
+                        if (flags[i] == arg)
+                            return true;
+                    }
+                    return false;
+                };
+            }
+        };
+        AdjustmentManager.prototype.getEffectValueQuery = function (command) {
+            var _this = this;
+            if (command == "attacker-veteran") {
+                return function (arg) {
+                    return _this.freecivcalc.attacker_vl.value;
+                };
+            }
+            if (command == "defender-veteran") {
+                return function (arg) {
+                    return _this.freecivcalc.defender_vl.value;
+                };
+            }
+            if (command == "terrain") {
+                return function (arg) {
+                    return _this.freecivcalc.terrains.current().value;
+                };
+            }
+        };
+        return AdjustmentManager;
+    }());
+    FreecivCalc.AdjustmentManager = AdjustmentManager;
 })(FreecivCalc || (FreecivCalc = {}));
