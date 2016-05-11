@@ -14,8 +14,19 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<span id="display-error"></span>
-<div id="freecivcalc"<% for(var i=0; i<dataset.length; i++) { if(dataset[i].default){ %> data-default-dataset-path="<%= dataset[i].path %>"<% break; } } %>>
+<div id="main">
+	<h1>FreecivCalc2</h1>
+	<span id="display-error"></span>
+	<div id="freecivcalc"<% for(var i=0; i<dataset.length; i++) { if(dataset[i].default){ %> data-default-dataset-path="<%= dataset[i].path %>"<% break; } } %>>
+	</div>
+	<p id="select-lang">
+		<span class="link-lang"><% if(language!="ja"){ %><a href="./"><% } %>日本語<% if(language!="ja"){ %></a><% } %></span>
+		<span class="link-lang"><% if(language!="en"){ %><a href="./index_en.html"><% } %>English<% if(language!="en"){ %></a><% } %></span>
+	</p>
+	<footer>
+		<p><a href="https://github.com/Tatamo/freecivcalc" target="_blank">github repository</a></p>
+		<p>Copyright (c) 2016 <a href="http://tatamo.81.la/" target="_blank">Tatamo</a>.</p>
+	</footer>
 </div>
 <template id="freecivcalc-template">
 <div id="tabs">
@@ -97,7 +108,7 @@
 			</ul>
 		</fieldset>
 		<fieldset id="fieldset-in-open">
-			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open"><%= adjustments.legend_in_open %><label></legend>
+			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open"><%= adjustments.legend_in_open %></label></legend>
 			<input type="checkbox" id="defender-fortified"><label for="defender-fortified" title="valid for only land units"><%= adjustments.fortified %></label>
 			<span id="flags-bases">
 			</span>
@@ -115,16 +126,16 @@
 				<th><%= result.exp %></th>
 			</tr>
 			<tr>
-				<td id="attacker-result-side"><%= result.unit_side_attacker %></th>
-				<td id="attacker-result-strength"></th>
-				<td id="attacker-result-prob"></th>
-				<td id="attacker-result-exp"></th>
+				<td id="attacker-result-side"><%= result.unit_side_attacker %></td>
+				<td id="attacker-result-strength"></td>
+				<td id="attacker-result-prob"></td>
+				<td id="attacker-result-exp"></td>
 			</tr>
 			<tr>
-				<td id="defender-result-side"><%= result.unit_side_defender %></th>
-				<td id="defender-result-strength"></th>
-				<td id="defender-result-prob"></th>
-				<td id="defender-result-exp"></th>
+				<td id="defender-result-side"><%= result.unit_side_defender %></td>
+				<td id="defender-result-strength"></td>
+				<td id="defender-result-prob"></td>
+				<td id="defender-result-exp"></td>
 			</tr>
 		</table>
 		<button id="add-tab"><%= show_detail_tab %></button>
@@ -160,6 +171,7 @@
 			</p>
 		</fieldset>
 	</fieldset>
+</div>
 </div>
 <template id="result-template">
 	<div class="flex-container">
