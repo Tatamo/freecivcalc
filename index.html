@@ -131,22 +131,32 @@
 </div>
 <div id="tab-config">
 	<fieldset>
-		<legend>config</legend>
-		<p>
-			<label>select_dataset: </label>
-			<select id="select-dataset">
-			
-			<option value="./freecivcalc.json">freecivcalc.json</option>
-			
-			</select>
-			<button id="selected-dataset-apply">apply</button>
-			<a id="dataset-download">Download this dataset</a>
-		</p>
-		<p>
-			<label>load dataset from local file: </label>
-			<input type="file" id="dataset-load">
-			<button id="local-dataset-apply" disabled>apply</button>
-		</p>
+		<legend>dataset_config</legend>
+		<fieldset>
+			<legend>select_dataset</legend>
+			<p>
+				<label>select_dataset: </label>
+				<select id="select-dataset">
+				
+				<option value="./freecivcalc.json" selected >freecivcalc.json</option>
+				
+				</select>
+				<a id="dataset-download">Download this dataset</a>
+			</p>
+			<p>
+				<button id="selected-dataset-apply">apply</button>
+			</p>
+		</fieldset>
+		<fieldset>
+			<legend>load_dataset_from_local_file</legend>
+			<p>
+				<label>select dataset file: </label>
+				<input type="file" id="dataset-load">
+			</p>
+			<p>
+				<button id="local-dataset-apply" disabled>apply</button>
+			</p>
+		</fieldset>
 	</fieldset>
 </div>
 <template id="result-template">
