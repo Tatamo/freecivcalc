@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="freecivcalc">
+<div id="freecivcalc"<% for(var i=0; i<dataset.length; i++) { if(dataset[i].default){ %> data-default-dataset-path="<%= dataset[i].path %>"<% break; } } %>>
 </div>
 <template id="freecivcalc-template">
 <div id="tabs">
@@ -131,14 +131,14 @@
 </div>
 <div id="tab-config">
 	<fieldset>
-		<legend><%= "dataset_config" %></legend>
+		<legend><%= config.dataset_legend %></legend>
 		<fieldset>
 			<legend><%= "select_dataset" %></legend>
 			<p>
 				<label><%= "select_dataset" %>: </label>
 				<select id="select-dataset">
-				<% for(var i=0; i<config.dataset.length; i++) {%>
-				<option value="<%= config.dataset[i].path %>" <% if(config.dataset[i].default){ %>selected <% } %>><%= config.dataset[i].filename %></option>
+				<% for(var i=0; i<dataset.length; i++) {%>
+				<option value="<%= dataset[i].path %>" <% if(dataset[i].default){ %>selected <% } %>><%= dataset[i].filename %></option>
 				<% } %>
 				</select>
 				<a id="dataset-download"><%= "Download this dataset" %></a>

@@ -40,7 +40,7 @@ module FreecivCalc{
 			this.loaded = false;
 			this.loader = new Loader();
 			this.loader.init(
-				"freecivcalc.json",
+				"freecivcalc_ja.json",
 				()=>{
 					this.loaded = true;
 					this.init();

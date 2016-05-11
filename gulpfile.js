@@ -5,7 +5,7 @@ var rename = require("gulp-rename");
 var ejs = require("gulp-ejs");
 
 gulp.task("ejs", function(){
-	var json = JSON.parse(fs.readFileSync("./template/index.json"));
+	var json = JSON.parse(fs.readFileSync("./template/index_ja.json"));
 	gulp.src("./template/index.ejs")
 	.pipe(plumber())
 	.pipe(ejs(json))

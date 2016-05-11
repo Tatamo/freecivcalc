@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="freecivcalc">
+<div id="freecivcalc" data-default-dataset-path="./freecivcalc_ja.json">
 </div>
 <template id="freecivcalc-template">
 <div id="tabs">
@@ -131,14 +131,16 @@
 </div>
 <div id="tab-config">
 	<fieldset>
-		<legend>dataset_config</legend>
+		<legend>データセット設定</legend>
 		<fieldset>
 			<legend>select_dataset</legend>
 			<p>
 				<label>select_dataset: </label>
 				<select id="select-dataset">
 				
-				<option value="./freecivcalc.json" selected >freecivcalc.json</option>
+				<option value="./freecivcalc_ja.json" selected >freecivcalc_ja.json</option>
+				
+				<option value="./freecivcalc_en.json" >freecivcalc_en.json</option>
 				
 				</select>
 				<a id="dataset-download">Download this dataset</a>

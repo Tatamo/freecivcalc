@@ -728,7 +728,7 @@ var FreecivCalc;
             this.detailtabs = new FreecivCalc_1.DetailTabs();
             this.loaded = false;
             this.loader = new FreecivCalc_1.Loader();
-            this.loader.init("freecivcalc.json", function () {
+            this.loader.init("freecivcalc_ja.json", function () {
                 _this.loaded = true;
                 _this.init();
             });

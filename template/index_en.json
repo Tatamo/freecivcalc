@@ -35,8 +35,8 @@
 		"exp": "Expected hp left"
 	},
 	"show_detail_tab": "Open detail tab",
-	"result_detail":{
-		"units":{
+	"result_detail": {
+		"units": {
 			"atk_legend": "攻撃ユニット",
 			"def_legend": "防御ユニット",
 			"prob": "Probability of winning",
@@ -47,31 +47,36 @@
 			"mod": "補正後",
 			"modified_strength": "最終能力値"
 		},
-		"adjustments":{
+		"adjustments": {
 			"legend": "strength adjustments",
 			"label": "adjustment",
 			"effect": "effect",
 			"value": "value"
 		},
-		"adjustment_effect_name":{
-			"attacker-strength-multiply":"攻撃側能力値補正(%)",
-			"defender-strength-multiply":"防御側能力値補正(%)",
-			"attacker-firepower-multiply":"攻撃側火力補正(%)",
-			"defender-firepower-multiply":"防御側火力補正(%)",
-			"attacker-firepower-set":"攻撃側火力変更",
-			"defender-firepower-set":"防御側火力変更"
+		"adjustment_effect_name": {
+			"attacker-strength-multiply": "攻撃側能力値補正(%)",
+			"defender-strength-multiply": "防御側能力値補正(%)",
+			"attacker-firepower-multiply": "攻撃側火力補正(%)",
+			"defender-firepower-multiply": "防御側火力補正(%)",
+			"attacker-firepower-set": "攻撃側火力変更",
+			"defender-firepower-set": "防御側火力変更"
 		},
-		"hp_graph":{
+		"hp_graph": {
 			"atk_legend": "攻撃ユニット残HP期待値",
 			"def_legend": "防御ユニット残HP期待値",
 			"exp": "Expected hp left"
 		}
 	},
-	"config":{
-		"dataset":[{
-			"filename": "freecivcalc.json",
-			"path": "./freecivcalc.json",
-			"default": true
-		}]
-	}
+	"config": {
+		"dataset_legend": "Dataset"
+	},
+	"dataset": [{
+		"filename": "freecivcalc_en.json",
+		"path": "./freecivcalc_en.json",
+		"default": true
+	}, {
+		"filename": "freecivcalc_ja.json",
+		"path": "./freecivcalc_ja.json",
+		"default": false
+	}]
 }
