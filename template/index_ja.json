@@ -37,8 +37,8 @@
 	"show_detail_tab": "詳細タブを開く",
 	"result_detail": {
 		"units": {
-			"atk_legend": "攻撃ユニット",
-			"def_legend": "防御ユニット",
+			"legend_atk": "攻撃ユニット",
+			"legend_def": "防御ユニット",
 			"prob": "勝率",
 			"hp": "HP",
 			"attack": "攻撃力",
@@ -62,13 +62,23 @@
 			"defender-firepower-set": "防御側火力変更"
 		},
 		"hp_graph": {
-			"atk_legend": "攻撃ユニット残HP",
-			"def_legend": "防御ユニット残HP",
+			"legend_atk": "攻撃ユニット残HP",
+			"legend_def": "防御ユニット残HP",
 			"exp": "期待値"
 		}
 	},
 	"config": {
-		"dataset_legend": "データセット設定"
+		"legend_dataset": "データセット設定",
+		"current_dataset": "現在のデータセット",
+		"current_dataset_freeciv_version": "対応Freecivバージョン",
+		"legend_select_dataset": "既存のデータセットから選択",
+		"select_dataset": "データセット",
+		"download_selected_dataset": "このデータセットをダウンロード",
+		"apply_selected_dataset": "適用",
+		"legend_load_dataset_from_local_file": "ローカルファイルからデータセットを読み込み",
+		"select_dataset_local_file": "データセット",
+		"apply_local_dataset": "適用",
+		"local_dataset_error":"正しくない形式のデータセットファイルです"
 	},
 	"dataset": [{
 		"name": "Freeciv2.5 Classic(Japanese)",

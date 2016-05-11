@@ -132,31 +132,31 @@
 </div>
 <div id="tab-config">
 	<fieldset>
-		<legend><%= config.dataset_legend %></legend>
-		<p><%= "current_dataset" %>: <span id="current-dataset"></span></p>
-		<p><%= "current_dataset_freeciv_version" %>: <span id="current-dataset-freeciv-version"></span></p>
+		<legend><%= config.legend_dataset %></legend>
+		<p><%= config.current_dataset %>: <span id="current-dataset"></span></p>
+		<p><%= config.current_dataset_freeciv_version %>: <span id="current-dataset-freeciv-version"></span></p>
 		<fieldset>
-			<legend><%= "select_dataset" %></legend>
+			<legend><%= config.legend_select_dataset %></legend>
 			<p>
-				<label><%= "select_dataset" %>: </label>
+				<label><%= config.select_dataset %>: </label>
 				<select id="select-dataset">
 				<% for(var i=0; i<dataset.length; i++) {%>	<option value="<%= dataset[i].path %>"<% if(dataset[i].default){ %> selected<% } %>><%= dataset[i].name %></option>
 				<% } %></select>
-				<a id="dataset-download"><%= "Download this dataset" %></a>
+				<a id="dataset-download"><%= config.download_selected_dataset %></a>
 			</p>
 			<p>
-				<button id="selected-dataset-apply"><%= "apply" %></button>
+				<button id="selected-dataset-apply"><%= config.apply_selected_dataset %></button>
 			</p>
 		</fieldset>
 		<fieldset>
-			<legend><%= "load_dataset_from_local_file" %></legend>
+			<legend><%= config.legend_load_dataset_from_local_file %></legend>
 			<p>
-				<label><%= "select dataset file" %>: </label>
+				<label><%= config.select_dataset_local_file %>: </label>
 				<input type="file" id="dataset-load">
 			</p>
 			<p>
-				<button id="local-dataset-apply" disabled><%= "apply" %></button>
-				<span id="display-error-local-dataset-load" style="display:none"><%= "failed to load dataset (invalid dataset JSON file)"%></span>
+				<button id="local-dataset-apply" disabled><%= config.apply_local_dataset %></button>
+				<span id="display-error-local-dataset-load" style="display:none"><%= config.local_dataset_error %></span>
 			</p>
 		</fieldset>
 	</fieldset>
@@ -164,7 +164,7 @@
 <template id="result-template">
 	<div class="flex-container">
 		<fieldset id="fieldset-attacker-detail" class="fieldset-attacker-detail">
-			<legend><%= result_detail.units.atk_legend %>: <span id="attacker-detail-unitname"></span></legend>
+			<legend><%= result_detail.units.legend_atk %>: <span id="attacker-detail-unitname"></span></legend>
 			<p><%= result_detail.units.prob %>: <span id="attacker-detail-prob"></span></p>
 			<table id="attacker-detail">
 				<tr>
@@ -190,7 +190,7 @@
 			</table>
 		</fieldset>
 		<fieldset id="fieldset-defender-detail" class="fieldset-defender-detail">
-			<legend><%= result_detail.units.def_legend %>: <span id="defender-detail-unitname"></span></legend>
+			<legend><%= result_detail.units.legend_def %>: <span id="defender-detail-unitname"></span></legend>
 			<p><%= result_detail.units.prob %>: <span id="defender-detail-prob"></span></p>
 			<table id="defender-detail">
 				<tr>
@@ -228,12 +228,12 @@
 	</fieldset>
 	<div class="flex-container">
 		<fieldset id="fieldset-exp-attacker" class="fieldset-exp-attacker">
-			<legend><%= result_detail.hp_graph.atk_legend %></legend>
+			<legend><%= result_detail.hp_graph.legend_atk %></legend>
 			<p><%= result_detail.hp_graph.exp %>: <span id="attacker-detail-exp"></span></p>
 			<div id="chart-exp-attacker" style="width: 100%; height: 300px;"></div>
 		</fieldset>
 		<fieldset id="fieldset-exp-defender" class="fieldset-exp-defender">
-			<legend><%= result_detail.hp_graph.def_legend %></legend>
+			<legend><%= result_detail.hp_graph.legend_def %></legend>
 			<p><%= result_detail.hp_graph.exp %>: <span id="defender-detail-exp"></span></p>
 			<div id="chart-exp-defender" style="width: 100%; height: 300px;"></div>
 		</fieldset>

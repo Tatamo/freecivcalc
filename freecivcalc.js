@@ -951,7 +951,7 @@ var FreecivCalc;
             select.change(function () {
                 var option = select.find("option:selected");
                 var url = option.val();
-                var filename = option.text();
+                var filename = url.match(".+/(.+?)([\?#;].*)?$")[1];
                 a.attr("href", url);
                 a.attr("target", "_blank");
                 a.attr("download", filename);

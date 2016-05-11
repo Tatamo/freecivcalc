@@ -26,79 +26,79 @@
 <div id="tab-main">
 	<div class="flex-container">
 		<fieldset id="fieldset-attacker">
-			<legend>attacker unit</legend>
+			<legend>Attacker unit</legend>
 			<table class="table-unit-select">
 				<tr>
 					<td><label>Select unit: </label></td>
 					<td><select id="combobox-attack"></select></td>
 				</tr>
 				<tr>
-					<td><label>unit class: </label></td>
+					<td><label>Unit class: </label></td>
 					<td><input type="hidden" id="attacker-class"><span id="attacker-class-display"></span></td>
 				</tr>
 				<tr>
-					<td><label>veteran level: </label></td>
+					<td><label>Veteran level: </label></td>
 					<td><select id="attacker-veteranlevel"></select></td>
 				</tr>
 			</table>
 			<table>
 				<tr>
-					<td><label>current HP: </label></td><td><input type="number" value="10" min="1" id="attacker-current-hp"></td>
-					<td><label>max HP: </label></td><td><input type="number" value="10" min="1" id="attacker-max-hp"></td>
+					<td><label>Current HP: </label></td><td><input type="number" value="10" min="1" id="attacker-current-hp"></td>
+					<td><label>Max HP: </label></td><td><input type="number" value="10" min="1" id="attacker-max-hp"></td>
 				</tr>
 				<tr>
-					<td><label>attack: </label></td><td><input type="number" value="1" min="1" id="attacker-strength">
-						<td><label>firepower: </label></td><td><input type="number" value="1" min="1" id="attacker-firepower"></td>
+					<td><label>Attack: </label></td><td><input type="number" value="1" min="1" id="attacker-strength">
+						<td><label>Firepower: </label></td><td><input type="number" value="1" min="1" id="attacker-firepower"></td>
 				</tr>
 			</table>
 		</fieldset>
 		<fieldset id="fieldset-defender">
-			<legend>defender unit</legend>
+			<legend>Defender unit</legend>
 			<table class="table-unit-select">
 				<tr>
 					<td><label>Select unit: </label></td>
 					<td><select id="combobox-defence"></select></td>
 				</tr>
 				<tr>
-					<td><label>unit class: </label></td>
+					<td><label>Unit class: </label></td>
 					<td><input type="hidden" id="defender-class"><span id="defender-class-display"></span></td>
 				</tr>
 				<tr>
-					<td><label>veteran level: </label></td>
+					<td><label>Veteran level: </label></td>
 					<td><select id="defender-veteranlevel"></select></td>
 				</tr>
 			</table>
 			<table>
 				<tr>
-					<td><label>current HP: </label></td><td><input type="number" value="10" min="1" id="defender-current-hp"></td>
-					<td><label>max HP: </label></td><td><input type="number" value="10" min="1" id="defender-max-hp"></td>
+					<td><label>Current HP: </label></td><td><input type="number" value="10" min="1" id="defender-current-hp"></td>
+					<td><label>Max HP: </label></td><td><input type="number" value="10" min="1" id="defender-max-hp"></td>
 				</tr>
 				<tr>
-					<td><label>decence: </label></td><td><input type="number" value="1" min="1" id="defender-strength">
-						<td><label>firepower: </label></td><td><input type="number" value="1" min="1" id="defender-firepower"></td>
+					<td><label>Decence: </label></td><td><input type="number" value="1" min="1" id="defender-strength">
+						<td><label>Firepower: </label></td><td><input type="number" value="1" min="1" id="defender-firepower"></td>
 				</tr>
 			</table>
 		</fieldset>
 	</div>
 	<fieldset>
-		<legend>defender adjustments</legend>
+		<legend>Defender adjustments</legend>
 		<fieldset id="fieldset-terrains">
-			<legend>terrains</legend>
-			<label>terrain: </label>
+			<legend>Terrains</legend>
+			<label>Terrain: </label>
 			<select id="select-terrain">
 			</select>
 			<span id="flags-roads">
 	   </span>
 		</fieldset>
 		<fieldset id="fieldset-in-city">
-			<legend><input type="radio" name="in-city-or-open" value="city" id="in-city"><label for="in-city"  title="land units gain 150% defence adjustments">in city</label></legend>
-			<label>defence structures: </label>
+			<legend><input type="radio" name="in-city-or-open" value="city" id="in-city"><label for="in-city"  title="land units gain 150% defence adjustments">In city</label></legend>
+			<label>Defence structures: </label>
 			<ul id="list-structure">
 			</ul>
 		</fieldset>
 		<fieldset id="fieldset-in-open">
-			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open">out of city<label></legend>
-			<input type="checkbox" id="defender-fortified"><label for="defender-fortified" title="valid for only land units">land unit fortified</label>
+			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open">Out of city<label></legend>
+			<input type="checkbox" id="defender-fortified"><label for="defender-fortified" title="valid for only land units">Land unit fortified</label>
 			<span id="flags-bases">
 			</span>
 		</fieldset>
@@ -132,13 +132,13 @@
 </div>
 <div id="tab-config">
 	<fieldset>
-		<legend>Dataset</legend>
-		<p>current_dataset: <span id="current-dataset"></span></p>
-		<p>current_dataset_freeciv_version: <span id="current-dataset-freeciv-version"></span></p>
+		<legend>Dataset config</legend>
+		<p>Current dataset: <span id="current-dataset"></span></p>
+		<p>Freeciv version: <span id="current-dataset-freeciv-version"></span></p>
 		<fieldset>
-			<legend>select_dataset</legend>
+			<legend>Select dataset</legend>
 			<p>
-				<label>select_dataset: </label>
+				<label>Dataset: </label>
 				<select id="select-dataset">
 					<option value="./freecivcalc_en.json" selected>Freeciv2.5 Classic(English)</option>
 					<option value="./freecivcalc_ja.json">Freeciv2.5 Classic(Japanese)</option>
@@ -146,17 +146,17 @@
 				<a id="dataset-download">Download this dataset</a>
 			</p>
 			<p>
-				<button id="selected-dataset-apply">apply</button>
+				<button id="selected-dataset-apply">Apply</button>
 			</p>
 		</fieldset>
 		<fieldset>
-			<legend>load_dataset_from_local_file</legend>
+			<legend>Load dataset from local</legend>
 			<p>
-				<label>select dataset file: </label>
+				<label>Dataset: </label>
 				<input type="file" id="dataset-load">
 			</p>
 			<p>
-				<button id="local-dataset-apply" disabled>apply</button>
+				<button id="local-dataset-apply" disabled>Apply</button>
 				<span id="display-error-local-dataset-load" style="display:none">failed to load dataset (invalid dataset JSON file)</span>
 			</p>
 		</fieldset>
@@ -165,13 +165,13 @@
 <template id="result-template">
 	<div class="flex-container">
 		<fieldset id="fieldset-attacker-detail" class="fieldset-attacker-detail">
-			<legend>攻撃ユニット: <span id="attacker-detail-unitname"></span></legend>
+			<legend>Attacker unit: <span id="attacker-detail-unitname"></span></legend>
 			<p>Probability of winning: <span id="attacker-detail-prob"></span></p>
 			<table id="attacker-detail">
 				<tr>
 					<th>HP</th>
-					<th>攻撃力</th>
-					<th>火力</th>
+					<th>Attack</th>
+					<th>Firepower</th>
 				</tr>
 				<tr>
 					<td id="attacker-detail-hp"></td>
@@ -179,9 +179,9 @@
 					<td id="attacker-detail-firepower-raw"></td>
 				</tr>
 				<tr>
-					<th>補正後</th>
-					<th>最終能力値</th>
-					<th>火力</th>
+					<th>After modification:</th>
+					<th>Strength</th>
+					<th>Firepower</th>
 				</tr>
 				<tr>
 					<td></td>
@@ -191,13 +191,13 @@
 			</table>
 		</fieldset>
 		<fieldset id="fieldset-defender-detail" class="fieldset-defender-detail">
-			<legend>防御ユニット: <span id="defender-detail-unitname"></span></legend>
+			<legend>Defender unit: <span id="defender-detail-unitname"></span></legend>
 			<p>Probability of winning: <span id="defender-detail-prob"></span></p>
 			<table id="defender-detail">
 				<tr>
 					<th>HP</th>
-					<th>防御力</th>
-					<th>火力</th>
+					<th>Decence</th>
+					<th>Firepower</th>
 				</tr>
 				<tr>
 					<td id="defender-detail-hp"></td>
@@ -205,9 +205,9 @@
 					<td id="defender-detail-firepower-raw"></td>
 				</tr>
 				<tr>
-					<th>補正後</th>
-					<th>最終能力値</th>
-					<th>火力</th>
+					<th>After modification:</th>
+					<th>Strength</th>
+					<th>Firepower</th>
 				</tr>
 				<tr>
 					<td></td>
@@ -218,24 +218,24 @@
 		</fieldset>
 	</div>
 	<fieldset id="fieldset-adjustments">
-		<legend>strength adjustments</legend>
-		<table id="adjustments-detail" data-effects='{&#34;attacker-strength-multiply&#34;:&#34;攻撃側能力値補正(%)&#34;,&#34;defender-strength-multiply&#34;:&#34;防御側能力値補正(%)&#34;,&#34;attacker-firepower-multiply&#34;:&#34;攻撃側火力補正(%)&#34;,&#34;defender-firepower-multiply&#34;:&#34;防御側火力補正(%)&#34;,&#34;attacker-firepower-set&#34;:&#34;攻撃側火力変更&#34;,&#34;defender-firepower-set&#34;:&#34;防御側火力変更&#34;}'>
+		<legend>Strength adjustments</legend>
+		<table id="adjustments-detail" data-effects='{&#34;attacker-strength-multiply&#34;:&#34;Attacker strength multiply(%)&#34;,&#34;defender-strength-multiply&#34;:&#34;Defender strength multiply(%)&#34;,&#34;attacker-firepower-multiply&#34;:&#34;Attacker firepower multiply(%)&#34;,&#34;defender-firepower-multiply&#34;:&#34;Defender firepower multiply(%)&#34;,&#34;attacker-firepower-set&#34;:&#34;Set attacker firepower&#34;,&#34;defender-firepower-set&#34;:&#34;Set defender firepower&#34;}'>
 			<tr>
-				<th>adjustment</th>
-				<th>effect</th>
-				<th>value</th>
+				<th>Adjustment</th>
+				<th>Effect</th>
+				<th>Value</th>
 			</tr>
 		</table>
 	</fieldset>
 	<div class="flex-container">
 		<fieldset id="fieldset-exp-attacker" class="fieldset-exp-attacker">
-			<legend>攻撃ユニット残HP期待値</legend>
-			<p>Expected hp left: <span id="attacker-detail-exp"></span></p>
+			<legend>Attacker expected HP graph</legend>
+			<p>Expected HP left: <span id="attacker-detail-exp"></span></p>
 			<div id="chart-exp-attacker" style="width: 100%; height: 300px;"></div>
 		</fieldset>
 		<fieldset id="fieldset-exp-defender" class="fieldset-exp-defender">
-			<legend>防御ユニット残HP期待値</legend>
-			<p>Expected hp left: <span id="defender-detail-exp"></span></p>
+			<legend>Defender expected HP graph</legend>
+			<p>Expected HP left: <span id="defender-detail-exp"></span></p>
 			<div id="chart-exp-defender" style="width: 100%; height: 300px;"></div>
 		</fieldset>
 	</div>

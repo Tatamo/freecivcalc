@@ -133,31 +133,31 @@
 <div id="tab-config">
 	<fieldset>
 		<legend>データセット設定</legend>
-		<p>current_dataset: <span id="current-dataset"></span></p>
-		<p>current_dataset_freeciv_version: <span id="current-dataset-freeciv-version"></span></p>
+		<p>現在のデータセット: <span id="current-dataset"></span></p>
+		<p>対応Freecivバージョン: <span id="current-dataset-freeciv-version"></span></p>
 		<fieldset>
-			<legend>select_dataset</legend>
+			<legend>既存のデータセットから選択</legend>
 			<p>
-				<label>select_dataset: </label>
+				<label>データセット: </label>
 				<select id="select-dataset">
 					<option value="./freecivcalc_ja.json" selected>Freeciv2.5 Classic(Japanese)</option>
 					<option value="./freecivcalc_en.json">Freeciv2.5 Classic(English)</option>
 				</select>
-				<a id="dataset-download">Download this dataset</a>
+				<a id="dataset-download">このデータセットをダウンロード</a>
 			</p>
 			<p>
-				<button id="selected-dataset-apply">apply</button>
+				<button id="selected-dataset-apply">適用</button>
 			</p>
 		</fieldset>
 		<fieldset>
-			<legend>load_dataset_from_local_file</legend>
+			<legend>ローカルファイルからデータセットを読み込み</legend>
 			<p>
-				<label>select dataset file: </label>
+				<label>データセット: </label>
 				<input type="file" id="dataset-load">
 			</p>
 			<p>
-				<button id="local-dataset-apply" disabled>apply</button>
-				<span id="display-error-local-dataset-load" style="display:none">failed to load dataset (invalid dataset JSON file)</span>
+				<button id="local-dataset-apply" disabled>適用</button>
+				<span id="display-error-local-dataset-load" style="display:none">正しくない形式のデータセットファイルです</span>
 			</p>
 		</fieldset>
 	</fieldset>

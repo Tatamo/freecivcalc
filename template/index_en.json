@@ -5,25 +5,25 @@
 		"config": "Config"
 	},
 	"unit_select": {
-		"legend_atk": "attacker unit",
-		"legend_def": "defender unit",
+		"legend_atk": "Attacker unit",
+		"legend_def": "Defender unit",
 		"select": "Select unit",
-		"class": "unit class",
-		"veteran": "veteran level",
-		"current_hp": "current HP",
-		"max_hp": "max HP",
-		"attack": "attack",
-		"defence": "decence",
-		"firepower": "firepower"
+		"class": "Unit class",
+		"veteran": "Veteran level",
+		"current_hp": "Current HP",
+		"max_hp": "Max HP",
+		"attack": "Attack",
+		"defence": "Decence",
+		"firepower": "Firepower"
 	},
 	"adjustments": {
-		"legend": "defender adjustments",
-		"legend_terrains": "terrains",
-		"select_terrain": "terrain",
-		"legend_in_city": "in city",
-		"legend_in_open": "out of city",
-		"defence_structure": "defence structures",
-		"fortified": "land unit fortified"
+		"legend": "Defender adjustments",
+		"legend_terrains": "Terrains",
+		"select_terrain": "Terrain",
+		"legend_in_city": "In city",
+		"legend_in_open": "Out of city",
+		"defence_structure": "Defence structures",
+		"fortified": "Land unit fortified"
 	},
 	"calc": "Calc",
 	"result": {
@@ -37,38 +37,48 @@
 	"show_detail_tab": "Open detail tab",
 	"result_detail": {
 		"units": {
-			"atk_legend": "攻撃ユニット",
-			"def_legend": "防御ユニット",
+			"legend_atk": "Attacker unit",
+			"legend_def": "Defender unit",
 			"prob": "Probability of winning",
 			"hp": "HP",
-			"attack": "攻撃力",
-			"defence": "防御力",
-			"firepower": "火力",
-			"mod": "補正後",
-			"modified_strength": "最終能力値"
+			"attack": "Attack",
+			"defence": "Decence",
+			"firepower": "Firepower",
+			"mod": "After modification:",
+			"modified_strength": "Strength"
 		},
 		"adjustments": {
-			"legend": "strength adjustments",
-			"label": "adjustment",
-			"effect": "effect",
-			"value": "value"
+			"legend": "Strength adjustments",
+			"label": "Adjustment",
+			"effect": "Effect",
+			"value": "Value"
 		},
 		"adjustment_effect_name": {
-			"attacker-strength-multiply": "攻撃側能力値補正(%)",
-			"defender-strength-multiply": "防御側能力値補正(%)",
-			"attacker-firepower-multiply": "攻撃側火力補正(%)",
-			"defender-firepower-multiply": "防御側火力補正(%)",
-			"attacker-firepower-set": "攻撃側火力変更",
-			"defender-firepower-set": "防御側火力変更"
+			"attacker-strength-multiply": "Attacker strength multiply(%)",
+			"defender-strength-multiply": "Defender strength multiply(%)",
+			"attacker-firepower-multiply": "Attacker firepower multiply(%)",
+			"defender-firepower-multiply": "Defender firepower multiply(%)",
+			"attacker-firepower-set": "Set attacker firepower",
+			"defender-firepower-set": "Set defender firepower"
 		},
 		"hp_graph": {
-			"atk_legend": "攻撃ユニット残HP期待値",
-			"def_legend": "防御ユニット残HP期待値",
-			"exp": "Expected hp left"
+			"legend_atk": "Attacker expected HP graph",
+			"legend_def": "Defender expected HP graph",
+			"exp": "Expected HP left"
 		}
 	},
 	"config": {
-		"dataset_legend": "Dataset"
+		"legend_dataset": "Dataset config",
+		"current_dataset": "Current dataset",
+		"current_dataset_freeciv_version": "Freeciv version",
+		"legend_select_dataset": "Select dataset",
+		"select_dataset": "Dataset",
+		"download_selected_dataset": "Download this dataset",
+		"apply_selected_dataset": "Apply",
+		"legend_load_dataset_from_local_file": "Load dataset from local",
+		"select_dataset_local_file": "Dataset",
+		"apply_local_dataset": "Apply",
+		"local_dataset_error":"failed to load dataset (invalid dataset JSON file)"
 	},
 	"dataset": [{
 		"name": "Freeciv2.5 Classic(English)",
