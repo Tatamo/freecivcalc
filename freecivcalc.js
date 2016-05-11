@@ -338,13 +338,18 @@ var FreecivCalc;
             this.flags = null;
             this.adjustments = [];
         }
-        Loader.prototype.init = function (path, cb) {
+        Loader.prototype.initByPath = function (path, cb) {
             var _this = this;
             if (cb === void 0) { cb = function (data) { }; }
             $.getJSON(path).done(function (data) {
                 if (_this.setDataSet(data))
                     cb(data);
             });
+        };
+        Loader.prototype.initByObj = function (data, cb) {
+            if (cb === void 0) { cb = function (data) { }; }
+            if (this.setDataSet(data))
+                cb(data);
         };
         Loader.prototype.setDataSet = function (data) {
             if (!this.validate(data))
@@ -712,7 +717,7 @@ var FreecivCalc;
 var FreecivCalc;
 (function (FreecivCalc_1) {
     var FreecivCalc = (function () {
-        function FreecivCalc() {
+        function FreecivCalc(dataset) {
             var _this = this;
             this.attacker = null;
             this.defender = null;
@@ -728,10 +733,32 @@ var FreecivCalc;
             this.detailtabs = new FreecivCalc_1.DetailTabs();
             this.loaded = false;
             this.loader = new FreecivCalc_1.Loader();
-            this.loader.init("freecivcalc_ja.json", function () {
-                _this.loaded = true;
-                _this.init();
-            });
+            $("#display-error").text("");
+            if (!dataset) {
+                // load default dataset
+                this.loader.initByPath($("#freecivcalc").attr("data-default-dataset-path"), function () {
+                    _this.loaded = true;
+                    _this.init();
+                });
+            }
+            else if (typeof dataset == "string") {
+                // load from path
+                this.loader.initByPath(dataset, function () {
+                    _this.loaded = true;
+                    _this.init();
+                });
+            }
+            else if (this.loader.validate(dataset)) {
+                // load dataset object
+                this.loader.initByObj(dataset, function () {
+                    _this.loaded = true;
+                    _this.init();
+                });
+            }
+            else {
+                // cant start freecivcalc
+                $("#display-error").text("Error: Failed to load Dataset. cannot start FreecivCalc.");
+            }
         }
         FreecivCalc.prototype.init = function () {
             var dest = $("#freecivcalc");
@@ -911,20 +938,29 @@ var FreecivCalc;
             });
         };
         FreecivCalc.prototype.createConfigTab = function () {
+            var _this = this;
+            $("#current-dataset").text("dataset");
             // dataset download button
             var select = $("#select-dataset");
+            var apply_selected = $("#selected-dataset-apply");
             var a = $("#dataset-download");
-            var option = select.find("option:selected");
             select.change(function () {
+                var option = select.find("option:selected");
                 var url = option.val();
                 var filename = option.text();
                 a.attr("href", url);
                 a.attr("target", "_blank");
                 a.attr("download", filename);
+                apply_selected.unbind("click");
+                apply_selected.click(function () {
+                    console.log(url);
+                    FreecivCalc_1.freecivcalc = new FreecivCalc(url);
+                });
             });
             select.change();
             var loadbutton = $("#dataset-load");
-            var applybutton = $("#local-dataset-apply");
+            var apply_loaded = $("#local-dataset-apply");
+            var errordisplay = $("#display-error-local-dataset-load");
             loadbutton.change(function (e) {
                 var files = e.target.files;
                 var file = files[0];
@@ -932,20 +968,22 @@ var FreecivCalc;
                     return;
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    console.log(reader.result);
-                    applybutton.prop("disabled", false);
-                    applybutton.click(function () {
+                    errordisplay.hide();
+                    apply_loaded.prop("disabled", false);
+                    apply_loaded.unbind("click");
+                    apply_loaded.click(function () {
                         var data;
                         try {
                             data = JSON.parse(reader.result);
+                            if (!_this.loader.validate(data))
+                                throw new Error();
+                            FreecivCalc_1.freecivcalc = new FreecivCalc(data);
                         }
                         catch (e) {
-                            console.log("JSON parse error occured");
+                            console.log("Error: failed to load dataset");
                             data = null;
+                            errordisplay.show();
                         }
-                        console.log(FreecivCalc_1.freecivcalc);
-                        FreecivCalc_1.freecivcalc = new FreecivCalc();
-                        //console.log(this.loader.setDataSet(data));
                     });
                 };
                 reader.readAsText(file);
@@ -1020,12 +1058,12 @@ var FreecivCalc;
                 return null;
             var attacker = this.units.copyUnit(this.attacker);
             var defender = this.units.copyUnit(this.defender);
-            attacker.hp = +$("#attacker-current-hp").val();
-            defender.hp = +$("#defender-current-hp").val();
-            attacker.attack = +$("#attacker-strength").val();
-            defender.defence = +$("#defender-strength").val();
-            attacker.firepower = +$("#attacker-firepower").val();
-            defender.firepower = +$("#defender-firepower").val();
+            attacker.hp = Math.max(+$("#attacker-current-hp").val(), 1);
+            defender.hp = Math.max(+$("#defender-current-hp").val(), 1);
+            attacker.attack = Math.max(+$("#attacker-strength").val(), 1);
+            defender.defence = Math.max(+$("#defender-strength").val(), 1);
+            attacker.firepower = Math.max(+$("#attacker-firepower").val(), 1);
+            defender.firepower = Math.max(+$("#defender-firepower").val(), 1);
             var adjustments = this.adjustments.check();
             this.calculator.set(attacker, defender, adjustments);
             var result = this.calculator.calc();

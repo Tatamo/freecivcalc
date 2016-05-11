@@ -22,10 +22,13 @@ module FreecivCalc{
 			this.flags = null;
 			this.adjustments = [];
 		}
-		init(path:string, cb = (data)=>{}) {
+		initByPath(path:string, cb = (data)=>{}) {
 			$.getJSON(path).done((data)=>{
 				if(this.setDataSet(data)) cb(data);
 			});
+		}
+		initByObj(data:any, cb = (data)=>{}) {
+			if(this.setDataSet(data)) cb(data);
 		}
 		setDataSet(data: any): boolean{
 			if(!this.validate(data)) return false;

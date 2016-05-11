@@ -24,7 +24,7 @@ module FreecivCalc{
 		detailtabs: DetailTabs;
 		loader: Loader;
 		loaded: boolean;
-		constructor(){
+		constructor(dataset?){
 			this.attacker = null;
 			this.defender = null;
 			this.attacker_vl = null;
@@ -39,13 +39,41 @@ module FreecivCalc{
 			this.detailtabs = new DetailTabs();
 			this.loaded = false;
 			this.loader = new Loader();
-			this.loader.init(
-				"freecivcalc_ja.json",
-				()=>{
-					this.loaded = true;
-					this.init();
-				}
-			);
+			$( "#display-error" ).text("");
+			if(!dataset){
+				// load default dataset
+				this.loader.initByPath(
+					$( "#freecivcalc" ).attr("data-default-dataset-path"),
+					()=>{
+						this.loaded = true;
+						this.init();
+					}
+				);
+			}
+			else if(typeof dataset == "string"){
+				// load from path
+				this.loader.initByPath(
+					dataset,
+					()=>{
+						this.loaded = true;
+						this.init();
+					}
+				);
+			}
+			else if(this.loader.validate(dataset)) {
+				// load dataset object
+				this.loader.initByObj(
+					dataset,
+					()=>{
+						this.loaded = true;
+						this.init();
+					}
+				);
+			}
+			else {
+				// cant start freecivcalc
+				$( "#display-error" ).text("Error: Failed to load Dataset. cannot start FreecivCalc.");
+			}
 		}
 		init(){
 			var dest = $( "#freecivcalc" );
@@ -233,40 +261,49 @@ module FreecivCalc{
 			});
 		}
 		createConfigTab(){
+			$( "#current-dataset" ).text("dataset");
 			// dataset download button
 			var select = $( "#select-dataset" );
+			var apply_selected = $( "#selected-dataset-apply" );
 			var a = $( "#dataset-download" );
-			var option = select.find("option:selected");
 			select.change(()=>{
+				var option = select.find("option:selected");
 				var url = option.val();
 				var filename = option.text();
 				a.attr("href", url);
 				a.attr("target", "_blank");
 				a.attr("download", filename);
+				apply_selected.unbind("click");
+				apply_selected.click(()=>{
+					console.log(url);
+					freecivcalc = new FreecivCalc(url);
+				});
 			});
 			select.change();
 			var loadbutton = $( "#dataset-load" );
-			var applybutton = $( "#local-dataset-apply" );
+			var apply_loaded = $( "#local-dataset-apply" );
+			var errordisplay = $( "#display-error-local-dataset-load" );
 			loadbutton.change((e)=>{
 				var files = (<any>e.target).files;
 				var file = files[0];
 				if(!file) return;
 				var reader = new FileReader();
 				reader.onload = (e)=>{
-					console.log(reader.result);
-					applybutton.prop("disabled",false);
-					applybutton.click(()=>{
+					errordisplay.hide();
+					apply_loaded.prop("disabled",false);
+					apply_loaded.unbind("click");
+					apply_loaded.click(()=>{
 						var data;
 						try{
 							data = JSON.parse(reader.result);
+							if(!this.loader.validate(data)) throw new Error();
+							freecivcalc = new FreecivCalc(data);
 						}
 						catch(e){
-							console.log("JSON parse error occured");
+							console.log("Error: failed to load dataset");
 							data = null;
+							errordisplay.show();
 						}
-						console.log(freecivcalc);
-						freecivcalc = new FreecivCalc();
-						//console.log(this.loader.setDataSet(data));
 					});
 				};
 				reader.readAsText(file);
@@ -337,12 +374,12 @@ module FreecivCalc{
 			if(!this.loaded) return null;
 			var attacker = this.units.copyUnit(this.attacker);
 			var defender = this.units.copyUnit(this.defender);
-			attacker.hp = +$( "#attacker-current-hp" ).val();
-			defender.hp = +$( "#defender-current-hp" ).val();
-			attacker.attack = +$( "#attacker-strength" ).val();
-			defender.defence = +$( "#defender-strength" ).val();
-			attacker.firepower = +$( "#attacker-firepower" ).val();
-			defender.firepower = +$( "#defender-firepower" ).val();
+			attacker.hp = Math.max(+$( "#attacker-current-hp" ).val(), 1);
+			defender.hp = Math.max(+$( "#defender-current-hp" ).val(), 1);
+			attacker.attack = Math.max(+$( "#attacker-strength" ).val(), 1);
+			defender.defence = Math.max(+$( "#defender-strength" ).val(), 1);
+			attacker.firepower = Math.max(+$( "#attacker-firepower" ).val(), 1);
+			defender.firepower = Math.max(+$( "#defender-firepower" ).val(), 1);
 			var adjustments = this.adjustments.check();
 			this.calculator.set(attacker, defender, adjustments);
 			var result = this.calculator.calc();

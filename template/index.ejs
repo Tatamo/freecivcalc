@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<span id="display-error"></span>
 <div id="freecivcalc"<% for(var i=0; i<dataset.length; i++) { if(dataset[i].default){ %> data-default-dataset-path="<%= dataset[i].path %>"<% break; } } %>>
 </div>
 <template id="freecivcalc-template">
@@ -132,6 +133,7 @@
 <div id="tab-config">
 	<fieldset>
 		<legend><%= config.dataset_legend %></legend>
+		<p><%= "current_dataset" %>: <span id="current-dataset"></span></p>
 		<fieldset>
 			<legend><%= "select_dataset" %></legend>
 			<p>
@@ -155,6 +157,7 @@
 			</p>
 			<p>
 				<button id="local-dataset-apply" disabled><%= "apply" %></button>
+				<span id="display-error-local-dataset-load" style="display:none"><%= "failed to load dataset (invalid dataset JSON file)"%></span>
 			</p>
 		</fieldset>
 	</fieldset>

@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<span id="display-error"></span>
 <div id="freecivcalc" data-default-dataset-path="./freecivcalc_ja.json">
 </div>
 <template id="freecivcalc-template">
@@ -132,6 +133,7 @@
 <div id="tab-config">
 	<fieldset>
 		<legend>データセット設定</legend>
+		<p>current_dataset: <span id="current-dataset"></span></p>
 		<fieldset>
 			<legend>select_dataset</legend>
 			<p>
@@ -157,6 +159,7 @@
 			</p>
 			<p>
 				<button id="local-dataset-apply" disabled>apply</button>
+				<span id="display-error-local-dataset-load" style="display:none">failed to load dataset (invalid dataset JSON file)</span>
 			</p>
 		</fieldset>
 	</fieldset>
