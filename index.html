@@ -3,10 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>FreecivCalc2</title>
-	<script src="jquery-1.12.3.min.js"></script>
-	<script src="jquery-ui.min.js"></script>
-	<script src="amcharts/amcharts.js"></script>
-	<script src="amcharts/serial.js"></script>
+	<script src="lib/jquery-1.12.3.min.js"></script>
+	<script src="lib/jquery-ui.min.js"></script>
+	<script src="lib/amcharts.js"></script>
+	<script src="lib/serial.js"></script>
 	<script src="widgets.js"></script>
 	<script src="freecivcalc.js"></script>
 	<link rel="stylesheet" href="css/normalize.css">
@@ -15,7 +15,7 @@
 </head>
 <body>
 <span id="display-error"></span>
-<div id="freecivcalc" data-default-dataset-path="./freecivcalc_ja.json">
+<div id="freecivcalc" data-default-dataset-path="./data/freecivcalc_ja.json">
 </div>
 <template id="freecivcalc-template">
 <div id="tabs">
@@ -140,8 +140,8 @@
 			<p>
 				<label>データセット: </label>
 				<select id="select-dataset">
-					<option value="./freecivcalc_ja.json" selected>Freeciv2.5 Classic(Japanese)</option>
-					<option value="./freecivcalc_en.json">Freeciv2.5 Classic(English)</option>
+					<option value="./data/freecivcalc_ja.json" selected>Freeciv2.5 Classic(Japanese)</option>
+					<option value="./data/freecivcalc_en.json">Freeciv2.5 Classic(English)</option>
 				</select>
 				<a id="dataset-download">このデータセットをダウンロード</a>
 			</p>

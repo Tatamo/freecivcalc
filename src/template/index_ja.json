@@ -82,11 +82,11 @@
 	},
 	"dataset": [{
 		"name": "Freeciv2.5 Classic(Japanese)",
-		"path": "./freecivcalc_ja.json",
+		"path": "./data/freecivcalc_ja.json",
 		"default": true
 	}, {
 		"name": "Freeciv2.5 Classic(English)",
-		"path": "./freecivcalc_en.json",
+		"path": "./data/freecivcalc_en.json",
 		"default": false
 	}]
 }
