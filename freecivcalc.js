@@ -330,20 +330,50 @@ var FreecivCalc;
     // load JSON files
     // TODO: define interface of JSON items
     var Loader = (function () {
-        function Loader(path, cb) {
-            var _this = this;
-            if (cb === void 0) { cb = function () { }; }
-            this.onload = cb;
-            $.getJSON(path).done(function (data) {
-                _this.units = data.units;
-                _this.unitclass = data.unitclass;
-                _this.veteranlevel = data.veteranlevel;
-                _this.terrains = data.terrains;
-                _this.flags = data.flags;
-                _this.adjustments = data.adjustments;
-                _this.onload();
-            });
+        function Loader() {
+            this.units = [];
+            this.unitclass = [];
+            this.veteranlevel = [];
+            this.terrains = [];
+            this.flags = null;
+            this.adjustments = [];
         }
+        Loader.prototype.init = function (path, cb) {
+            var _this = this;
+            if (cb === void 0) { cb = function (data) { }; }
+            $.getJSON(path).done(function (data) {
+                if (_this.setDataSet(data))
+                    cb(data);
+            });
+        };
+        Loader.prototype.setDataSet = function (data) {
+            if (!this.validate(data))
+                return false;
+            this.units = data.units;
+            this.unitclass = data.unitclass;
+            this.veteranlevel = data.veteranlevel;
+            this.terrains = data.terrains;
+            this.flags = data.flags;
+            this.adjustments = data.adjustments;
+            return true;
+        };
+        Loader.prototype.validate = function (data) {
+            if (!data)
+                return false;
+            if (!data.units)
+                return false;
+            if (!data.unitclass)
+                return false;
+            if (!data.veteranlevel)
+                return false;
+            if (!data.terrains)
+                return false;
+            if (!data.flags)
+                return false;
+            if (!data.adjustments)
+                return false;
+            return true;
+        };
         return Loader;
     }());
     FreecivCalc.Loader = Loader;
@@ -698,7 +728,8 @@ var FreecivCalc;
             this.result = null;
             this.detailtabs = new FreecivCalc_1.DetailTabs();
             this.loaded = false;
-            this.loader = new FreecivCalc_1.Loader("freecivcalc.json", function () {
+            this.loader = new FreecivCalc_1.Loader();
+            this.loader.init("freecivcalc.json", function () {
                 _this.loaded = true;
                 _this.init();
             });
@@ -888,6 +919,31 @@ var FreecivCalc;
                 a.attr("download", filename);
             });
             select.change();
+            var loadbutton = $("#dataset-load");
+            var applybutton = $("#local-dataset-apply");
+            loadbutton.change(function (e) {
+                var files = (e.target).files;
+                var file = files[0];
+                if (!file)
+                    return;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    console.log(reader.result);
+                    applybutton.prop("disabled", false);
+                    applybutton.click(function () {
+                        var data;
+                        try {
+                            data = JSON.parse(reader.result);
+                        }
+                        catch (e) {
+                            console.log("JSON parse error occured");
+                            data = null;
+                        }
+                        //console.log(this.loader.setDataSet(data));
+                    });
+                };
+                reader.readAsText(file);
+            });
         };
         FreecivCalc.prototype.createOptions = function () {
             var _this = this;

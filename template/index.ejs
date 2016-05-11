@@ -129,14 +129,21 @@
 <div id="tab-config">
 	<fieldset>
 		<legend><%= "config" %></legend>
-		<label><%= "select_dataset" %>: </label>
-		<select id="select-dataset">
-		<% for(var i=0; i<config.dataset.length; i++) {%>
-		   <option value="<%= config.dataset[i].path %>"><%= config.dataset[i].filename %></option>
-		<% } %>
-		</select>
-		<button id="dataset-apply"><%= "apply" %></button>
-		<a id="dataset-download"><%= "Download this dataset" %></a>
+		<p>
+			<label><%= "select_dataset" %>: </label>
+			<select id="select-dataset">
+			<% for(var i=0; i<config.dataset.length; i++) {%>
+			<option value="<%= config.dataset[i].path %>"><%= config.dataset[i].filename %></option>
+			<% } %>
+			</select>
+			<button id="selected-dataset-apply"><%= "apply" %></button>
+			<a id="dataset-download"><%= "Download this dataset" %></a>
+		</p>
+		<p>
+			<label><%= "load dataset from local file" %>: </label>
+			<input type="file" id="dataset-load">
+			<button id="local-dataset-apply" disabled><%= "apply" %></button>
+		</p>
 	</fieldset>
 </div>
 <div style="display:none" id="result-template">

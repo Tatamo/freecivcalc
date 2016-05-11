@@ -132,3 +132,8 @@ ul#list-structure{
 #dataset-download{
 	font-size: small;
 }
+
+/* -- 無効化されたボタン(normalize.cssで色が元に戻されているのを修正) --*/
+button:disabled {
+	color: #CCCCCC;
+}

@@ -38,7 +38,8 @@ module FreecivCalc{
 			this.result = null;
 			this.detailtabs = new DetailTabs();
 			this.loaded = false;
-			this.loader = new Loader(
+			this.loader = new Loader();
+			this.loader.init(
 				"freecivcalc.json",
 				()=>{
 					this.loaded = true;
@@ -239,6 +240,30 @@ module FreecivCalc{
 				a.attr("download", filename);
 			});
 			select.change();
+			var loadbutton = $( "#dataset-load" );
+			var applybutton = $( "#local-dataset-apply" );
+			loadbutton.change((e)=>{
+				var files = (<any>(e.target)).files;
+				var file = files[0];
+				if(!file) return;
+				var reader = new FileReader();
+				reader.onload = (e)=>{
+					console.log(reader.result);
+					applybutton.prop("disabled",false);
+					applybutton.click(()=>{
+						var data;
+						try{
+							data = JSON.parse(reader.result);
+						}
+						catch(e){
+							console.log("JSON parse error occured");
+							data = null;
+						}
+						//console.log(this.loader.setDataSet(data));
+					});
+				};
+				reader.readAsText(file);
+			});
 		}
 		createOptions(){
 			$(()=>{
