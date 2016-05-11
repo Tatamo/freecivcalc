@@ -14,8 +14,19 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<span id="display-error"></span>
-<div id="freecivcalc" data-default-dataset-path="./data/freecivcalc_ja.json">
+<div id="main">
+	<h1>FreecivCalc2</h1>
+	<span id="display-error"></span>
+	<div id="freecivcalc" data-default-dataset-path="./data/freecivcalc_ja.json">
+	</div>
+	<p id="select-lang">
+		<span class="link-lang">日本語</span>
+		<span class="link-lang"><a href="./index_en.html">English</a></span>
+	</p>
+	<footer>
+		<p><a href="https://github.com/Tatamo/freecivcalc" target="_blank">github repository</a></p>
+		<p>Copyright (c) 2016 <a href="http://tatamo.81.la/" target="_blank">Tatamo</a>.</p>
+	</footer>
 </div>
 <template id="freecivcalc-template">
 <div id="tabs">
@@ -97,7 +108,7 @@
 			</ul>
 		</fieldset>
 		<fieldset id="fieldset-in-open">
-			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open">都市外<label></legend>
+			<legend><input type="radio" name="in-city-or-open" value="open" id="in-open"><label for="in-open">都市外</label></legend>
 			<input type="checkbox" id="defender-fortified"><label for="defender-fortified" title="valid for only land units">防御態勢</label>
 			<span id="flags-bases">
 			</span>
@@ -115,16 +126,16 @@
 				<th>残HP期待値</th>
 			</tr>
 			<tr>
-				<td id="attacker-result-side">攻撃側</th>
-				<td id="attacker-result-strength"></th>
-				<td id="attacker-result-prob"></th>
-				<td id="attacker-result-exp"></th>
+				<td id="attacker-result-side">攻撃側</td>
+				<td id="attacker-result-strength"></td>
+				<td id="attacker-result-prob"></td>
+				<td id="attacker-result-exp"></td>
 			</tr>
 			<tr>
-				<td id="defender-result-side">防御側</th>
-				<td id="defender-result-strength"></th>
-				<td id="defender-result-prob"></th>
-				<td id="defender-result-exp"></th>
+				<td id="defender-result-side">防御側</td>
+				<td id="defender-result-strength"></td>
+				<td id="defender-result-prob"></td>
+				<td id="defender-result-exp"></td>
 			</tr>
 		</table>
 		<button id="add-tab">詳細タブを開く</button>
@@ -161,6 +172,7 @@
 			</p>
 		</fieldset>
 	</fieldset>
+</div>
 </div>
 <template id="result-template">
 	<div class="flex-container">
