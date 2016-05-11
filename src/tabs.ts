@@ -12,10 +12,10 @@ module FreecivCalc{
 				this.tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
 				this.tabCounter = 0;
 			this.tabList = [0];
-			this.tabs = $( "#tabs" ).tabs();
 		}
 		init(){
 			var self = this;
+			this.tabs = $( "#tabs" ).tabs();
 			this.tabs.delegate( "span.ui-icon-close", "click", function() {
 				var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
 				$( "#" + panelId ).remove();

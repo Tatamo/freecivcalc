@@ -48,6 +48,11 @@ module FreecivCalc{
 			);
 		}
 		init(){
+			var dest = $( "#freecivcalc" );
+			var template = $( "#freecivcalc-template" );
+			dest.empty();
+			var clone = $(document.importNode((<any>template[0]).content, true));
+			dest.append(clone);
 			this.units.init(this.loader.unitclass,this.loader.units);
 			this.veteranlevelmanager.init(this.loader.veteranlevel);
 			this.terrains.init(this.loader.terrains);
@@ -243,7 +248,7 @@ module FreecivCalc{
 			var loadbutton = $( "#dataset-load" );
 			var applybutton = $( "#local-dataset-apply" );
 			loadbutton.change((e)=>{
-				var files = (<any>(e.target)).files;
+				var files = (<any>e.target).files;
 				var file = files[0];
 				if(!file) return;
 				var reader = new FileReader();
@@ -259,6 +264,8 @@ module FreecivCalc{
 							console.log("JSON parse error occured");
 							data = null;
 						}
+						console.log(freecivcalc);
+						freecivcalc = new FreecivCalc();
 						//console.log(this.loader.setDataSet(data));
 					});
 				};

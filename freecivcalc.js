@@ -547,11 +547,11 @@ var FreecivCalc;
                 this.tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
                 this.tabCounter = 0;
             this.tabList = [0];
-            this.tabs = $("#tabs").tabs();
         }
         DetailTabs.prototype.init = function () {
             var _this = this;
             var self = this;
+            this.tabs = $("#tabs").tabs();
             this.tabs.delegate("span.ui-icon-close", "click", function () {
                 var panelId = $(this).closest("li").remove().attr("aria-controls");
                 $("#" + panelId).remove();
@@ -735,6 +735,11 @@ var FreecivCalc;
             });
         }
         FreecivCalc.prototype.init = function () {
+            var dest = $("#freecivcalc");
+            var template = $("#freecivcalc-template");
+            dest.empty();
+            var clone = $(document.importNode(template[0].content, true));
+            dest.append(clone);
             this.units.init(this.loader.unitclass, this.loader.units);
             this.veteranlevelmanager.init(this.loader.veteranlevel);
             this.terrains.init(this.loader.terrains);
@@ -922,7 +927,7 @@ var FreecivCalc;
             var loadbutton = $("#dataset-load");
             var applybutton = $("#local-dataset-apply");
             loadbutton.change(function (e) {
-                var files = (e.target).files;
+                var files = e.target.files;
                 var file = files[0];
                 if (!file)
                     return;
@@ -939,6 +944,8 @@ var FreecivCalc;
                             console.log("JSON parse error occured");
                             data = null;
                         }
+                        console.log(FreecivCalc_1.freecivcalc);
+                        FreecivCalc_1.freecivcalc = new FreecivCalc();
                         //console.log(this.loader.setDataSet(data));
                     });
                 };
