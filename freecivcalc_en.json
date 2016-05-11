@@ -1,4 +1,10 @@
 {
+	"meta": {
+		"name": "Freeciv2.5 Classic(English)",
+		"language": "en",
+		"ruleset": "classic",
+		"freeciv-version": "2.5"
+	},
 	"units": [{
 		"id": "warriors",
 		"label": "Warriors",

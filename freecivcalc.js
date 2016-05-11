@@ -354,6 +354,7 @@ var FreecivCalc;
         Loader.prototype.setDataSet = function (data) {
             if (!this.validate(data))
                 return false;
+            this.meta = data.meta;
             this.units = data.units;
             this.unitclass = data.unitclass;
             this.veteranlevel = data.veteranlevel;
@@ -364,6 +365,8 @@ var FreecivCalc;
         };
         Loader.prototype.validate = function (data) {
             if (!data)
+                return false;
+            if (!data.meta)
                 return false;
             if (!data.units)
                 return false;
@@ -939,7 +942,8 @@ var FreecivCalc;
         };
         FreecivCalc.prototype.createConfigTab = function () {
             var _this = this;
-            $("#current-dataset").text("dataset");
+            $("#current-dataset").text(this.loader.meta.name);
+            $("#current-dataset-freeciv-version").text(this.loader.meta.freeciv_version);
             // dataset download button
             var select = $("#select-dataset");
             var apply_selected = $("#selected-dataset-apply");

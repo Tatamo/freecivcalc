@@ -261,7 +261,8 @@ module FreecivCalc{
 			});
 		}
 		createConfigTab(){
-			$( "#current-dataset" ).text("dataset");
+			$( "#current-dataset" ).text(this.loader.meta.name);
+			$( "#current-dataset-freeciv-version" ).text(this.loader.meta.freeciv_version);
 			// dataset download button
 			var select = $( "#select-dataset" );
 			var apply_selected = $( "#selected-dataset-apply" );

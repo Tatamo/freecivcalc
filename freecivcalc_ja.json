@@ -1,4 +1,10 @@
 {
+	"meta": {
+		"name": "Freeciv2.5 Classic(Japanese)",
+		"language": "ja",
+		"ruleset": "classic",
+		"freeciv_version": "2.5"
+	},
 	"units": [{
 		"id": "warriors",
 		"label": "戦士",

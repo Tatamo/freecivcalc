@@ -8,6 +8,7 @@ module FreecivCalc{
 	// load JSON files
 	// TODO: define interface of JSON items
 	export class Loader{
+		meta: { name:string, language:string, ruleset:string, freeciv_version:string;};
 		units: Array<Unit>;
 		unitclass: Array<UnitClass>;
 		veteranlevel: Array<VeteranLevel>;
@@ -32,6 +33,7 @@ module FreecivCalc{
 		}
 		setDataSet(data: any): boolean{
 			if(!this.validate(data)) return false;
+			this.meta = data.meta;
 			this.units = data.units;
 			this.unitclass = data.unitclass;
 			this.veteranlevel = data.veteranlevel;
@@ -42,6 +44,7 @@ module FreecivCalc{
 		}
 		validate(data: any): boolean{
 			if(!data) return false;
+			if(!data.meta) return false;
 			if(!data.units) return false;
 			if(!data.unitclass) return false;
 			if(!data.veteranlevel) return false;

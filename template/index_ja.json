@@ -71,11 +71,11 @@
 		"dataset_legend": "データセット設定"
 	},
 	"dataset": [{
-		"filename": "freecivcalc_ja.json",
+		"name": "Freeciv2.5 Classic(Japanese)",
 		"path": "./freecivcalc_ja.json",
 		"default": true
 	}, {
-		"filename": "freecivcalc_en.json",
+		"name": "Freeciv2.5 Classic(English)",
 		"path": "./freecivcalc_en.json",
 		"default": false
 	}]
