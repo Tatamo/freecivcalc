@@ -637,18 +637,26 @@
 	}, {
 		"id": "terrain-river",
 		"label": "地形補正(川)",
-		"condition": ["defender-class(land)", "flag(river)"],
+		"condition": ["defender-class(land)", "flag(river)", ["NOT", [["NOT", "flag(in-city)"], "flag(in-fortress)"]]],
 		"effect": [{
 			"type": "defender-strength-multiply",
 			"value": "150"
 		}]
 	}, {
 		"id": "land-unit-in-fortress",
-		"label": "要塞",
-		"condition": ["defender-class(land)", ["NOT", "flag(in-city)"], "flag(in-fortress)"],
+		"label": "地形補正(要塞)",
+		"condition": ["defender-class(land)", ["NOT", "flag(in-city)"], "flag(in-fortress)", ["NOT", "flag(river)"]],
 		"effect": [{
 			"type": "defender-strength-multiply",
 			"value": "200"
+		}]
+	}, {
+		"id": "in-fortress-and-river",
+		"label": "地形補正(要塞+川)",
+		"condition": ["defender-class(land)", ["NOT", "flag(in-city)"], "flag(in-fortress)", "flag(river)"],
+		"effect": [{
+			"type": "defender-strength-multiply",
+			"value": "250"
 		}]
 	}, {
 		"id": "land-unit-fortified-or-in-city",
