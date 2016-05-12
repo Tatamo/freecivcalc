@@ -58,6 +58,7 @@ Select attacker and defender unit, set conditions, and click Calc button, the Pr
 ## Language Support / Add New Language
 
 (Even translation for English is less than perfect. Please contribute to improve translation.)
+
 Japanese and English are supported currently.
 To add new language, you have to make following 2 files:
 - `src/template/index_*.json` descripts FreecivCalc2's UI in each language
@@ -66,6 +67,7 @@ To add new language, you have to make following 2 files:
 New language file cannot added automatically currently, so if you make new language files, please make contact. 
 
 ---
+(現在、日本語から英語への翻訳の質もあまり高くありません。翻訳の改善に協力していただけると非常に助かります)
 
 現在、日本語と英語がサポートされています。
 新しい言語を追加される場合、その言語に翻訳した次の2つのファイルを作成する必要があります。
@@ -77,8 +79,12 @@ New language file cannot added automatically currently, so if you make new langu
 ## Dataset
 
 Dataset is JSON file that descripts the rule of battle.
-It is similar to freeciv's ruleset but has its own notation.
+It is similar to Freeciv's ruleset but has its own notation.
 Dataset file contains the following structure:
+
+データセットは戦闘のルールを記述したJSON形式のファイルです。
+これはFreecivのルールセットに似ていますが、独自の記述形式を持っています。
+データセットは以下のような構造を持っています。
 ```
 {
 	"meta",
@@ -319,10 +325,10 @@ function: "func(arg)" (string)
   * 省略可能。 条件式配列の最初の要素にのみ指定できます。その条件式配列のすべての要素がtrueを返した場合にその条件式配列はtrueとなります
 - "OR"  
   * only used at the first element of condition array. at least one of elements in the condition array returns true, the condition returns true
-  *条件式配列の最初の要素にのみ指定できます。その条件式配列のうちいずれか一つの要素でもtrueを返すなら、その条件式配列はtrueとなります
+  * 条件式配列の最初の要素にのみ指定できます。その条件式配列のうちいずれか一つの要素でもtrueを返すなら、その条件式配列はtrueとなります
 - "NOT"
   * only used at the first element of condition array. next element returns false, the condition returns true. third and later elements would be all ignored
-  *条件式配列の最初の要素にのみ指定できます。二番目の要素がfalseを返す場合にその条件式配列はtrueとなります。三番目以降の要素は無視されます。
+  * 条件式配列の最初の要素にのみ指定できます。二番目の要素がfalseを返す場合にその条件式配列はtrueとなります。三番目以降の要素は無視されます。
 - "true","false"
   * express true or false. if an adjustment's condition is true, the adjustment effect would be enabled
   * trueもしくはfalseそのものの表現です。あるadjustmentの条件式配列がtrueとなるとき、その補正が適用されます
