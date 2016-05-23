@@ -175,7 +175,7 @@
 			// 最初はselectイベントが発火されないので手動で行う
 			var options = this.element.children("option");
 			if(options.length > 0) {
-				this._trigger( "select", event, {
+				this._trigger( "select", null, {
 					item: options[0]
 				});
 			}
