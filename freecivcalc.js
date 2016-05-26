@@ -39,7 +39,7 @@ var FreecivCalc;
                 id: unit.id,
                 label: unit.label,
                 label_detail: unit.label_detail,
-                pronunciation: unit.pronunciation,
+                phonetics: unit.phonetics,
                 class: unit.class,
                 flags: unit.flags,
                 hp: unit.hp,

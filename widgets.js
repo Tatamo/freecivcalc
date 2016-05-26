@@ -104,7 +104,7 @@
 					}
 					if(matcher.test(data.label_detail)) return true;
 					return false;
-				}( data.pronunciation )) ) )
+				}( data.phonetics )) ) )
 					return {
 						label: data.label_detail,
 						value: data.value,
