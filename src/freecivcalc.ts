@@ -6,7 +6,7 @@
 /// <reference path="loader.ts" />
 /// <reference path="calc.ts" />
 /// <reference path="tabs.ts" />
-/// <reference path="../typings/main.d.ts" />
+/// <reference path="../typings/index.d.ts" />
 module FreecivCalc{
 	export class FreecivCalc{
 		attacker: Unit;

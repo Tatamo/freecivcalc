@@ -1,9 +1,9 @@
 {
-	"name": "freecivcalc",
-	"version": false,
-	"ambientDependencies": {
-		"amcharts": "registry:dt/amcharts#0.0.0+20160505171013",
-		"jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#94d8775a947f626269b06ccadd6f5e61839389d0",
-		"jqueryui": "github:DefinitelyTyped/DefinitelyTyped/jqueryui/jqueryui.d.ts#94d8775a947f626269b06ccadd6f5e61839389d0"
-	}
+  "name": "freecivcalc2",
+  "dependencies": {},
+  "globalDependencies": {
+    "amcharts": "registry:dt/amcharts#0.0.0+20160805223305",
+    "jquery": "registry:dt/jquery#1.10.0+20160704162008",
+    "jqueryui": "registry:dt/jqueryui#1.11.0+20160727153854"
+  }
 }

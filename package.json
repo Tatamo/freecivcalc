@@ -1,30 +1,30 @@
 {
-	"name": "freecivcalc2",
-	"version": "1.0.0",
-	"description": "Freeciv battle calculator",
-	"main": "freecivcalc.js",
-	"scripts": {
-		"tsc": "tsc --watch --out freecivcalc.js src/freecivcalc.ts",
-		"tsc-make": "tsc --out freecivcalc.js src/freecivcalc.ts",
-		"typings": "typings install",
-		"build": "gulp build"
-	},
-	"author": "Tatamo",
-	"license": "BSD-3-Clause",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Tatamo/freecivcalc.git"
-	},
-	"devDependencies": {
-		"event-stream": "^3.3.2",
-		"gulp": "^3.9.1",
-		"gulp-ejs": "^2.1.1",
-		"gulp-plumber": "^1.1.0",
-		"gulp-rename": "^1.2.2",
-		"gulp-typescript": "^2.13.4",
-		"rimraf": "^2.5.2",
-		"run-sequence": "^1.1.5",
-		"typescript": "^1.8.10",
-		"typings": "^0.8.1"
-	}
+  "name": "freecivcalc2",
+  "version": "1.0.0",
+  "description": "Freeciv battle calculator",
+  "main": "freecivcalc.js",
+  "scripts": {
+    "tsc": "tsc --watch --out dist/freecivcalc.js src/freecivcalc.ts",
+    "tsc-make": "tsc --out dist/freecivcalc.js src/freecivcalc.ts",
+    "typings": "typings install",
+    "build": "gulp build"
+  },
+  "author": "Tatamo",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tatamo/freecivcalc.git"
+  },
+  "devDependencies": {
+    "event-stream": "^3.3.2",
+    "gulp": "^3.9.1",
+    "gulp-ejs": "^2.1.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-typescript": "^2.13.4",
+    "rimraf": "^2.5.2",
+    "run-sequence": "^1.1.5",
+    "typescript": "^1.8.10",
+    "typings": "^1.3.2"
+  }
 }

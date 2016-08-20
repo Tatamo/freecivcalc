@@ -3,7 +3,7 @@
 /// <reference path="terrain.ts" />
 /// <reference path="flags.ts" />
 /// <reference path="adjustment.ts" />
-/// <reference path="../typings/main.d.ts" />
+/// <reference path="../typings/index.d.ts" />
 module FreecivCalc{
 	// load JSON files
 	// TODO: define interface of JSON items
