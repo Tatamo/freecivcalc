@@ -9,7 +9,7 @@ fieldset{
 
 #main{
 	margin: 10px auto;
-	width: calc(940px + 10px + 10px);
+	width: calc(10px + 4px + 940px + 4px + 10px);
 }
 
 .flex-container{
@@ -20,7 +20,7 @@ fieldset{
 #fieldset-attacker{
 	-webkit-flex: 1;
 	flex: 1;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 #fieldset-defender{
 	-webkit-flex: 1;
@@ -29,7 +29,7 @@ fieldset{
 .fieldset-attacker-detail{
 	-webkit-flex: 1;
 	flex: 1;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 .fieldset-defender-detail{
 	-webkit-flex: 1;
@@ -38,7 +38,7 @@ fieldset{
 .fieldset-exp-attacker{
 	-webkit-flex: 1;
 	flex: 1;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 .fieldset-exp-defender{
 	-webkit-flex: 1;
@@ -49,9 +49,15 @@ fieldset{
 #tabs{
 	min-height: calc(100vh - 100px);
 }
+
+.ui-tabs{
+	padding: 4px;
+}
+
 .ui-tabs .ui-tabs-panel{
 	padding-left: 10px;
 	padding-right: 10px;
+	width: 940px;
 }
 .ui-tabs .ui-tabs-nav .ui-tabs-anchor{
 	padding: 8px;
